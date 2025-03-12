@@ -29,14 +29,15 @@ public class EnemyAI : MonoBehaviour
     [Range(0f, 100f)][SerializeField] private float DetectingDistance;
     private float PlayerDistance;
     private float AttackDistance = 3f;
-    public GameObject Player; //ÇÃ·¹ÀÌ¾î·Î ¹Ù²Ü²¨ÀÓ
+    Silhumyoung Player; //ÇÃ·¹ÀÌ¾î·Î ¹Ù²Ü²¨ÀÓ
 
 
     private void Awake()
     {
+        Player = FindAnyObjectByType<Silhumyoung>();
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
-        surface = GetComponentInParent<NavMeshSurface>();
+        surface = transform.parent.GetComponentInChildren<NavMeshSurface>();
         enemyObject = GetComponent<EnemyObject>();
         
 
@@ -80,7 +81,7 @@ public class EnemyAI : MonoBehaviour
         }
         else
         {
-            if(AIState.Detect == state && agent.remainingDistance<0.1f)
+            if(AIState.Detect == state &&agent.gameObject.activeInHierarchy && agent.remainingDistance<0.1f)
             {
                 SetState(AIState.Idle);
                 Invoke("StartDetect", Random.Range(0f, 3f));
