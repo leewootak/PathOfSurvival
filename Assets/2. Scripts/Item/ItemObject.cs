@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 public interface IInteractable
 {
@@ -10,10 +10,6 @@ public class ItemObject : MonoBehaviour, IInteractable
 {
     public ItemData data;
 
-    private void Start()
-    {
-        Debug.Log(data.getAmount);
-    }
     public string GetInteractPrompt()
     {
         string str = $"{data.displayName}\n{data.description}";

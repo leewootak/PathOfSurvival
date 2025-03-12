@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -11,14 +11,18 @@ public class VendingMachine : MonoBehaviour
 
     private void Start()
     {
-        ItemSpawn();
+        InvokeRepeating("ItemSpawn", 0f, 3f);
     }
     public void ItemSpawn()
     {
-        int rand = Random.Range(0, data.Length);
-        if (data[rand].type == ItemType.Resource)
-            data[rand].getAmount = Random.Range(1, 30);
-        Instantiate(data[rand].dropPrefab, transform.position + Vector3.up, Quaternion.identity);
+        if (transform.childCount == 0)
+        {
+            int rand = Random.Range(0, data.Length);
+            if (data[rand].type == ItemType.Resource)
+                data[rand].getAmount = Random.Range(1, 30);
+            GameObject child = Instantiate(data[rand].dropPrefab, transform.position + Vector3.up, Quaternion.identity);
+            child.transform.SetParent(transform);
+        }
     }
 }
 
