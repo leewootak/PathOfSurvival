@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   displayName: 
   description: 
-  type: 0
-  dropPrefab: {fileID: 0}
+  type: 3
+  dropPrefab: {fileID: 6180663838326387332, guid: b9b7773d74755fc4f83b4aba1f68b908, type: 3}
   icon: {fileID: 0}
-  canStack: 0
-  maxStackAmount: 0
+  canStack: 1
+  maxStackAmount: 99
   consumables: []
   equipPrefab: {fileID: 0}
   attackDamage: 0

@@ -1,15 +1,23 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-//ÀÚÆÇ±â ¼³Á¤ ¹× »óÈ£ÀÛ¿ë
+//ìíŒê¸° ì„¤ì • ë° ìƒí˜¸ì‘ìš©
 public class VendingMachine : MonoBehaviour
 {
     public ItemData[] data;
+
+
+    private void Start()
+    {
+        ItemSpawn();
+    }
     public void ItemSpawn()
     {
         int rand = Random.Range(0, data.Length);
+        if (data[rand].type == ItemType.Resource)
+            data[rand].getAmount = Random.Range(1, 30);
         Instantiate(data[rand].dropPrefab, transform.position + Vector3.up, Quaternion.identity);
     }
 }

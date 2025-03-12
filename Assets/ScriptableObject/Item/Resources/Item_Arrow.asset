@@ -15,9 +15,11 @@ MonoBehaviour:
   displayName: 
   description: 
   type: 0
-  dropPrefab: {fileID: 0}
+  dropPrefab: {fileID: 7461134767379709357, guid: e99b061b51bc7754a822bc5efb430d3d, type: 3}
   icon: {fileID: 0}
-  canStack: 0
-  maxStackAmount: 0
+  canStack: 1
+  maxStackAmount: 99
   consumables: []
   equipPrefab: {fileID: 0}
+  attackDamage: 0
+  isSetUP: 0

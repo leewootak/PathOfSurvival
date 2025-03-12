@@ -1,4 +1,4 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 public enum ItemType
 {
@@ -16,7 +16,7 @@ public enum ConsumableType
     Disinfection
 }
 
-//¾ÆÀÌÅÛ µ¥ÀÌÅÍ Á¤ÀÇ
+//ì•„ì´í…œ ë°ì´í„° ì •ì˜
 [System.Serializable]
 public class ItemDataConsumable
 {
@@ -39,6 +39,9 @@ public class ItemData : ScriptableObject
     public bool canStack;
     public int maxStackAmount;
 
+    [Header("GetAmount")]
+    public int getAmount;
+    
     [Header("Consumable")]
     public ItemDataConsumable[] consumables;
 

@@ -1,4 +1,4 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 public interface IInteractable
 {
@@ -10,15 +10,23 @@ public class ItemObject : MonoBehaviour, IInteractable
 {
     public ItemData data;
 
+    private void Start()
+    {
+        Debug.Log(data.getAmount);
+    }
     public string GetInteractPrompt()
     {
         string str = $"{data.displayName}\n{data.description}";
+        if(data.getAmount > 0)
+        {
+            str += $"\n{data.getAmount}ê°œ";
+        }
         return str;
     }
 
     public void OnInteract()
     {
-        //Player ½ºÅ©¸³Æ® ¸ÕÀú ¼öÁ¤
+        //Player ìŠ¤í¬ë¦½íŠ¸ ë¨¼ì € ìˆ˜ì •
  //       CharacterManager.Instance.Player.itemData = data;
  //       CharacterManager.Instance.Player.addItem?.Invoke();
         Destroy(gameObject);
