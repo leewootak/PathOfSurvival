@@ -12,13 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b45cb21f00ed944eaefcd2ac11fce6e, type: 3}
   m_Name: Item_Branch
   m_EditorClassIdentifier: 
-  displayName: 
-  description: 
+  displayName: "\uB098\uBB47\uAC00\uC9C0"
+  description: "\uC798 \uB9C8\uB978 \uB098\uBB47\uAC00\uC9C0\uB2E4"
   type: 0
   dropPrefab: {fileID: 1814377141559223965, guid: ff7452cc2342c6946a5c32198dffe531, type: 3}
   icon: {fileID: 0}
   canStack: 1
   maxStackAmount: 99
+  getAmount: 0
   consumables: []
   equipPrefab: {fileID: 0}
   attackDamage: 0

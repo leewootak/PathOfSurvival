@@ -12,14 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b45cb21f00ed944eaefcd2ac11fce6e, type: 3}
   m_Name: Item_Sword
   m_EditorClassIdentifier: 
-  displayName: 
-  description: 
+  displayName: "\uCE7C"
+  description: "\uB0A0\uCE74\uB85C\uC6B4 \uCE7C\uC774\uB2E4. \uC870\uC2EC\uD558\uC790."
   type: 1
   dropPrefab: {fileID: 5274398640790485116, guid: 4aa18f110903a3f43afce88488037295, type: 3}
   icon: {fileID: 0}
   canStack: 0
   maxStackAmount: 0
+  getAmount: 0
   consumables: []
   equipPrefab: {fileID: 0}
-  attackDamage: 0
+  attackDamage: 10
   isSetUP: 0
