@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+using TMPro;
+using UnityEngine;
 
 public class DayNightCycle : MonoBehaviour
 {
@@ -24,6 +25,8 @@ public class DayNightCycle : MonoBehaviour
     public AnimationCurve lightingIntensityMultiplier; // 환경 조명 강도 변화
     public AnimationCurve reflectionIntensityMultiplier; // 반사 강도 변화
 
+    public GameObject warningTxt;
+
     private void Start()
     {
         timeRate = 1.0f / dayLength; // 하루 길이에 따라 시간 증가 속도 설정 (1초에 1/dayLength 만큼 증가)
@@ -41,6 +44,11 @@ public class DayNightCycle : MonoBehaviour
         // 환경 조명과 반사 강도를 현재 시간에 따라 설정
         RenderSettings.ambientIntensity = lightingIntensityMultiplier.Evaluate(time);
         RenderSettings.reflectionIntensity = reflectionIntensityMultiplier.Evaluate(time);
+
+        if (time > 0.75f)
+        {
+            warningTxt.SetActive(true);
+        }
     }
 
     /// <summary>
