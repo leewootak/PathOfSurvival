@@ -45,9 +45,13 @@ public class DayNightCycle : MonoBehaviour
         RenderSettings.ambientIntensity = lightingIntensityMultiplier.Evaluate(time);
         RenderSettings.reflectionIntensity = reflectionIntensityMultiplier.Evaluate(time);
 
-        if (time > 0.75f)
+        if (time > 0.75f && time <= 0.85f)
         {
             warningTxt.SetActive(true);
+        }
+        else
+        {
+            warningTxt.SetActive(false);
         }
     }
 
