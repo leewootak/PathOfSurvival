@@ -6,10 +6,21 @@ public class EnemyObject : MonoBehaviour
 {
     [SerializeField] private EnemyInfo EnemyInfo;
 
-
+    private float health;
+    private float attack;
+    public void Set()
+    {
+        health = EnemyInfo.Health;
+        attack = EnemyInfo.Attack;
+    }
     public EnemyInfo GetEnemyInfo()
     {
         return EnemyInfo;
+    }
+
+    public float SubHealth(float Damage)
+    {
+        return health -= Damage;
     }
     
 }

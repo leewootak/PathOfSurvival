@@ -29,7 +29,7 @@ public class EnemyAI : MonoBehaviour
     [Range(0f, 100f)][SerializeField] private float DetectingDistance;
     private float PlayerDistance;
     private float AttackDistance = 3f;
-    Silhumyoung Player; //«√∑π¿ÃæÓ∑Œ πŸ≤‹≤®¿”
+    Silhumyoung Player; //ÌîåÎ†àÏù¥Ïñ¥Î°ú Î∞îÍøÄÍ∫ºÏûÑ
 
 
     private void Awake()
@@ -37,7 +37,7 @@ public class EnemyAI : MonoBehaviour
         Player = FindAnyObjectByType<Silhumyoung>();
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
-        surface = transform.parent.GetComponentInChildren<NavMeshSurface>();
+   
         enemyObject = GetComponent<EnemyObject>();
         
 
@@ -45,6 +45,7 @@ public class EnemyAI : MonoBehaviour
     private void Start()
     {
         agent.speed = enemyObject.GetEnemyInfo().Speed;
+        surface = GetComponentInParent<NavMeshSurface>();
         state = AIState.Detect;
     }
 
@@ -93,18 +94,21 @@ public class EnemyAI : MonoBehaviour
     {
         state = WonderState;
 
-        switch (state)
+        if (this.gameObject.activeInHierarchy)
         {
-            case AIState.Idle:
-                agent.isStopped = true;
-                break;
-            case AIState.Detect:
-                agent.isStopped = false;
-                break;
-            case AIState.Attack:
+            switch (state)
+            {
+                case AIState.Idle:
+                    agent.isStopped = true;
+                    break;
+                case AIState.Detect:
+                    agent.isStopped = false;
+                    break;
+                case AIState.Attack:
 
-                agent.isStopped = false;
-                break;
+                    agent.isStopped = false;
+                    break;
+            }
         }
 
         //animator.speed = agent.speed / 10;
@@ -125,13 +129,20 @@ public class EnemyAI : MonoBehaviour
     private void FindNewLocation()
     {
         NavMeshHit hit;
-        Vector3 RandomPosition = new Vector3(Random.Range(surface.transform.position.x, surface.transform.position.x + surface.size.x),
-            transform.position.y, Random.Range(surface.transform.position.z, surface.transform.position.z + surface.size.z));
-        NavMesh.SamplePosition(RandomPosition, out hit, 100f, NavMesh.AllAreas);
+        if (surface != null)
+        {
+            Vector3 RandomPosition = new Vector3(Random.Range(surface.transform.position.x, surface.transform.position.x + surface.size.x),
+                transform.position.y, Random.Range(surface.transform.position.z, surface.transform.position.z + surface.size.z));
+            NavMesh.SamplePosition(RandomPosition, out hit, 100f, NavMesh.AllAreas);
+            Debug.Log(hit.position);
 
-        Debug.Log(hit.position);
-
-        agent.SetDestination(hit.position);
+            if(transform.gameObject.activeInHierarchy)
+            agent.SetDestination(hit.position);
+        }
+        else
+        {
+            Debug.Log("Surface is null");
+        }
     }
 
     private void Attacking()
@@ -144,8 +155,7 @@ public class EnemyAI : MonoBehaviour
             {
                 lastAttackTime = Time.time;
                 animator.SetTrigger("IsAttack");
-                //æ÷¥œ∏ﬁ¿Ãº« ¿Áª˝
-                //«√∑π¿ÃæÓø°∞‘ ∞¯∞›«œ±‚
+                //ÌîåÎ†àÏù¥Ïñ¥ÏóêÍ≤å Í≥µÍ≤©ÌïòÍ∏∞
             }
 
 
@@ -186,6 +196,14 @@ public class EnemyAI : MonoBehaviour
         Vector3 Dir = Player.transform.position - transform.position;
         float angle  = Vector3.Angle(transform.forward, Dir);
         return angle < enemyObject.GetEnemyInfo().Sight * 0.5f;
+    }
+
+    private void Die()
+    {
+        if(enemyObject.SubHealth(1) <= 0f)
+        {
+            animator.SetTrigger("DIE");
+        }
     }
 
 }
