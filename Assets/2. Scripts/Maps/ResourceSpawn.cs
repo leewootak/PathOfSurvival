@@ -7,6 +7,8 @@ public class ResourceSpawn : MonoBehaviour
     public List<StoneResource> StoneSpawnPosition;
     public List<WoodResource> WoodSpawnPosition;
 
+    public GameObject ResourceParticle;
+
     [Range(0f, 1f)] public float SpawnPercentage;
 
     int HowManyStoneSpawn;
