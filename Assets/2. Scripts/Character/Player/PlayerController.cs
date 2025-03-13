@@ -5,8 +5,11 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
+    public PlayerCondition Stamina;
+
     [Header("Movement")]
-    public float MoveSpeed; //이동 속도
+    public float moveSpeed; //이동 속도
+    public float triggerspeed;
     public float jumpPower;
     private Vector2 curMovementInput; // 현재 이동하는 값
     public LayerMask groundLayerMask;
@@ -46,10 +49,30 @@ public class PlayerController : MonoBehaviour
     void Move()
     {
         Vector3 dir = transform.forward * curMovementInput.y + transform.right * curMovementInput.x;
-        // 2D 입력값을 3D 에 맞게 변환한것 y는 플레이어 기준 앞뒤 움직임을 나태냄
-        dir *= MoveSpeed;
-        dir.y = _rigidbody.velocity.y; 
-        
+        // 2D 입력값을 3D 에 맞게 변환한것, y 는 플레이어 기준 앞뒤 움직임을 나태냄
+
+        float triggerspeed = 1.0f;
+
+        //// 스테미나가 부족한 경우 속도 감소
+        //if (Stamina != null && Stamina.curValue <= 0f)
+        //{
+        //    triggerspeed *= 0.1f; // 스테미나가 0 이하일 때 90% 느리게
+        //}
+
+        // y 좌표가 15.5 이하일 경우 속도 감소
+        if (transform.position.y <= 15.5f)
+        {
+            triggerspeed *= 0.3f; // y 좌표가 15.5 이하일 때 50% 느리게
+        }
+
+        // 최종 속도 계산
+        float finalSpeed = moveSpeed * triggerspeed;
+
+        // 방향에 최종 속도 적용
+        dir *= finalSpeed;
+        dir.y = _rigidbody.velocity.y; // y 방향 속도는 그대로 유지
+
+        // Rigidbody의 속도 업데이트
         _rigidbody.velocity = dir;
     }
 
@@ -103,14 +126,11 @@ public class PlayerController : MonoBehaviour
 
         for(int i = 0; i < rays.Length; i++)
         {
-            Debug.DrawRay(rays[i].origin, rays[i].direction * 0.3f, Color.red, 1f);
             if (Physics.Raycast(rays[i], 0.5f, groundLayerMask))
             { // 현재 Ray가 groundLayerMask에 속하는 오브젝트와 충돌하는지 검사 (거리: 0.5)
-                Debug.Log("땅이 감지됨");
                 return true;
             }
         }
-        Debug.Log("땅이 감지안됨");
         return false;
     }
 }
