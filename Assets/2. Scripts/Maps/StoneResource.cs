@@ -4,15 +4,25 @@ using UnityEngine;
 
 public class StoneResource : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    Vector3 Scale;
+    Collider Collider;
+
+    private void Start()
     {
-        
+        MapManager.Instance.Resource.resourceSpawn.StoneSpawnPosition.Add(this);
+        Scale = gameObject.transform.localScale;
+        Collider = gameObject.GetComponent<Collider>();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void SpawnResource()
     {
-        
+        gameObject.transform.localScale = Scale;
+        Collider.enabled = true;
+    }
+
+    public void DeleteResource()
+    {
+        gameObject.transform.localScale = Vector3.zero;
+        Collider.enabled = false;
     }
 }

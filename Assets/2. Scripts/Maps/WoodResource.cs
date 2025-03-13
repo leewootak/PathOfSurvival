@@ -4,15 +4,25 @@ using UnityEngine;
 
 public class WoodResource : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    Renderer _renderer;
+    Collider _collider;
+
+    private void Start()
     {
-        
+        MapManager.Instance.Resource.resourceSpawn.WoodSpawnPosition.Add(this);
+        _collider = GetComponent<Collider>();
+        _renderer = GetComponent<Renderer>();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void SpawnResource()
     {
-        
+        _collider.enabled = true;
+        _renderer.enabled = true;
+    }
+
+    public void DeleteResource()
+    {
+        _collider.enabled = false;
+        _renderer.enabled = false;
     }
 }

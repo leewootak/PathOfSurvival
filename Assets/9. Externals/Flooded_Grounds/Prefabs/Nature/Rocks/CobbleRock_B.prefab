@@ -259,6 +259,8 @@ GameObject:
   m_Component:
   - component: {fileID: 410414}
   - component: {fileID: 20588830}
+  - component: {fileID: 2831350110728211100}
+  - component: {fileID: 8040718121352780465}
   m_Layer: 0
   m_Name: CobbleRock_B
   m_TagString: Untagged
@@ -311,3 +313,38 @@ LODGroup:
     renderers:
     - renderer: {fileID: 2319308}
   m_Enabled: 1
+--- !u!114 &2831350110728211100
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 156448}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22c69ac16f2a32f4f8783f710f8e20a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!136 &8040718121352780465
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 156448}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.7
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: -0.1, y: 0.38, z: 0}

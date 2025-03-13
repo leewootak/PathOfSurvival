@@ -4,14 +4,8 @@ using UnityEngine;
 
 public class ResourceSpawn : MonoBehaviour
 {
-    public GameObject Stone;
-    public GameObject Wood;
-
-    public List<GameObject> OnFieldStoneList;
-    public List<GameObject> OnFieldWoodList;
-
-    public List<Vector3> StoneSpawnPosition;
-    public List<Vector3> WoodSpawnPosition;
+    public List<StoneResource> StoneSpawnPosition;
+    public List<WoodResource> WoodSpawnPosition;
 
     [Range(0f, 1f)] public float SpawnPercentage;
 
@@ -20,7 +14,19 @@ public class ResourceSpawn : MonoBehaviour
 
     private void Start()
     {
+        Invoke("LateStart", 0.1f);
+    }
+
+    void LateStart()
+    {
         ChangeSpawnPercentage();
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space)) {
+            SpawnResource();
+        }
     }
 
     public void ChangeSpawnPercentage()
@@ -49,8 +55,7 @@ public class ResourceSpawn : MonoBehaviour
         {
             int random = Random.Range(i, StoneSpawnPosition.Count);
 
-            OnFieldStoneList.Add(Instantiate(Stone));
-            OnFieldStoneList[i].transform.position = StoneSpawnPosition[random];
+            StoneSpawnPosition[random].SpawnResource();
 
             StoneSpawnNum[random] = StoneSpawnNum[i];
         }
@@ -58,8 +63,7 @@ public class ResourceSpawn : MonoBehaviour
         {
             int random = Random.Range(i, WoodSpawnPosition.Count);
 
-            OnFieldWoodList.Add(Instantiate(Wood));
-            OnFieldWoodList[i].transform.position = WoodSpawnPosition[random];
+            WoodSpawnPosition[random].SpawnResource();
 
             WoodSpawnNum[random] = WoodSpawnNum[i];
         }
@@ -67,15 +71,13 @@ public class ResourceSpawn : MonoBehaviour
 
     void BreakAllResource()
     {
-        foreach (GameObject stone in OnFieldStoneList)
+        foreach (StoneResource stone in StoneSpawnPosition)
         {
-            Destroy(stone);
-            OnFieldStoneList.Remove(stone);
+            stone.DeleteResource();
         }
-        foreach (GameObject wood in OnFieldWoodList)
+        foreach (WoodResource wood in WoodSpawnPosition)
         {
-            Destroy(wood);
-            OnFieldStoneList.Remove(wood);
+            wood.DeleteResource();
         }
     }
 }
