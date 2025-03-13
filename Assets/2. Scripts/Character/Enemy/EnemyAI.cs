@@ -154,7 +154,7 @@ public class EnemyAI : MonoBehaviour
             {
                 lastAttackTime = Time.time;
                 animator.SetTrigger("IsAttack");
-                //플레이어에게 공격하기
+
             }
 
 
