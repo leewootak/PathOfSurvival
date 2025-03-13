@@ -27,8 +27,8 @@ public class EnemyAI : MonoBehaviour
 
     [Header("AI")]
     [Range(0f, 100f)][SerializeField] private float DetectingDistance;
-    private float PlayerDistance;
-    private float AttackDistance = 3f;
+    [Range(0f, 100f)][SerializeField] private float AttackDistance;
+    private float playerDistance;
     Silhumyoung Player; //플레이어로 바꿀꺼임
 
 
@@ -37,7 +37,6 @@ public class EnemyAI : MonoBehaviour
         Player = FindAnyObjectByType<Silhumyoung>();
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
-   
         enemyObject = GetComponent<EnemyObject>();
         
 
@@ -51,7 +50,7 @@ public class EnemyAI : MonoBehaviour
 
     private void Update()
     {
-        PlayerDistance = Vector3.Distance(transform.position, Player.transform.position);
+        playerDistance = Vector3.Distance(transform.position, Player.transform.position);
         animator.SetBool("IsMoving", state != AIState.Idle);
         
         StateAction();
@@ -76,7 +75,7 @@ public class EnemyAI : MonoBehaviour
 
     private void DetectingPlayer()
     {
-        if(PlayerDistance < DetectingDistance) 
+        if(playerDistance < DetectingDistance) 
         {
             SetState(AIState.Attack);
         }
@@ -148,7 +147,7 @@ public class EnemyAI : MonoBehaviour
     private void Attacking()
     {
         
-        if(AttackDistance > PlayerDistance && Sight())
+        if(AttackDistance > playerDistance && Sight())
         {
             agent.isStopped = true;
             if( Time.time - lastAttackTime  > enemyObject.GetEnemyInfo().AttackCoolTime )
@@ -162,7 +161,7 @@ public class EnemyAI : MonoBehaviour
         }
         else
         {
-            if(DetectingDistance > PlayerDistance) 
+            if(DetectingDistance > playerDistance) 
             {
                 agent.isStopped = false;
                 NavMeshPath path = new NavMeshPath();
