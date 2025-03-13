@@ -52,6 +52,7 @@ public class EnemyPool : MonoBehaviour
         if (Pool.Count <= 0)
         {
             GameObject NewObject = Instantiate(EnemyList[0], transform);
+            NewObject.SetActive(false);
             NewObject.GetComponent<EnemyObject>().Set();
             return NewObject;
         }
