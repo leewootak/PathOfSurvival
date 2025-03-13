@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 public enum ItemType
 {
@@ -33,7 +33,7 @@ public class ItemData : ScriptableObject
     public ItemType type;
     public GameObject dropPrefab;
     public Sprite icon;
-
+    public float weight;
 
     [Header("Stack")]
     public bool canStack;

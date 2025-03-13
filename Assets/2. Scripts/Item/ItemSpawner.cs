@@ -6,23 +6,18 @@ using UnityEngine;
 //자판기 설정 및 상호작용
 public class ItemSpawner : MonoBehaviour
 {
-    public ItemData[] data;
-
+    ItemManager manager;
 
     private void Start()
     {
-        InvokeRepeating("ItemSpawn", 0f, 3f);
+        manager = ItemManager.Instance;
+        StartCoroutine(spawn());
     }
-    public void ItemSpawn()
+    
+    IEnumerator spawn()
     {
-        if (transform.childCount == 0)
-        {
-            int rand = Random.Range(0, data.Length);
-            if (data[rand].type == ItemType.Resource)
-                data[rand].getAmount = Random.Range(1, 10);
-            GameObject child = Instantiate(data[rand].dropPrefab, transform.position + Vector3.up, Quaternion.identity);
-            child.transform.SetParent(transform);
-        }
+        yield return new WaitForSeconds(1f);
+        manager.ItemSpawn(transform);
     }
 }
 
