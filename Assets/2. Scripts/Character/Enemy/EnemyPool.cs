@@ -7,8 +7,6 @@ public class EnemyPool : MonoBehaviour
 
     public Queue<GameObject> Pool = new Queue<GameObject>();
     public GameObject[] EnemyList;
-    public EnemySpot[] Grounds;
-    public GameObject GroundsPrefabs;
     public int PoolCount;
 
     private static EnemyPool instance;

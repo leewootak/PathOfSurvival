@@ -143,9 +143,6 @@ public class EnemyAI : MonoBehaviour
         {
             Debug.Log("Surface is null");
         }
-
-
-    
     }
 
     private void Attacking()
@@ -158,7 +155,6 @@ public class EnemyAI : MonoBehaviour
             {
                 lastAttackTime = Time.time;
                 animator.SetTrigger("IsAttack");
-                //애니메이션 재생
                 //플레이어에게 공격하기
             }
 
