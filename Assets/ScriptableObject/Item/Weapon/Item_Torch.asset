@@ -10,20 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5b45cb21f00ed944eaefcd2ac11fce6e, type: 3}
-  m_Name: Item_Drug
+  m_Name: Item_Torch
   m_EditorClassIdentifier: 
-  displayName: 
+  displayName: "\uD683\uBD88"
   description: 
-  type: 2
-  dropPrefab: {fileID: 5319022058258619095, guid: 2dd4e364fff21d84ebe2930a020d0500, type: 3}
+  type: 0
+  dropPrefab: {fileID: 7863944550608283333, guid: 60d3603858042df44818ffa6a7eac8dc, type: 3}
   icon: {fileID: 0}
   weight: 0
-  canStack: 1
-  maxStackAmount: 99
+  canStack: 0
+  maxStackAmount: 0
   getAmount: 0
-  consumables:
-  - type: 3
-    value: 20
+  consumables: []
   equipPrefab: {fileID: 0}
   attackDamage: 0
   isSetUP: 0

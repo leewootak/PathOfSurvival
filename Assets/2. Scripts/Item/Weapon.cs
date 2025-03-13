@@ -15,7 +15,7 @@ public class Weapon : MonoBehaviour
     private bool attacked;
     
     public float useStamina;
-    public WeaponType type;
+    [SerializeField] private WeaponType type;
 
 
     [Header("Meleee")]
@@ -31,7 +31,7 @@ public class Weapon : MonoBehaviour
     void Start()
     {
         //animator = GetComponent<Animator>();    
-        InvokeRepeating("OnAttackInput", 0, attackRate);
+        //InvokeRepeating("OnAttackInput", 0, attackRate);
     }
 
     public void OnAttackInput()

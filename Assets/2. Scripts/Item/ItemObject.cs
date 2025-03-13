@@ -15,14 +15,13 @@ public class ItemObject : MonoBehaviour, IInteractable
         string str = $"{data.displayName}\n{data.description}";
         if(data.getAmount > 0)
         {
-            str += $"\n{data.getAmount}개";
+            str += $"\n X {data.getAmount}";
         }
         return str;
     }
 
     public void OnInteract()
     {
-        //Player 스크립트 먼저 수정
  //       CharacterManager.Instance.Player.itemData = data;
  //       CharacterManager.Instance.Player.addItem?.Invoke();
         Destroy(gameObject);

@@ -28,6 +28,7 @@ public class ItemDataConsumable
 public class ItemData : ScriptableObject
 {
     [Header("Info")]
+    public ItemID id;
     public string displayName;
     public string description;
     public ItemType type;

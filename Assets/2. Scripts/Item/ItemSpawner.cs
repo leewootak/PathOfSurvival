@@ -7,17 +7,22 @@ using UnityEngine;
 public class ItemSpawner : MonoBehaviour
 {
     ItemManager manager;
+    public ItemID wantSpawnID;
 
     private void Start()
     {
         manager = ItemManager.Instance;
-        StartCoroutine(spawn());
+        
     }
-    
-    IEnumerator spawn()
+
+    private void Update()
     {
-        yield return new WaitForSeconds(1f);
-        manager.ItemSpawn(transform);
+        if (Input.GetMouseButtonDown(0))
+        {
+            if (wantSpawnID != ItemID.None)
+                manager.WantItemSpawn(transform, wantSpawnID);
+            else manager.RandomItemSpawn(transform);
+        }
     }
 }
 

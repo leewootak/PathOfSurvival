@@ -11,7 +11,7 @@ public enum ProjectileType
 
 public class Projectile : MonoBehaviour
 {
-    public ProjectileType type;
+    [SerializeField] private ProjectileType type;
     public float damage;
     public float distance;
     public float speed;
