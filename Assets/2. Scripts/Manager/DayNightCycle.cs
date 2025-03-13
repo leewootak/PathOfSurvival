@@ -26,10 +26,7 @@ public class DayNightCycle : MonoBehaviour
     public AnimationCurve reflectionIntensityMultiplier; // 반사 강도 변화
 
     [Header("Skybox Settings (Procedural)")]
-    // 아래 AnimationCurve와 Gradient는 Procedural Skybox Material의 파라미터를 제어합니다.
-    public AnimationCurve skyboxAtmosphereThickness;   // 추천값: (0, 0.5), (0.25, 1.0), (0.5, 1.0), (0.75, 1.8), (1, 0.5)
-    //public Gradient skyboxSkyTint;                     // 추천값: Night(0): (0.02,0.05,0.2), Day(0.5): (0.5,0.7,1.0), Sunset(0.75): (1.0,0.5,0.2)
-    //public Gradient skyboxGroundColor;                 // 추천값: Night(0): (0.02,0.02,0.02), Day(0.5): (0.6,0.6,0.6), Sunset(0.75): (0.8,0.4,0.3)
+    public AnimationCurve skyboxAtmosphereThickness; // 노을 효과 적용
 
     [Header("---")]
     public GameObject warningTxt;
@@ -64,9 +61,7 @@ public class DayNightCycle : MonoBehaviour
         if (RenderSettings.skybox != null)
         {
             Material skyboxMat = RenderSettings.skybox;
-            skyboxMat.SetFloat("_AtmosphereThickness", skyboxAtmosphereThickness.Evaluate(time));
-            //skyboxMat.SetColor("_SkyTint", skyboxSkyTint.Evaluate(time));
-            //skyboxMat.SetColor("_GroundColor", skyboxGroundColor.Evaluate(time));
+            skyboxMat.SetFloat("_AtmosphereThickness", skyboxAtmosphereThickness.Evaluate(time)); // 시간에 따른 노을 적용
         }
 
         // 경고 텍스트 표시: 예를 들어, 시간이 0.75 ~ 0.85 구간일 때 표시
