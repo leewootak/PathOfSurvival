@@ -7,16 +7,14 @@ public class EnemyPool : MonoBehaviour
 
     public Queue<GameObject> Pool = new Queue<GameObject>();
     public GameObject[] EnemyList;
-    public GameObject[] Grounds;
-    public GameObject GroundsPrefabs;
     public int PoolCount;
 
     private static EnemyPool instance;
-    public static EnemyPool Instance {  get { return instance; } }
+    public static EnemyPool Instance { get { return instance; } }
 
     private void Awake()
     {
-        if(instance == null)
+        if (instance == null)
         {
             instance = this;
         }
@@ -32,38 +30,39 @@ public class EnemyPool : MonoBehaviour
 
     private void SetQueue()
     {
-        for (int i = 0; i < Grounds.Length; i++)
+
+        for (int j = 0; j < PoolCount; j++)
         {
-            GameObject Ground = Instantiate(GroundsPrefabs, Grounds[i].transform);
-            Ground.GetComponent<EnemySpot>().EnemyCount = PoolCount / Grounds.Length;
-            for (int j = 0; j < PoolCount/Grounds.Length; j++)
-            {
-                GameObject Enemy = Instantiate(EnemyList[0], Grounds[i].transform);
-                Enemy.SetActive(false);
-                Pool.Enqueue(Enemy);
-            }
+            GameObject Enemy = Instantiate(EnemyList[0], transform);
+            Enemy.GetComponent<EnemyObject>().Set();
+            Enemy.SetActive(false);
+            Pool.Enqueue(Enemy);
         }
     }
 
-    public void GetQueue(int HowMany)
+    public void ReQueue(GameObject gameObject)
     {
-        for (int i = 0; i < HowMany; i++)
-        {
-            if (Pool.Count <= 0)
-            {
-                GameObject NewObject = Instantiate(EnemyList[0], transform.parent);
-            }
-            else
-            {
-                GameObject NewObject = Pool.Dequeue();
-                //NewObject.transform.localScale = new Vector3(1f / Grounds[0].transform.localScale.x, 
-                //    1f / Grounds[0].transform.localScale.y, 1f / Grounds[0].transform.localScale.z);
-                NewObject.SetActive(true);
+        Pool.Enqueue(gameObject);
+    }
 
-            }
+    public GameObject GetQueue()
+    {
+        if (Pool.Count <= 0)
+        {
+            GameObject NewObject = Instantiate(EnemyList[0], transform);
+            NewObject.SetActive(false);
+            NewObject.GetComponent<EnemyObject>().Set();
+            return NewObject;
         }
-        
+        else
+        {
+            GameObject NewObject = Pool.Dequeue();
+            NewObject.GetComponent<EnemyObject>().Set();
+            return NewObject;
+
+        }
+
 
     }
-   
+
 }

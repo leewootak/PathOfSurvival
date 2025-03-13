@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using Unity.AI.Navigation;
 using UnityEngine;
 using UnityEngine.AI;
@@ -8,34 +9,38 @@ public class EnemySpot : MonoBehaviour
 {
     NavMeshSurface Surface;
     public int EnemyCount;
-    public List<EnemyObject> EnemyObjects = new List<EnemyObject>();
+    private List<GameObject> EnemyObjects = new List<GameObject>();
+
     void Start()
     {
         Surface = GetComponent<NavMeshSurface>();
-
-
-        for (int i = 0; i < transform.parent.childCount - 1; i++)
-        {
-            EnemyObjects.Add(transform.parent.transform.GetChild(i + 1).GetComponent<EnemyObject>());
-        }
-
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
-
-            Surface.size.Scale(transform.parent.localScale * 2);
-            Surface.BuildNavMesh();
-            for (int i = 0; i < transform.parent.childCount - 1; i++)
+            for (int i = 0; i < EnemyCount; i++)
             {
-                EnemyObjects[i].transform.localScale = new Vector3(1f / transform.parent.transform.localScale.x,
-                    1f / transform.parent.localScale.y, 1f / transform.parent.transform.localScale.z);
-                EnemyObjects[i].transform.position = new Vector3(Random.Range(transform.parent.position.x - transform.parent.localScale.x / 2,
-                    transform.parent.position.x + transform.parent.localScale.x / 2), transform.position.y, Random.Range(transform.parent.position.z - transform.parent.localScale.z / 2,
-                    transform.parent.position.z + transform.parent.localScale.z / 2));
+                EnemyObjects.Add(EnemyPool.Instance.GetQueue());
+                EnemyObjects[i].transform.parent = transform;
+            }
+            Surface.BuildNavMesh();
+            for (int i = 0; i < EnemyObjects.Count; i++)
+            {
+                EnemyObjects[i].transform.localScale = new Vector3(1f / transform.localScale.x,
+                    1f / transform.localScale.y, 1f / transform.localScale.z);
+                Vector3 Position = new Vector3(Random.Range(Surface.transform.position.x - Surface.size.x / 2,
+                    Surface.transform.position.x + Surface.size.x / 2), Surface.transform.position.y, 
+                    Random.Range(Surface.transform.position.z - Surface.size.z / 2,
+                    Surface.transform.position.z + Surface.size.z / 2));
+                NavMeshHit hit;
+          
+                NavMesh.SamplePosition(Position, out hit, 100f, NavMesh.AllAreas);
+                Debug.Log("Debug"+hit.position);
+                EnemyObjects[i].transform.position = hit.position;
                 EnemyObjects[i].gameObject.SetActive(true);
+
             }
         }
     }
@@ -44,10 +49,14 @@ public class EnemySpot : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            for (int i = 0; i < transform.parent.childCount - 1; i++)
+            for (int i = 0; i < EnemyCount; i++)
             {
+                EnemyPool.Instance.ReQueue(EnemyObjects[i]);
+                EnemyObjects[i].transform.parent = EnemyPool.Instance.transform;
                 EnemyObjects[i].gameObject.SetActive(false);
+
             }
+            EnemyObjects.Clear();
             Surface.navMeshData = null;
         }
 

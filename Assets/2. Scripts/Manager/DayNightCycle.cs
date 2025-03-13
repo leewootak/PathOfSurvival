@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 public class DayNightCycle : MonoBehaviour
 {
@@ -9,7 +9,6 @@ public class DayNightCycle : MonoBehaviour
     public float startTime = 0.4f; // 시작 시간
     private float timeRate; // 시간 증가 속도
     public Vector3 noon; // 정오(낮) 방향 벡터 설정
-
     [Header("Sun")]
     public Light sun;
     public Gradient sunColor; // 시간에 따른 햇빛 색상 변화
@@ -41,6 +40,7 @@ public class DayNightCycle : MonoBehaviour
         // 환경 조명과 반사 강도를 현재 시간에 따라 설정
         RenderSettings.ambientIntensity = lightingIntensityMultiplier.Evaluate(time);
         RenderSettings.reflectionIntensity = reflectionIntensityMultiplier.Evaluate(time);
+
     }
 
     /// <summary>
