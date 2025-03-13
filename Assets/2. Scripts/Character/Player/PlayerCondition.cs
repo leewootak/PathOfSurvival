@@ -3,7 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerCondition : MonoBehaviour
+public interface IDamagable
+{
+    void TakePhysicalDamage(int damage);
+}
+
+public class PlayerCondition : MonoBehaviour, IDamagable
 {
     public UICondition uICondition;
 
@@ -15,9 +20,9 @@ public class PlayerCondition : MonoBehaviour
 
     public float noHungerHealthDecay; // 등가 교환
     public float noThirstStaminaDecay;
-    internal float curValue;
+    // internal float curValue;
 
-    //public event Action onTakeDamage;
+    public event Action onTakeDamage;
 
     void Update()
     {
@@ -66,5 +71,11 @@ public class PlayerCondition : MonoBehaviour
     public void Die()
     {
         Debug.Log("죽음");
+    }
+
+    public void TakePhysicalDamage(int damage)
+    {
+        health.Subtract(damage);
+        onTakeDamage?.Invoke();
     }
 }
