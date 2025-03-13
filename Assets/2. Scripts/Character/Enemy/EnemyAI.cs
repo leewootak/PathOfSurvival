@@ -27,9 +27,9 @@ public class EnemyAI : MonoBehaviour
 
     [Header("AI")]
     [Range(0f, 100f)][SerializeField] private float DetectingDistance;
-    private float PlayerDistance;
-    private float AttackDistance = 3f;
-    Silhumyoung Player; //«√∑π¿ÃæÓ∑Œ πŸ≤‹≤®¿”
+    [Range(0f, 100f)][SerializeField] private float AttackDistance;
+    private float playerDistance;
+    Silhumyoung Player; //ÌîåÎ†àÏù¥Ïñ¥Î°ú Î∞îÍøÄÍ∫ºÏûÑ
 
 
     private void Awake()
@@ -37,7 +37,6 @@ public class EnemyAI : MonoBehaviour
         Player = FindAnyObjectByType<Silhumyoung>();
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
-        surface = transform.parent.GetComponentInChildren<NavMeshSurface>();
         enemyObject = GetComponent<EnemyObject>();
         
 
@@ -45,12 +44,13 @@ public class EnemyAI : MonoBehaviour
     private void Start()
     {
         agent.speed = enemyObject.GetEnemyInfo().Speed;
+        surface = GetComponentInParent<NavMeshSurface>();
         state = AIState.Detect;
     }
 
     private void Update()
     {
-        PlayerDistance = Vector3.Distance(transform.position, Player.transform.position);
+        playerDistance = Vector3.Distance(transform.position, Player.transform.position);
         animator.SetBool("IsMoving", state != AIState.Idle);
         
         StateAction();
@@ -75,7 +75,7 @@ public class EnemyAI : MonoBehaviour
 
     private void DetectingPlayer()
     {
-        if(PlayerDistance < DetectingDistance) 
+        if(playerDistance < DetectingDistance) 
         {
             SetState(AIState.Attack);
         }
@@ -93,18 +93,21 @@ public class EnemyAI : MonoBehaviour
     {
         state = WonderState;
 
-        switch (state)
+        if (this.gameObject.activeInHierarchy)
         {
-            case AIState.Idle:
-                agent.isStopped = true;
-                break;
-            case AIState.Detect:
-                agent.isStopped = false;
-                break;
-            case AIState.Attack:
+            switch (state)
+            {
+                case AIState.Idle:
+                    agent.isStopped = true;
+                    break;
+                case AIState.Detect:
+                    agent.isStopped = false;
+                    break;
+                case AIState.Attack:
 
-                agent.isStopped = false;
-                break;
+                    agent.isStopped = false;
+                    break;
+            }
         }
 
         //animator.speed = agent.speed / 10;
@@ -125,34 +128,40 @@ public class EnemyAI : MonoBehaviour
     private void FindNewLocation()
     {
         NavMeshHit hit;
-        Vector3 RandomPosition = new Vector3(Random.Range(surface.transform.position.x, surface.transform.position.x + surface.size.x),
-            transform.position.y, Random.Range(surface.transform.position.z, surface.transform.position.z + surface.size.z));
-        NavMesh.SamplePosition(RandomPosition, out hit, 100f, NavMesh.AllAreas);
+        if (surface != null)
+        {
+            Vector3 RandomPosition = new Vector3(Random.Range(surface.transform.position.x, surface.transform.position.x + surface.size.x),
+                transform.position.y, Random.Range(surface.transform.position.z, surface.transform.position.z + surface.size.z));
+            NavMesh.SamplePosition(RandomPosition, out hit, 100f, NavMesh.AllAreas);
+            Debug.Log(hit.position);
 
-        Debug.Log(hit.position);
-
-        agent.SetDestination(hit.position);
+            if(transform.gameObject.activeInHierarchy)
+            agent.SetDestination(hit.position);
+        }
+        else
+        {
+            Debug.Log("Surface is null");
+        }
     }
 
     private void Attacking()
     {
         
-        if(AttackDistance > PlayerDistance && Sight())
+        if(AttackDistance > playerDistance && Sight())
         {
             agent.isStopped = true;
             if( Time.time - lastAttackTime  > enemyObject.GetEnemyInfo().AttackCoolTime )
             {
                 lastAttackTime = Time.time;
                 animator.SetTrigger("IsAttack");
-                //æ÷¥œ∏ﬁ¿Ãº« ¿Áª˝
-                //«√∑π¿ÃæÓø°∞‘ ∞¯∞›«œ±‚
+                //ÌîåÎ†àÏù¥Ïñ¥ÏóêÍ≤å Í≥µÍ≤©ÌïòÍ∏∞
             }
 
 
         }
         else
         {
-            if(DetectingDistance > PlayerDistance) 
+            if(DetectingDistance > playerDistance) 
             {
                 agent.isStopped = false;
                 NavMeshPath path = new NavMeshPath();
@@ -186,6 +195,14 @@ public class EnemyAI : MonoBehaviour
         Vector3 Dir = Player.transform.position - transform.position;
         float angle  = Vector3.Angle(transform.forward, Dir);
         return angle < enemyObject.GetEnemyInfo().Sight * 0.5f;
+    }
+
+    private void Die()
+    {
+        if(enemyObject.SubHealth(1) <= 0f)
+        {
+            animator.SetTrigger("DIE");
+        }
     }
 
 }
