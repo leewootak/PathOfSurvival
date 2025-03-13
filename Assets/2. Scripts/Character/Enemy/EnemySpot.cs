@@ -8,7 +8,7 @@ public class EnemySpot : MonoBehaviour
 {
     NavMeshSurface Surface;
     public int EnemyCount;
-    public List<GameObject> EnemyObjects = new List<GameObject>();
+    private List<GameObject> EnemyObjects = new List<GameObject>();
 
     private bool IsSummoned = false;
     void Start()
