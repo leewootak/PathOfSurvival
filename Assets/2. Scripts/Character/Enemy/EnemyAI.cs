@@ -136,6 +136,7 @@ public class EnemyAI : MonoBehaviour
             NavMesh.SamplePosition(RandomPosition, out hit, 100f, NavMesh.AllAreas);
             Debug.Log(hit.position);
 
+            if(transform.gameObject.activeInHierarchy)
             agent.SetDestination(hit.position);
         }
         else
