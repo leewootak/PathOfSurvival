@@ -17,5 +17,10 @@ public class EnemyObject : MonoBehaviour
     {
         return EnemyInfo;
     }
+
+    public float SubHealth(float Damage)
+    {
+        return health -= Damage;
+    }
     
 }

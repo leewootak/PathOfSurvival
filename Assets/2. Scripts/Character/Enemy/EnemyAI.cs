@@ -202,4 +202,12 @@ public class EnemyAI : MonoBehaviour
         return angle < enemyObject.GetEnemyInfo().Sight * 0.5f;
     }
 
+    private void Die()
+    {
+        if(enemyObject.SubHealth(1) <= 0f)
+        {
+            animator.SetTrigger("DIE");
+        }
+    }
+
 }
