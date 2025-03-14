@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum InventoryUIButton
 {
@@ -10,23 +11,42 @@ public enum InventoryUIButton
 
 public class InventoryUI : MonoBehaviour
 {
+    public GameObject InventoryUIGameObject;
+
     public GameObject Slot;
     public Transform Contents;
 
     InventoryUIButton nowUI;
 
     public GameObject StateUI;
-    public GameObject StateButton;
+    public Button StateButton;
     public GameObject StateButtonIsOn;
 
     public GameObject CraftUI;
-    public GameObject CraftButton;
+    public Button CraftButton;
     public GameObject CraftButtonIsOn;
 
+    public Button ExitButton;
 
     private void Awake()
     {
         UIManager.Instance.InventoryUI = this;
+    }
+
+    private void Start()
+    {
+        if (StateButton != null)
+        {
+            StateButton.onClick.AddListener(OnClickStateButton);
+        }
+        if (CraftButton != null)
+        {
+            CraftButton.onClick.AddListener(OnClickCraftButton);
+        }
+        if (ExitButton != null)
+        {
+            ExitButton.onClick.AddListener(OnClickExitButton);
+        }
     }
 
     private void OnEnable()
@@ -56,5 +76,27 @@ public class InventoryUI : MonoBehaviour
                 CraftButtonIsOn.SetActive(true);
                 break;
         }
+    }
+
+    void OnClickStateButton()
+    {
+        nowUI = InventoryUIButton.State;
+        ChangeStateAndUI();
+    }
+
+    void OnClickCraftButton()
+    {
+        nowUI = InventoryUIButton.Craft;
+        ChangeStateAndUI();
+    }
+
+    public void OnOffInventoryUI()
+    {
+        InventoryUIGameObject.SetActive(!InventoryUIGameObject.activeSelf);
+    }
+
+    void OnClickExitButton()
+    {
+        OnOffInventoryUI();
     }
 }
