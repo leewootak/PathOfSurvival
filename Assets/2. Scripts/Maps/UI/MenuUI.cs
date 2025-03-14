@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.UI;
 
 public class MenuUI : MonoBehaviour
@@ -12,6 +13,7 @@ public class MenuUI : MonoBehaviour
     public RectTransform Radio;
     public float RadioSpeed;
 
+    public AudioMixer MasterAudioMixer;
     public Scrollbar VolumeSlider;
     public Button RestartButton;
     public Button OffGameButton;
@@ -38,6 +40,10 @@ public class MenuUI : MonoBehaviour
         {
             PauseButton.onClick.AddListener(OnClickPauseButton);
         }
+        if (VolumeSlider != null)
+        {
+            VolumeSlider.onValueChanged.AddListener(SetVolume);
+        }
     }
 
     private void OnEnable()
@@ -51,6 +57,10 @@ public class MenuUI : MonoBehaviour
             RadioMove = null;
         }
         RadioMove = StartCoroutine(MoveRadio());
+
+        float CurrentValue;
+        MasterAudioMixer.GetFloat("MasterAudioMixer", out CurrentValue);
+        VolumeSlider.value = Mathf.InverseLerp(-80f, 0f, CurrentValue);
     }
 
     IEnumerator MoveRadio()
@@ -109,5 +119,11 @@ public class MenuUI : MonoBehaviour
         {
             MenuUIGameObject.SetActive(true);
         }
+    }
+
+    void SetVolume(float siderValue)
+    {
+        float volume = Mathf.Lerp(-80f, 0f, siderValue);
+        MasterAudioMixer.SetFloat("MasterVolume", volume);
     }
 }
