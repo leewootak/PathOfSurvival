@@ -24,25 +24,17 @@ public class Bulid_Prefabs : MonoBehaviour
     private void OnTriggerStay(Collider other)
     {
        
-        Ray ray = new Ray(transform.position, -transform.up);
-        RaycastHit hit;
-        if(Physics.Raycast(ray, out hit, 1f, layerMask) )
-        {
-            Debug.Log("OK");
-            Material[] NewMaterial = new Material[materials.Length];
-            
-        }
-        else
-        {
-            meshRenderer.material = materials[1];
-        }
-
    
     }
 
     private void ColorChange(Material Color)
     {
-        Material[] NewMaterialArray = new Material[materials.Length]; 
+        Material[] NewMaterialArray = new Material[materials.Length];
+        for(int i = 0;i < NewMaterialArray.Length;i++)
+        {
+            NewMaterialArray[i] = Color;
+        }
+        meshRenderer.materials = NewMaterialArray;
 
 
     }
