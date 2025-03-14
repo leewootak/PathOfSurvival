@@ -22,13 +22,6 @@ public class ResourceSpawn : MonoBehaviour
         ChangeSpawnPercentage();
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space)) {
-            SpawnResource();
-        }
-    }
-
     public void ChangeSpawnPercentage()
     {
         HowManyStoneSpawn = Mathf.RoundToInt(SpawnPercentage * StoneSpawnPosition.Count);
