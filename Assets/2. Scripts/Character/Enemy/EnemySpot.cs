@@ -37,7 +37,7 @@ public class EnemySpot : MonoBehaviour
                 NavMeshHit hit;
           
                 NavMesh.SamplePosition(Position, out hit, 100f, NavMesh.AllAreas);
-                Debug.Log("Debug"+hit.position);
+                //Debug.Log("Debug"+hit.position);
                 EnemyObjects[i].transform.position = hit.position;
                 EnemyObjects[i].gameObject.SetActive(true);
 
