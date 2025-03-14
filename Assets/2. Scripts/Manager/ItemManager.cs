@@ -1,5 +1,6 @@
 
 using System.Collections.Generic;
+using UnityEditor.Search;
 using UnityEngine;
 
 
@@ -23,12 +24,12 @@ public enum ItemID
     Bonfire,
 }
 
+
 public class ItemManager : MonoBehaviour
 {
     public List<ItemData> list = new List<ItemData>();
-    public List<ItemData> inventory = new List<ItemData>();
     private static ItemManager _instance;
-
+    public Inventory inventory = new Inventory();
     public float maxWeight;
     public float curWeight;
 
@@ -36,7 +37,7 @@ public class ItemManager : MonoBehaviour
     {
         get
         {
-            if(_instance == null)
+            if (_instance == null)
             {
                 _instance = new GameObject().GetComponent<ItemManager>();
             }
@@ -46,14 +47,14 @@ public class ItemManager : MonoBehaviour
 
     private void Awake()
     {
-        if(_instance == null)
+        if (_instance == null)
         {
             _instance = this;
             DontDestroyOnLoad(gameObject);
         }
         else
         {
-            if(_instance != this) Destroy(gameObject);
+            if (_instance != this) Destroy(gameObject);
         }
     }
     public void RandomItemSpawn(Transform trans)
@@ -74,4 +75,11 @@ public class ItemManager : MonoBehaviour
         GameObject child = Instantiate(wantItem.dropPrefab, trans.position + Vector3.up, Quaternion.identity);
         child.transform.SetParent(trans);
     }
+
+    public bool CompareWeight(float itemWeight)
+    {
+        return (itemWeight + curWeight < maxWeight) ? true : false;
+    }
+
+
 }
