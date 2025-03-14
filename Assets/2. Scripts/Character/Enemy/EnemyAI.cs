@@ -84,7 +84,7 @@ public class EnemyAI : MonoBehaviour
             if(AIState.Detect == state &&agent.gameObject.activeInHierarchy && agent.remainingDistance<0.1f)
             {
                 SetState(AIState.Idle);
-                Invoke("StartDetect", Random.Range(0f, 3f));
+                Invoke("StartDetect", 0f);
             }
         }
     }
@@ -130,10 +130,11 @@ public class EnemyAI : MonoBehaviour
         NavMeshHit hit;
         if (surface != null)
         {
+            Debug.Log("Find");
             Vector3 RandomPosition = new Vector3(Random.Range(surface.transform.position.x, surface.transform.position.x + surface.size.x),
                 transform.position.y, Random.Range(surface.transform.position.z, surface.transform.position.z + surface.size.z));
             NavMesh.SamplePosition(RandomPosition, out hit, 100f, NavMesh.AllAreas);
-            Debug.Log(hit.position);
+            //Debug.Log(hit.position);
 
             if(transform.gameObject.activeInHierarchy)
             agent.SetDestination(hit.position);
@@ -146,33 +147,60 @@ public class EnemyAI : MonoBehaviour
 
     private void Attacking()
     {
-        
-        if(AttackDistance > playerDistance && Sight())
+        Debug.Log("AttackIng");
+        if (AttackDistance > playerDistance && Sight())
         {
             agent.isStopped = true;
             if( Time.time - lastAttackTime  > enemyObject.GetEnemyInfo().AttackCoolTime )
             {
                 lastAttackTime = Time.time;
                 animator.SetTrigger("IsAttack");
-                //플레이어에게 공격하기
+                Debug.Log("AttackComplete");
+            }
+            else
+            {
+                Debug.Log("AfterDelay");
+                agent.isStopped = false;
+                NavMeshPath path = new NavMeshPath();
+                if (agent.CalculatePath(Player.transform.position, path))
+                {
+                    agent.SetDestination(Player.transform.position);
+                    animator.SetBool("IsRun", true);
+                    animator.SetBool("IsMoving", false);
+                    Debug.Log("AfterAttackRun");
+                }
+                else
+                {
+                    agent.SetDestination(transform.position);
+                    agent.isStopped = true;
+                    SetState(AIState.Detect);
+                    animator.SetBool("IsRun", false);
+                    animator.SetBool("IsMoving", true);
+                    Debug.Log("AfterAttackIdle");
+
+                }
             }
 
 
         }
         else
         {
-            if(DetectingDistance > playerDistance) 
+            Debug.Log("Attack Fail");
+            if (DetectingDistance > playerDistance) 
             {
+                Debug.Log("In Range");
                 agent.isStopped = false;
                 NavMeshPath path = new NavMeshPath();
                 if(agent.CalculatePath(Player.transform.position, path))
                 {
+                    Debug.Log("yes Way");
                     agent.SetDestination(Player.transform.position);
                     animator.SetBool("IsRun", true);
                     animator.SetBool("IsMoving", false);
                 }
                 else
                 {
+                    Debug.Log("No way");
                     agent.SetDestination(transform.position);
                     agent.isStopped = true;
                     SetState(AIState.Detect);
@@ -183,6 +211,7 @@ public class EnemyAI : MonoBehaviour
             }
             else
             {
+                Debug.Log("Cant Find");
                 SetState(AIState.Detect);
                 animator.SetBool("IsRun", false);
                 animator.SetBool("IsMoving", true);
@@ -192,9 +221,10 @@ public class EnemyAI : MonoBehaviour
 
     private bool Sight()
     {
-        Vector3 Dir = Player.transform.position - transform.position;
-        float angle  = Vector3.Angle(transform.forward, Dir);
-        return angle < enemyObject.GetEnemyInfo().Sight * 0.5f;
+        Vector3 Dir = (Player.transform.position - transform.position).normalized;
+        float dot = Vector3.Dot(Dir, transform.position);
+        float Sightcos  = Mathf.Cos(enemyObject.GetEnemyInfo().Sight * 0.5f * Mathf.Deg2Rad);
+        return Sightcos < dot;
     }
 
     private void Die()

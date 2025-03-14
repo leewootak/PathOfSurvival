@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Enemy
   m_EditorClassIdentifier: 
   Health: 100
-  Speed: 0.1
+  Speed: 1
   Attack: 100
   Sight: 120
   AttackCoolTime: 5
