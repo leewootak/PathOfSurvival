@@ -208,6 +208,7 @@ public class EnemyAI : MonoBehaviour
                     animator.SetBool("IsMoving", true);
 
                 }
+
             }
             else
             {
@@ -216,13 +217,14 @@ public class EnemyAI : MonoBehaviour
                 animator.SetBool("IsRun", false);
                 animator.SetBool("IsMoving", true);
             }
+
         }
     }
 
     private bool Sight()
     {
         Vector3 Dir = (Player.transform.position - transform.position).normalized;
-        float dot = Vector3.Dot(Dir, transform.position);
+        float dot = Vector3.Dot(Dir, transform.forward);
         float Sightcos  = Mathf.Cos(enemyObject.GetEnemyInfo().Sight * 0.5f * Mathf.Deg2Rad);
         return Sightcos < dot;
     }

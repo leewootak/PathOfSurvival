@@ -101,7 +101,6 @@ public class CreftTable : MonoBehaviour
             {
                 IsSelect = false;
                 box.transform.GetChild(0).GetComponent<Rigidbody>().isKinematic = true;
-                
                 box.transform.GetChild(0).GetComponent<Bulid_Prefabs>().IsnotBuild = true;
                 box.transform.GetChild(0).GetComponent<Bulid_Prefabs>().ColorChange(0);
             }
