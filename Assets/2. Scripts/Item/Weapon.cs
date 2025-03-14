@@ -25,7 +25,7 @@ public class Weapon : MonoBehaviour
     [Header("Range")]
     public float shootSpeed;
     public GameObject projectiles;
-
+    public ItemID useProjectile;
    // private Animator animator;
 
     void Start()
@@ -44,7 +44,12 @@ public class Weapon : MonoBehaviour
                //animator.SetTrigger("Attack");
                 if(type == WeaponType.Range)
                 {
-                    Shoot();
+                    Inventory proc = ItemManager.Instance.inventory.FindItem(useProjectile);
+                    if (proc.quantity > 0)
+                    {
+                        Shoot();
+                        proc.RemoveItem(useProjectile);
+                    }
                 }
                 Invoke("OnCanAttack", attackRate);
             }
@@ -55,7 +60,6 @@ public class Weapon : MonoBehaviour
     {
         Vector3 spawnPosition = transform.position + transform.forward * 1.3f;
         Quaternion spawnRotation = transform.rotation;
-
         GameObject procjec = Instantiate(projectiles, spawnPosition, spawnRotation);
         Rigidbody rb = procjec.GetComponent<Rigidbody>();
         if(rb!= null)
