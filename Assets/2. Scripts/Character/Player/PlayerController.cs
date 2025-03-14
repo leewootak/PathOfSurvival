@@ -85,7 +85,7 @@ public class PlayerController : MonoBehaviour
 
         // 마우스 움직임의 변화량(mouseDelta)중 x(좌우)값에 민감도를 곱한다.
         // 좌우 회전은 플레이어(transform)를 회전시켜준다.
-        // Why? 회전시킨 방향을 기준으로 앞뒤좌우 움직여야하니까.
+        // 회전시킨 방향을 기준으로 앞뒤좌우 움직여야하니까.
         transform.eulerAngles += new Vector3(0, mouseDelta.x * lookSensitivity, 0);
     }
 

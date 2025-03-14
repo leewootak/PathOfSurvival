@@ -15,13 +15,13 @@ public class TestItemData : ScriptableObject
     [Header("Info")]
     public string displayName;
     public string description;
-    //public ItemType type;
+    public ItemType type; // 결합시 지워야함
     public Sprite icon;
     public GameObject dropPrefab;
 
-    //[Header("Stacking")]
-    //public bool canStack;
-    //public int maxStackAmount;
+    [Header("Stacking")] //
+    public bool canStack; // 
+    public int maxStackAmount; //
 
     [Header("Consumable")]
     public TestItemDataConsumable[] consumables;
