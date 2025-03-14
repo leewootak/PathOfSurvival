@@ -64,7 +64,7 @@ public class DayNightCycle : MonoBehaviour
             skyboxMat.SetFloat("_AtmosphereThickness", skyboxAtmosphereThickness.Evaluate(time)); // 시간에 따른 노을 적용
         }
 
-        // 경고 텍스트 표시: 예를 들어, 시간이 0.75 ~ 0.85 구간일 때 표시
+        // 경고 텍스트 표시
         if (time > 0.75f && time <= 0.85f)
         {
             warningTxt.SetActive(true);
