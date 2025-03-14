@@ -38,6 +38,12 @@ public class Projectile : MonoBehaviour
         if (rb != null)
         {
             rb.constraints = RigidbodyConstraints.None;
+            EnemyObject enemy = collision.gameObject.GetComponent<EnemyObject>();
+            if (enemy != null)
+            {
+                enemy.SubHealth(damage);
+            }
+            DisActive();
         }
     }
 

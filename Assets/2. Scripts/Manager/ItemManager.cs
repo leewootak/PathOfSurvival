@@ -1,5 +1,6 @@
 
 using System.Collections.Generic;
+using System.Linq;
 using UnityEditor.Search;
 using UnityEngine;
 
@@ -56,7 +57,9 @@ public class ItemManager : MonoBehaviour
         {
             if (_instance != this) Destroy(gameObject);
         }
+        list = list.OrderBy(item => (int)item.id).ToList();
     }
+
     public void RandomItemSpawn(Transform trans)
     {
         if (transform.childCount == 0)
