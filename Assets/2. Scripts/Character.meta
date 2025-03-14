@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/1. Scenes/WHH_Scene.meta
+guid: 633fc55f8bc09c945af2cff1ae99126f
+========
 guid: 39898f3bcc9a6d541b01a3751a4360e9
+>>>>>>>> Dev:Assets/2. Scripts/Character.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}
