@@ -17,6 +17,11 @@ public class ItemSpawner : MonoBehaviour
 
     private void Update()
     {
+        TestSpawn();
+    }
+
+    private void TestSpawn()
+    {
         if (Input.GetMouseButtonDown(0))
         {
             if (wantSpawnID != ItemID.None)
