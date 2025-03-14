@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum ItemType
-{
-    Resource, // 자원
-    Equipable, // 장비
-    Consumable // 음식
-}
+//public enum ItemType
+//{
+//    Resource, // 자원
+//    Equipable, // 장비
+//    Consumable // 음식
+//}
 
 public enum ConsumableType
 {
@@ -28,7 +28,7 @@ public class TestItemData : ScriptableObject
     [Header("Info")]
     public string displayName;
     public string description;
-    public ItemType type;
+    //public ItemType type;
     public Sprite icon;
     public GameObject dropPrefab;
 
