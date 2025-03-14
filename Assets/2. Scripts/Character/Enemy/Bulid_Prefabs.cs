@@ -50,4 +50,7 @@ public class Bulid_Prefabs : MonoBehaviour
         meshRenderer.materials = NewMaterialArray;
     }
 
+
+    // 일정거리 이상 멀어질 경우 빨간색 변경 필요
+    // 공중에서 크로스헤어와 일치하지 않는 현상 수정 필요
 }
