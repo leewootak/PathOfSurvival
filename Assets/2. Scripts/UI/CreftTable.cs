@@ -49,7 +49,7 @@ public class CreftTable : MonoBehaviour
 
     private void Moving()
     {
-
+        //box.gameObject.GetComponent<MeshRenderer>().materials[1];
         if (IsSelect)
         {
             RaycastHit hit;
@@ -57,7 +57,7 @@ public class CreftTable : MonoBehaviour
             {
                 if (hit.collider != null)
                 {
-                    Vector3 vector3 = new Vector3(hit.point.x, hit.collider.bounds.size.y, hit.point.z);
+                    Vector3 vector3 = new Vector3(hit.point.x, hit.collider.bounds.max.y, hit.point.z);
                     if (Vector3.Distance(Player.transform.position, vector3) >= 3f)
                     {
                         box.transform.position = Vector3.Lerp(box.transform.position, vector3, Time.deltaTime * 5f);
