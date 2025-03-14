@@ -2,19 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum ItemType
-{
-    Resource, // 자원
-    Equipable, // 장비
-    Consumable // 음식
-}
-
-public enum ConsumableType
-{
-    Hunger,
-    Health
-}
-
 [System.Serializable]
 public class TestItemDataConsumable
 {

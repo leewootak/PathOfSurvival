@@ -29,12 +29,12 @@ public class EnemyAI : MonoBehaviour
     [Range(0f, 100f)][SerializeField] private float DetectingDistance;
     [Range(0f, 100f)][SerializeField] private float AttackDistance;
     private float playerDistance;
-    Silhumyoung Player; //플레이어로 바꿀꺼임
+    Player Player; //플레이어로 바꿀꺼임
 
 
     private void Awake()
     {
-        Player = FindAnyObjectByType<Silhumyoung>();
+        Player = FindAnyObjectByType<Player>();
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
         enemyObject = GetComponent<EnemyObject>();
