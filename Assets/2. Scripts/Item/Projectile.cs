@@ -16,11 +16,29 @@ public class Projectile : MonoBehaviour
     public float distance;
     public float speed;
     private float time;
-    // Start is called before the first frame update
+    Rigidbody rb;
+
+    private void Awake()
+    {
+        rb = GetComponent<Rigidbody>();
+        if (rb != null)
+        {
+            rb.constraints = RigidbodyConstraints.FreezeRotation;
+        }
+    }
+
     void Start()
     {
         time = distance / speed;
         Invoke("DisActive", time);
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        if (rb != null)
+        {
+            rb.constraints = RigidbodyConstraints.None;
+        }
     }
 
     public void GetSpeed(float sp)
