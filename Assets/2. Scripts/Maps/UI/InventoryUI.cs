@@ -28,6 +28,9 @@ public class InventoryUI : MonoBehaviour
 
     public Button ExitButton;
 
+    public StateUI stateUI;
+    public CraftUI craftUI;
+
     private void Awake()
     {
         UIManager.Instance.InventoryUI = this;
@@ -52,6 +55,8 @@ public class InventoryUI : MonoBehaviour
     private void OnEnable()
     {
         //가지고 있는 만큼 소환
+        //6개 단위로 Contents의 높이를 조정 + Slot소환
+        //아이템이 있다면 슬롯에 있는 코드를 통해 이미지를 생성
         //GameObject go = Instantiate(Slot);
         //go.transform.SetParent(Contents);
 
