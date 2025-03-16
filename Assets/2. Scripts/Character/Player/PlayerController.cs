@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -21,7 +22,9 @@ public class PlayerController : MonoBehaviour
     private float camCurXRot; // 마우스 델타값 저장 공간
     public float lookSensitivity; // 카메라 민감도 dpi
     private Vector2 mouseDelta; // 마우스 변화값
+    public bool canLook = true;
 
+    public Action inventory;
     private Rigidbody _rigidbody;
 
     private void Awake()
@@ -43,7 +46,10 @@ public class PlayerController : MonoBehaviour
 
     private void LateUpdate()
     {
-        CameraLook();
+        if (canLook)
+        {
+            CameraLook();
+        }
     }
 
     void Move()
@@ -132,5 +138,19 @@ public class PlayerController : MonoBehaviour
             }
         }
         return false;
+    }
+    public void OnInventory(InputAction.CallbackContext Context)
+    {
+        if (Context.phase == InputActionPhase.Started)
+        {
+            inventory?.Invoke();
+            ToggleCursor();
+        }
+    }
+    void ToggleCursor()
+    {
+        bool toggle = Cursor.lockState == CursorLockMode.Locked;
+        Cursor.lockState = toggle ? CursorLockMode.None : CursorLockMode.Locked;
+        canLook = !toggle;
     }
 }

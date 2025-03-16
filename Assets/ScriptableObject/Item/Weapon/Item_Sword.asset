@@ -17,12 +17,12 @@ MonoBehaviour:
   description: "\uB0A0\uCE74\uB85C\uC6B4 \uCE7C\uC774\uB2E4. \uC870\uC2EC\uD558\uC790."
   type: 1
   dropPrefab: {fileID: 5274398640790485116, guid: 4aa18f110903a3f43afce88488037295, type: 3}
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 4f2f320a217307a48a107491b1d17ebb, type: 3}
   weight: 0
   canStack: 0
   maxStackAmount: 0
   getAmount: 0
   consumables: []
-  equipPrefab: {fileID: 0}
+  equipPrefab: {fileID: 4860650037156938028, guid: 76a5d491d529e4545b701913314f4c37, type: 3}
   attackDamage: 10
   isSetUP: 0
