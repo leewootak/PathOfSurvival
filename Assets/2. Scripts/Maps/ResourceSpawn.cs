@@ -14,6 +14,9 @@ public class ResourceSpawn : MonoBehaviour
     int HowManyStoneSpawn;
     int HowManyWoodSpawn;
 
+    public GameObject Branch;
+    public GameObject Stone;
+
     private void Start()
     {
         Invoke("LateStart", 0.1f);

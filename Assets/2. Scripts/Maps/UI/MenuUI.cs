@@ -111,19 +111,12 @@ public class MenuUI : MonoBehaviour
 
     public void OnOffMenu()
     {
-        if (MenuUIGameObject.activeSelf)
-        {
-            MenuUIGameObject.SetActive(false);
-        }
-        else
-        {
-            MenuUIGameObject.SetActive(true);
-        }
+        MenuUIGameObject.SetActive(!MenuUIGameObject.activeSelf);
     }
 
     void SetVolume(float siderValue)
     {
         float volume = Mathf.Lerp(-80f, 0f, siderValue);
-        MasterAudioMixer.SetFloat("MasterVolume", volume);
+        MasterAudioMixer.SetFloat("MasterVolume", volume);  
     }
 }

@@ -29,14 +29,15 @@ public class Bulid_Prefabs : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.layer == LayerMask.NameToLayer("ground"))
+        if (other.gameObject.layer != LayerMask.NameToLayer("ground"))
         {
-            if(!IsnotBuild)
-            ColorChange(2);
+            
+            ColorChange(1);
         }
         else
         {
-            ColorChange(1);
+            if (!IsnotBuild)
+                ColorChange(2);
         }
     }
 
