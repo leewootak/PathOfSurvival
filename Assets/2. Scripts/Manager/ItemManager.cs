@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEditor.Search;
+using UnityEditorInternal.Profiling.Memory.Experimental;
 using UnityEngine;
 
 

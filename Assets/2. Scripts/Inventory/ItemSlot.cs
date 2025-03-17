@@ -7,6 +7,8 @@ using UnityEngine.UI;
 public class ItemSlot : MonoBehaviour
 {
     public ItemData item;
+    public int quantity;
+    public bool equiped;
 
     public Button button;
     public Image icon;
@@ -25,18 +27,22 @@ public class ItemSlot : MonoBehaviour
 
     private void OnEnable()
     {
-        outline.enabled = inventory.GetEquiped();
+        if (outline == null) outline = GetComponent<Outline>();
+        if (outline != null)
+        {
+            outline.enabled = equiped;
+        }
     }
 
     public void Set()
     {
         icon.gameObject.SetActive(true);
         icon.sprite = item.icon;
-        quantityText.text = inventory.GetQuantity() > 1 ? inventory.GetQuantity().ToString() : string.Empty;
+        quantityText.text = quantity > 1 ? quantity.ToString() : string.Empty;
 
         if (outline != null)
         {
-            outline.enabled = inventory.GetEquiped();
+            outline.enabled = equiped;
         }
     }
 
@@ -57,5 +63,14 @@ public class ItemSlot : MonoBehaviour
     public void OnClickButton()
     {
         inventory.SelectItem(index);
+    }
+
+    public float GetQuantity()
+    {
+        return quantity;
+    }
+    public bool GetEquiped()
+    {
+        return equiped;
     }
 }

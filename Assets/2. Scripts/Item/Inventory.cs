@@ -5,86 +5,87 @@ using Unity.VisualScripting;
 using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 
-public class Inventory:MonoBehaviour
+public class Inventory : MonoBehaviour
 {
-    public ItemData itemData;
-    public int quantity;
+
     public Transform dropPosition;
-    private bool equiped;
+
     private ItemID curEquipIndex;
     public PlayerCondition playerCondition;
+
+    public GameObject inventoryWindow;
 
     [Header("Select Item")]
     private ItemData selectedItem;
     private ItemID selectedItemIndex;
-    public TextMeshProUGUI selectedItemName;
-    public TextMeshProUGUI selectedItemDescription;
-    public TextMeshProUGUI selectedStatName;
-    public TextMeshProUGUI selectedStatValue;
+    private TextMeshProUGUI selectedItemName;
+    private TextMeshProUGUI selectedItemDescription;
+    private TextMeshProUGUI selectedStatName;
+    private TextMeshProUGUI selectedStatValue;
     public GameObject useButton;
     public GameObject equipButton;
     public GameObject unEquipButton;
     public GameObject dropButton;
 
-
-    public Dictionary<ItemID, Inventory> inventory = new Dictionary<ItemID, Inventory>();
+    public ItemData test;
+    public Dictionary<ItemID, ItemSlot> inventory;
 
     private PlayerController controller;
     private PlayerCondition condition;
 
     [Header("UI Management")]
-    private Dictionary<ItemID,ItemSlot> slots;
     public Transform slotParent; // Vertical Layout Group이 붙어있는 부모
     public GameObject slotPrefab; // 슬롯 프리팹
 
 
-    public Inventory(ItemData item = null , int qty = 1)
+    private void Awake()
     {
-        itemData = item;
-        quantity = qty;
+        inventory = new Dictionary<ItemID, ItemSlot>();
     }
-
     private void Start()
     {
         controller = CharacterManager.Instance.Player.controller;
         condition = CharacterManager.Instance.Player.condition;
-        slots = new Dictionary<ItemID, ItemSlot>();
+        controller.Inventory += Toggle;
     }
 
     public void GetItem(ItemData item)
     {
-        if (inventory.TryGetValue(item.id, out Inventory existingItem))
+        if (!inventory.ContainsKey(item.id))
         {
-            existingItem.quantity += item.getAmount;
+            CreateItemSlot(item);
         }
         else
         {
-            inventory[item.id] = new Inventory(item, item.getAmount);
-            CreateItemSlot(item);
+            inventory[item.id].quantity += item.getAmount;
         }
         UpdateUI();
     }
 
     void CreateItemSlot(ItemData item)  
     {
-        GameObject newSlot = Instantiate(slotPrefab, slotParent);
+        GameObject newSlot = Object.Instantiate(slotPrefab, slotParent);
         ItemSlot itemSlot = newSlot.GetComponent<ItemSlot>();
         itemSlot.inventory = this;
         itemSlot.index = item.id;
         itemSlot.item = item;
         itemSlot.Set();
-        slots.Add(item.id, itemSlot);
+        if (!inventory.ContainsKey(item.id))
+        {
+            inventory[item.id] = itemSlot;
+            inventory[item.id].quantity = item.getAmount;
+        }
     }
 
     void RemoveItemSlot(ItemID itemId)
     {
-         slots[itemId].DeleteSlot();
-         slots.Remove(itemId);
+         inventory[itemId].DeleteSlot();
+        inventory.Remove(itemId);
     }
 
     public void RemoveItem(ItemID item, int quantity = 1)
     {
-        Inventory existItem = ItemManager.Instance.inventory.FindItem(item);
+        ItemSlot existItem = ItemManager.Instance.inventory.FindItem(item);
         if (existItem != null)
         {
             if (existItem.quantity >= quantity)
@@ -111,9 +112,9 @@ public class Inventory:MonoBehaviour
         }
     }
 
-    public Inventory FindItem(ItemID id)
+    public ItemSlot FindItem(ItemID id)
     {
-        Inventory findItem;
+        ItemSlot findItem;
         return inventory.TryGetValue(id, out findItem) ? findItem : null;
     }
 
@@ -124,8 +125,8 @@ public class Inventory:MonoBehaviour
 
     public void SelectItem(ItemID index)
     {
-        if (inventory[index].itemData == null) return;
-        selectedItem = inventory[index].itemData;
+        if (inventory[index].item == null) return;
+        selectedItem = inventory[index].item;
         selectedItemIndex = index;
 
         selectedItemName.text = selectedItem.displayName;
@@ -219,21 +220,11 @@ public class Inventory:MonoBehaviour
         UnEquip(selectedItemIndex);
     }
 
-    public bool GetEquiped()
-    {
-        return equiped;
-    }
-
-    public float GetQuantity()
-    {
-        return quantity;
-    }
-
     void UpdateUI()
     {
-        foreach (KeyValuePair<ItemID, Inventory> slot in inventory)
+        foreach (KeyValuePair<ItemID, ItemSlot> slot in inventory)
         {
-            if (slots.TryGetValue(slot.Key, out ItemSlot itemSlot))
+            if (inventory.TryGetValue(slot.Key, out ItemSlot itemSlot))
             {
                 itemSlot.Set();
             }
@@ -242,5 +233,21 @@ public class Inventory:MonoBehaviour
                 itemSlot.Clear();
             }
         }
+    }
+
+    public void Toggle()
+    {
+        if (IsOpen())
+        {
+            inventoryWindow.SetActive(false);
+        }
+        else
+        {
+            inventoryWindow.SetActive(true);
+        }
+    }
+    public bool IsOpen()
+    {
+        return inventoryWindow.activeInHierarchy;
     }
 }

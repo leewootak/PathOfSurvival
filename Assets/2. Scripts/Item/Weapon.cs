@@ -44,11 +44,11 @@ public class Weapon : Equip
                //animator.SetTrigger("Attack");
                 if(type == WeaponType.Range)
                 {
-                    Inventory proc = ItemManager.Instance.inventory.FindItem(useProjectile);
+                    ItemSlot proc = ItemManager.Instance.inventory.FindItem(useProjectile);
                     if (proc.quantity > 0)
                     {
                         Shoot();
-                        proc.RemoveItem(useProjectile);
+                        ItemManager.Instance.inventory.RemoveItem(useProjectile);
                     }
                 }
                 Invoke("OnCanAttack", attackRate);
