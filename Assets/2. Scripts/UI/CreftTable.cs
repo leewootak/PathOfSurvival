@@ -5,55 +5,62 @@ using UnityEngine;
 using UnityEngine.InputSystem.HID;
 using UnityEngine.UI;
 
-
-
 public class CreftTable : MonoBehaviour
 {
-    public Button button; //이건 나중에 사라져도 되나?
-    public GameObject box; // 전달 받을 아이템의 프리펩
-    public GameObject UI; // 이걸 닫아야 함
-    private LayerMask layerMask; //그라운드만 닿게
+    public Button button;
+    public GameObject box;
+    public GameObject UI;
+    public GameObject Player;
     private Camera cam;
-    private Ray ray; //레이
-    public GameObject Player; // 나중에 받게 할거임
-
-    [SerializeField] private Build_Prefabs build_Prefabs;
-
-
-    private bool IsSelect = false;
-    public bool IsBatch;
+    private LayerMask layerMask;
+    private Ray ray;
 
     private float Angle;
+
+    // 설치 모드 활성 여부
+    private bool IsSelect = false;
+    // 설치 가능 상태 여부
+    public bool IsBatch;
+
+    // Build_Prefabs 스크립트 참조 (프리팹 관련 기능)
+    [SerializeField] private Build_Prefabs build_Prefabs;
+
 
     private void Awake()
     {
         cam = FindAnyObjectByType<Camera>();
         layerMask = LayerMask.GetMask("ground");
     }
+
     private void Start()
     {
-        button.onClick.AddListener(CraftBatch);
+        button.onClick.AddListener(Craft);
     }
 
     private void Update()
     {
         Drop();
     }
+
     private void FixedUpdate()
     {
-        ray = cam.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2));
-        Debug.DrawRay(ray.origin, ray.direction, Color.red);
         Moving();
+
+        // 화면 중앙에서 레이 생성
+        ray = cam.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2));
     }
 
-    private void CraftBatch()
+    // 설치 모드 시작 및 아이템 프리팹 생성
+    private void Craft()
     {
         UI.gameObject.SetActive(false);
+
+        // 아이템 프리팹 생성
         Instantiate(box, box.transform.position, Quaternion.identity);
-        box.transform.GetChild(0).GetComponent<Build_Prefabs>().ColorChange(2);
 
         IsSelect = true;
         IsBatch = true;
+
         Debug.Log("부품 선택");
     }
 
@@ -63,48 +70,56 @@ public class CreftTable : MonoBehaviour
         {
             RaycastHit hit;
 
-            if (Physics.Raycast(ray, out hit, 20f, layerMask) && Vector3.Distance(Player.transform.position, hit.point) < 10f)
+            // 10 이내의 그라운드를 감지하고, 플레이어와의 거리가 10 미만일 때
+            if (Physics.Raycast(ray, out hit, 10f, layerMask) && Vector3.Distance(Player.transform.position, hit.point) < 10f)
             {
                 if (hit.collider != null)
                 {
                     IsBatch = true;
-                    box.transform.GetChild(0).GetComponent<Build_Prefabs>().ColorChange(2);
-                    Vector3 forward = Vector3.Cross(hit.normal, Vector3.right);
-                    //범선 벡터와 오른쪽으로 이루어진 평면의 수직 백터(앞방향)
 
+                    // 설치 가능 상태 색상으로 변경
+                    box.transform.GetChild(0).GetComponent<Build_Prefabs>().ColorChange(2);
+
+                    // 충돌면의 법선과 오른쪽 벡터의 외적으로 전방 방향 계산
+                    Vector3 forward = Vector3.Cross(hit.normal, Vector3.right);
+
+                    // 아이템 위치를 감지된 지점으로 이동
                     box.transform.position = hit.point;
                 }
             }
+            // 플레이어와의 거리가 10 이상이면 설치 불가
             else if (Vector3.Distance(Player.transform.position, hit.point) >= 10f)
             {
                 IsBatch = false;
-                build_Prefabs.IsNotBuild = true;
+
+                // 설치 불가 상태 색상으로 변경
                 box.transform.GetChild(0).GetComponent<Build_Prefabs>().ColorChange(1);
+
                 Debug.Log("너무 멀음");
             }
         }
     }
 
+    // 아이템 설치 및 회전 (클릭 계속하면 디버그 로그 계속 찍히는거 수정 필요)
     private void Drop()
     {
         if (IsBatch && Input.GetMouseButtonDown(0))
         {
             IsSelect = false;
             box.transform.GetChild(0).GetComponent<Rigidbody>().isKinematic = true;
-            box.transform.GetChild(0).GetComponent<Build_Prefabs>().IsNotBuild = true;
+
+            // 설치 완료 상태 색상으로 변경
             box.transform.GetChild(0).GetComponent<Build_Prefabs>().ColorChange(0);
+
+            // 설치 UI 다시 활성화
             UI.gameObject.SetActive(true);
+
             Debug.Log("설치");
         }
+        // 우클릭: 아이템 회전
         else if (Input.GetMouseButtonDown(1))
         {
             Angle += 90f;
         }
-    }
-
-    private void ResetState()
-    {
-        IsSelect = true;
-        IsBatch = true;
     }
 }
