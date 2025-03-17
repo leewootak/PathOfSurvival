@@ -29,7 +29,7 @@ public class CreftTable : MonoBehaviour
     private void Awake()
     {
         cam = FindAnyObjectByType<Camera>();
-        layerMask = LayerMask.GetMask("ground");
+        layerMask = LayerMask.GetMask("ground", "Wall");
     }
 
     private void Start()
@@ -80,8 +80,15 @@ public class CreftTable : MonoBehaviour
                     // 설치 가능 상태 색상으로 변경
                     box.transform.GetChild(0).GetComponent<Build_Prefabs>().ColorChange(2);
 
-                    // 충돌면의 법선과 오른쪽 벡터의 외적으로 전방 방향 계산
-                    Vector3 forward = Vector3.Cross(hit.normal, Vector3.right);
+                    //// 충돌면의 법선과 오른쪽 벡터의 외적으로 전방 방향 계산
+                    //Vector3 forward = Vector3.Cross(hit.normal, Vector3.right);
+
+                    // 표면의 법선에 맞춰 회전
+                    Quaternion baseRotation = Quaternion.LookRotation(-hit.normal);
+                    Quaternion additionalRotation = Quaternion.Euler(0, Angle, 0);
+                    box.transform.rotation = baseRotation * additionalRotation;
+
+
 
                     // 아이템 위치를 감지된 지점으로 이동
                     box.transform.position = hit.point;
