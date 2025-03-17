@@ -6,12 +6,26 @@ public class EnemyObject : MonoBehaviour
 {
     [SerializeField] private EnemyInfo EnemyInfo;
 
+    private Animator animator;
     private float health;
-    private float attack;
+
     public void Set()
     {
         health = EnemyInfo.Health;
-        attack = EnemyInfo.Attack;
+    }
+    private void Start()
+    {
+        animator = GetComponent<Animator>();
+    }
+
+    private void Update()
+    {
+        if (health <= 0)
+        {
+            animator.SetTrigger("DIE");
+            gameObject.SetActive(false);
+            EnemyPool.Instance.ReQueue(gameObject);
+        }
     }
     public EnemyInfo GetEnemyInfo()
     {
