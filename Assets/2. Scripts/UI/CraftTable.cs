@@ -1,8 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.PackageManager;
 using UnityEngine;
-using UnityEngine.InputSystem.HID;
 using UnityEngine.UI;
 
 public class CraftTable : MonoBehaviour
@@ -17,12 +13,11 @@ public class CraftTable : MonoBehaviour
 
     private float Angle;
 
-    // 설치 모드 활성 여부
+    // 배치 모드 활성 여부
     private bool IsSelect = false;
-    // 설치 가능 상태 여부
-    public bool IsBatch;
+    // 배치 가능 상태 여부
+    public bool CanPlace;
 
-    // Build_Prefabs 스크립트 참조 (프리팹 관련 기능)
     [SerializeField] private Build_Prefabs build_Prefabs;
 
 
@@ -44,13 +39,13 @@ public class CraftTable : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Moving();
+        Place();
 
         // 화면 중앙에서 레이 생성
         ray = cam.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2));
     }
 
-    // 설치 모드 시작 및 아이템 프리팹 생성
+    // 배치 모드 시작 및 아이템 프리팹 생성
     private void Craft()
     {
         UI.gameObject.SetActive(false);
@@ -59,12 +54,12 @@ public class CraftTable : MonoBehaviour
         Instantiate(box, box.transform.position, Quaternion.identity);
 
         IsSelect = true;
-        IsBatch = true;
+        CanPlace = true;
 
         Debug.Log("부품 선택");
     }
 
-    private void Moving()
+    private void Place()
     {
         if (IsSelect)
         {
@@ -75,9 +70,9 @@ public class CraftTable : MonoBehaviour
             {
                 if (hit.collider != null)
                 {
-                    IsBatch = true;
+                    CanPlace = true;
 
-                    // 설치 가능 상태 색상으로 변경
+                    // 배치 가능 상태 색상으로 변경
                     box.transform.GetChild(0).GetComponent<Build_Prefabs>().ColorChange(2);
 
                     //// 충돌면의 법선과 오른쪽 벡터의 외적으로 전방 방향 계산
@@ -94,12 +89,12 @@ public class CraftTable : MonoBehaviour
                     box.transform.position = hit.point;
                 }
             }
-            // 플레이어와의 거리가 10 이상이면 설치 불가
+            // 플레이어와의 거리가 10 이상이면 배치 불가
             else if (Vector3.Distance(Player.transform.position, hit.point) >= 10f)
             {
-                IsBatch = false;
+                CanPlace = false;
 
-                // 설치 불가 상태 색상으로 변경
+                // 배치 불가 상태 색상으로 변경
                 box.transform.GetChild(0).GetComponent<Build_Prefabs>().ColorChange(1);
 
                 Debug.Log("너무 멀음");
@@ -107,21 +102,21 @@ public class CraftTable : MonoBehaviour
         }
     }
 
-    // 아이템 설치 및 회전 (클릭 계속하면 디버그 로그 계속 찍히는거 수정 필요)
+    // 아이템 배치 및 회전 (클릭 계속하면 디버그 로그 계속 찍히는 현상 수정 필요)
     private void Drop()
     {
-        if (IsBatch && Input.GetMouseButtonDown(0))
+        if (CanPlace && Input.GetMouseButtonDown(0))
         {
             IsSelect = false;
             box.transform.GetChild(0).GetComponent<Rigidbody>().isKinematic = true;
 
-            // 설치 완료 상태 색상으로 변경
+            // 배치 완료 상태 색상으로 변경
             box.transform.GetChild(0).GetComponent<Build_Prefabs>().ColorChange(0);
 
-            // 설치 UI 다시 활성화
+            // 배치 UI 다시 활성화
             UI.gameObject.SetActive(true);
 
-            Debug.Log("설치");
+            Debug.Log("배치");
         }
         // 우클릭: 아이템 회전
         else if (Input.GetMouseButtonDown(1))
