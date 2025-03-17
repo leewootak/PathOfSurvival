@@ -2,18 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StoneResource : MonoBehaviour
+public class StoneResource : ResourcePlayerCanGet
 {
     Vector3 Scale;
     Collider Collider;
-    GameObject Particle;
 
-    private void Start()
+    protected override void Start()
     {
+        base.Start();
+
         MapManager.Instance.Resource.resourceSpawn.StoneSpawnPosition.Add(this);
-        Particle = Instantiate(MapManager.Instance.Resource.resourceSpawn.ResourceParticle);
-        Particle.transform.SetParent(transform, true);
-        Particle.transform.localPosition = Vector3.zero;
 
         Scale = gameObject.transform.localScale;
         Collider = gameObject.GetComponent<Collider>();
@@ -24,6 +22,15 @@ public class StoneResource : MonoBehaviour
         gameObject.transform.localScale = Scale;
         Collider.enabled = true;
         Particle.SetActive(true);
+    }
+
+    public void GetResource()
+    {
+        GameObject go = Instantiate(MapManager.Instance.Resource.resourceSpawn.Stone);
+        go.transform.position = new Vector3(transform.position.x + Random.Range(-1f, 1f), transform.position.y + 2f, transform.position.z + Random.Range(-1f, 1f));
+        go.transform.eulerAngles = new Vector3(transform.eulerAngles.x + Random.Range(0, 360f), transform.eulerAngles.y, transform.eulerAngles.z + Random.Range(0, 360f));
+
+        DeleteResource();
     }
 
     public void DeleteResource()

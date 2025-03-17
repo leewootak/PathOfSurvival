@@ -9,6 +9,8 @@ public class Bulid_Prefabs : MonoBehaviour
     private Material[] materials;
     private MeshRenderer meshRenderer;
     private LayerMask layerMask;
+    public Ray ray;
+    public bool IsnotBuild = false;
     private void Awake()
     {
         meshRenderer = GetComponent<MeshRenderer>();
@@ -16,35 +18,37 @@ public class Bulid_Prefabs : MonoBehaviour
         for(int i = 0; i < materials.Length; i++) 
         {
             materials[i] = meshRenderer.materials[i];
+      
 
         }
-        layerMask = LayerMask.GetMask("Ground");
+        layerMask = LayerMask.GetMask("ground");
+        
     }
+
+
 
     private void OnTriggerStay(Collider other)
     {
-       
-        Ray ray = new Ray(transform.position, -transform.up);
-        RaycastHit hit;
-        if(Physics.Raycast(ray, out hit, 1f, layerMask) )
+        if (other.gameObject.layer != LayerMask.NameToLayer("ground"))
         {
-            Debug.Log("OK");
-            Material[] NewMaterial = new Material[materials.Length];
             
+            ColorChange(1);
         }
         else
         {
-            meshRenderer.material = materials[1];
+            if (!IsnotBuild)
+                ColorChange(2);
         }
-
-   
     }
 
-    private void ColorChange(Material Color)
+    public void ColorChange(int index)
     {
-        Material[] NewMaterialArray = new Material[materials.Length]; 
-
-
+        Material[] NewMaterialArray = new Material[materials.Length];
+        for(int i = 0;i < NewMaterialArray.Length;i++)
+        {
+            NewMaterialArray[i] = materials[index];
+        }
+        meshRenderer.materials = NewMaterialArray;
     }
 
 }

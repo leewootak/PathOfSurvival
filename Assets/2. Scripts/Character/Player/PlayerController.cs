@@ -35,7 +35,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Cursor.lockState = CursorLockMode.Locked; // 마우스 제어
+        //Cursor.lockState = CursorLockMode.Locked; // 마우스 제어
     }
 
     // Update is called once per frame
