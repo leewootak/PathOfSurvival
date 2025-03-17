@@ -31,9 +31,10 @@ public class EnemyObject : MonoBehaviour
         return EnemyInfo;
     }
 
-    public float SubHealth(float Damage)
+    public void SubHealth(float Damage)
     {
-        return health -= Damage;
+        animator.SetTrigger("Scream");
+        health -= Damage;
     }
 
     private IEnumerator Die()
