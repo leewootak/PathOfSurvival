@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -21,7 +22,6 @@ public class CreftTable : MonoBehaviour
     private bool IsBatch = false;
 
     private float Angle;
-
     private void Awake()
     {
         cam = FindAnyObjectByType<Camera>();
