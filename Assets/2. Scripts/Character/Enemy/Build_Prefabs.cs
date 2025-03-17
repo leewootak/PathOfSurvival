@@ -8,7 +8,7 @@ public class Build_Prefabs : MonoBehaviour
 
     [SerializeField] private Material Red;
     [SerializeField] private Material Green;
-    [SerializeField] private CreftTable creftTable;
+    [SerializeField] private CraftTable craftTable;
     private LayerMask layerMask;
     private Material[] materials;
     private MeshRenderer meshRenderer;
@@ -35,7 +35,7 @@ public class Build_Prefabs : MonoBehaviour
             // 배치 불가능 상태 머티리얼(예: 빨간색)로 변경
             ColorChange(1);
             // CreftTable의 배치 가능 여부를 false로 설정
-            creftTable.IsBatch = false;
+            craftTable.IsBatch = false;
             Debug.Log("배치 불가능");
         }
     }

@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.InputSystem.HID;
 using UnityEngine.UI;
 
-public class CreftTable : MonoBehaviour
+public class CraftTable : MonoBehaviour
 {
     public Button button;
     public GameObject box;
