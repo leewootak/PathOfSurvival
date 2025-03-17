@@ -223,6 +223,8 @@ public class EnemyAI : MonoBehaviour
         if(enemyObject.SubHealth(1) <= 0f)
         {
             animator.SetTrigger("DIE");
+            gameObject.SetActive(false);
+            EnemyPool.Instance.ReQueue(gameObject);
         }
     }
 
