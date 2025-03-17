@@ -22,9 +22,7 @@ public class EnemyObject : MonoBehaviour
     {
         if (health <= 0)
         {
-            animator.SetTrigger("DIE");
-            gameObject.SetActive(false);
-            EnemyPool.Instance.ReQueue(gameObject);
+            StartCoroutine(Die());
         }
     }
     public EnemyInfo GetEnemyInfo()
@@ -35,6 +33,14 @@ public class EnemyObject : MonoBehaviour
     public float SubHealth(float Damage)
     {
         return health -= Damage;
+    }
+
+    private IEnumerator Die()
+    {
+        animator.SetTrigger("DIE");
+        yield return new WaitForSeconds(2f);
+        gameObject.SetActive(false);
+        EnemyPool.Instance.ReQueue(gameObject);
     }
     
 }

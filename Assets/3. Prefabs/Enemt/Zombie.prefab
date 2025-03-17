@@ -769,7 +769,7 @@ GameObject:
   - component: {fileID: 1269883566511482920}
   - component: {fileID: 2237386298237022717}
   - component: {fileID: 8714075928915294874}
-  - component: {fileID: 6427407165129470843}
+  - component: {fileID: -5539913414679160201}
   m_Layer: 0
   m_Name: Zombie
   m_TagString: Untagged
@@ -900,7 +900,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EnemyInfo: {fileID: 11400000, guid: 5764a33beef79a04398645d821d3b624, type: 2}
---- !u!114 &6427407165129470843
+--- !u!114 &-5539913414679160201
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
