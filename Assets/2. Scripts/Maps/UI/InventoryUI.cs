@@ -59,6 +59,7 @@ public class InventoryUI : MonoBehaviour
         //아이템이 있다면 슬롯에 있는 코드를 통해 이미지를 생성
         //GameObject go = Instantiate(Slot);
         //go.transform.SetParent(Contents);
+        //go.Getcomponent<Slot>().InventorySlot();
 
         nowUI = InventoryUIButton.State;
         ChangeStateAndUI();

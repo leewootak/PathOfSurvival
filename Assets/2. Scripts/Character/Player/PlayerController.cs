@@ -14,6 +14,9 @@ public class PlayerController : MonoBehaviour
     private Vector2 curMovementInput; // 현재 이동하는 값
     public LayerMask groundLayerMask;
 
+    bool isjump = false;
+    Coroutine CheckjumpCoroutine;
+
     [Header("Look")]
     public Transform cameraContainer;
     public float minXLook; // 최소 시야각
@@ -70,7 +73,15 @@ public class PlayerController : MonoBehaviour
 
         // 방향에 최종 속도 적용
         dir *= finalSpeed;
-        dir.y = _rigidbody.velocity.y; // y 방향 속도는 그대로 유지
+
+        if(_rigidbody.velocity.y > 0 && !isjump)
+        {
+            dir.y = _rigidbody.velocity.y * 0.01f; // y 방향 속도는 그대로 유지
+        }
+        else
+        {
+            dir.y = _rigidbody.velocity.y; // y 방향 속도는 그대로 유지
+        }
 
         // Rigidbody의 속도 업데이트
         _rigidbody.velocity = dir;
@@ -108,13 +119,25 @@ public class PlayerController : MonoBehaviour
 
     public void OnJump(InputAction.CallbackContext context)
     {
-        if(context.phase == InputActionPhase.Started && IsGrounded())
+        if(context.phase == InputActionPhase.Started && IsGrounded(0.5f))
         {
+            isjump = true;
             _rigidbody.AddForce(Vector2.up * jumpPower, ForceMode.Impulse);
+            if(CheckjumpCoroutine != null) StopCoroutine(CheckjumpCoroutine);
+            CheckjumpCoroutine = StartCoroutine(AfterJump());
         }
     }
 
-    bool IsGrounded()
+    IEnumerator AfterJump()
+    {
+        while (!IsGrounded(0.43f))
+        {
+            yield return null;
+        }
+        isjump = false;
+    }
+
+    bool IsGrounded(float hieght)
     {
         Ray[] rays = new Ray[4]
         {
@@ -126,7 +149,7 @@ public class PlayerController : MonoBehaviour
 
         for(int i = 0; i < rays.Length; i++)
         {
-            if (Physics.Raycast(rays[i], 0.5f, groundLayerMask))
+            if (Physics.Raycast(rays[i], hieght, groundLayerMask))
             { // 현재 Ray가 groundLayerMask에 속하는 오브젝트와 충돌하는지 검사 (거리: 0.5)
                 return true;
             }
