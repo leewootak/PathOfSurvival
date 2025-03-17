@@ -86,7 +86,6 @@ public abstract class EnemyAI : MonoBehaviour
         {
             if(AIState.Detect == state &&agent.gameObject.activeInHierarchy && agent.remainingDistance<0.1f)
             {
-                Debug.Log("");
                 SetState(AIState.Idle);
                 Invoke("StartDetect", 0f);
             }
@@ -133,7 +132,6 @@ public abstract class EnemyAI : MonoBehaviour
         NavMeshHit hit;
         if (surface != null)
         {
-            Debug.Log("Find");
             Vector3 RandomPosition = new Vector3(Random.Range(surface.transform.position.x, surface.transform.position.x + surface.size.x),
                 transform.position.y, Random.Range(surface.transform.position.z, surface.transform.position.z + surface.size.z));
             NavMesh.SamplePosition(RandomPosition, out hit, 100f, NavMesh.AllAreas);

@@ -12,14 +12,12 @@ public class RangeEnemyAI : EnemyAI
 
     public override void Update()
     {
-      
         base.Update();
         if (AIState.Attack == state && ISRunAway)
         {
             if (playerDistance >= RunAwayRange)
             {
                 agent.isStopped = true;
-
             }
         }
     }
@@ -27,25 +25,21 @@ public class RangeEnemyAI : EnemyAI
     {
         if(playerDistance < AttackDistance && Sight())
         {
-            Debug.Log("Attack");
             agent.isStopped = true;
             if (Time.time - lastAttackTime > enemyObject.GetEnemyInfo().AttackCoolTime)
             {
                 lastAttackTime = Time.time;
                 animator.SetTrigger("IsAttack");
                 ProjectileShoot();
-                Debug.Log("AttackComplete");
                 RunAway();
             }
             else
             {
                 RunAway();
-                Debug.Log("Run1");
             }
         }
         else
         {
-            Debug.Log("Run2");
             agent.isStopped = false;
             SetState(AIState.Detect);
             
@@ -75,7 +69,7 @@ public class RangeEnemyAI : EnemyAI
         //공격모션에 따라서 잘하면 코루틴 써야할듯
         Vector3 dir = CharacterManager.Instance.Player.transform.position - transform.position;
         GameObject Pre =  Instantiate(Prefabs,transform);
-        Pre.transform.GetChild(0).GetComponent<Rigidbody>().AddForce(dir * 5f, ForceMode.Impulse);
+        Pre.transform.GetChild(0).GetComponent<Rigidbody>().AddForce(dir * 3f, ForceMode.Impulse);
     }
     
 }
