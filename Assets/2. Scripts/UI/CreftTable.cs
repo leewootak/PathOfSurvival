@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.InputSystem.HID;
 using UnityEngine.UI;
@@ -16,9 +17,11 @@ public class CreftTable : MonoBehaviour
     private Ray ray; //레이
     public GameObject Player; // 나중에 받게 할거임
 
+    [SerializeField] private Build_Prefabs build_Prefabs; 
+
 
     private bool IsSelect = false;
-    private bool IsBatch = false;
+    [SerializeField] private bool IsBatch = false;
     public bool CanDrop = true;
 
     private float Angle;
@@ -51,6 +54,7 @@ public class CreftTable : MonoBehaviour
     private void CraftBatch()
     {
         UI.gameObject.SetActive(false);
+        Instantiate(box, box.transform.position, Quaternion.identity);
         IsSelect = true;
         Debug.Log("HI");
     }
@@ -61,7 +65,7 @@ public class CreftTable : MonoBehaviour
         if (IsSelect)
         {
             RaycastHit hit;
-            if (Physics.Raycast(ray, out hit, 100f, layerMask))
+            if (Physics.Raycast(ray, out hit, 50f, layerMask))
             {
                 if (hit.collider != null)
                 {
@@ -86,7 +90,13 @@ public class CreftTable : MonoBehaviour
             }
             else
             {
-                IsBatch = false;
+                if (Vector3.Distance(Player.transform.position, hit.point) >= 10f)
+                {
+                    IsBatch = false;
+                    build_Prefabs.IsNotBuild = false;
+                    Debug.Log("너무 멀음");
+                }                    
+
                 //box.transform.position = ray.origin + new Vector3(0.06f, 0, 3f);
                 //box.transform.GetChild(0).localRotation = Quaternion.identity;
             }
@@ -101,8 +111,8 @@ public class CreftTable : MonoBehaviour
             {
                 IsSelect = false;
                 box.transform.GetChild(0).GetComponent<Rigidbody>().isKinematic = true;
-                box.transform.GetChild(0).GetComponent<Bulid_Prefabs>().IsnotBuild = true;
-                box.transform.GetChild(0).GetComponent<Bulid_Prefabs>().ColorChange(0);
+                box.transform.GetChild(0).GetComponent<Build_Prefabs>().IsNotBuild = true;
+                box.transform.GetChild(0).GetComponent<Build_Prefabs>().ColorChange(0);
                 UI.gameObject.SetActive(true);
             }
 
