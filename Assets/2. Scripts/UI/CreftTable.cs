@@ -17,12 +17,11 @@ public class CreftTable : MonoBehaviour
     private Ray ray; //레이
     public GameObject Player; // 나중에 받게 할거임
 
-    [SerializeField] private Build_Prefabs build_Prefabs; 
+    [SerializeField] private Build_Prefabs build_Prefabs;
 
 
     private bool IsSelect = false;
-    [SerializeField] private bool IsBatch = false;
-    public bool CanDrop = true;
+    public bool IsBatch;
 
     private float Angle;
 
@@ -33,7 +32,7 @@ public class CreftTable : MonoBehaviour
     }
     private void Start()
     {
-        button.onClick.AddListener(Craft);
+        button.onClick.AddListener(CraftBatch);
     }
 
     private void Update()
@@ -46,81 +45,66 @@ public class CreftTable : MonoBehaviour
         Debug.DrawRay(ray.origin, ray.direction, Color.red);
         Moving();
     }
-    private void Craft()
-    {
-        CraftBatch();
-    }
 
     private void CraftBatch()
     {
         UI.gameObject.SetActive(false);
         Instantiate(box, box.transform.position, Quaternion.identity);
+        box.transform.GetChild(0).GetComponent<Build_Prefabs>().ColorChange(2);
+
         IsSelect = true;
-        Debug.Log("HI");
+        IsBatch = true;
+        Debug.Log("부품 선택");
     }
 
     private void Moving()
     {
-        //box.gameObject.GetComponent<MeshRenderer>().materials[1];
         if (IsSelect)
         {
             RaycastHit hit;
-            if (Physics.Raycast(ray, out hit, 50f, layerMask))
+
+            if (Physics.Raycast(ray, out hit, 20f, layerMask) && Vector3.Distance(Player.transform.position, hit.point) < 10f)
             {
                 if (hit.collider != null)
                 {
-
+                    IsBatch = true;
+                    box.transform.GetChild(0).GetComponent<Build_Prefabs>().ColorChange(2);
                     Vector3 forward = Vector3.Cross(hit.normal, Vector3.right);
                     //범선 벡터와 오른쪽으로 이루어진 평면의 수직 백터(앞방향)
 
-                    if (Vector3.Distance(Player.transform.position, hit.point) >= 3f)
-                    {
-                        IsBatch = true; 
-                        box.transform.position = Vector3.Lerp(box.transform.position, hit.point, Time.deltaTime * 5f);
-                        box.transform.GetChild(0).transform.localRotation = Quaternion.LookRotation(forward, hit.normal) * 
-                            Quaternion.AngleAxis(Angle, Vector3.up);
-                        //box.transform.GetChild(0).transform.localRotation = Quaternion.LookRotation(forward, hit.normal);
-                    }
-                    else
-                    {
-                        box.transform.position = hit.point;
-                        IsBatch = true;
-                    }
+                    box.transform.position = hit.point;
                 }
             }
-            else
+            else if (Vector3.Distance(Player.transform.position, hit.point) >= 10f)
             {
-                if (Vector3.Distance(Player.transform.position, hit.point) >= 10f)
-                {
-                    IsBatch = false;
-                    build_Prefabs.IsNotBuild = false;
-                    Debug.Log("너무 멀음");
-                }                    
-
-                //box.transform.position = ray.origin + new Vector3(0.06f, 0, 3f);
-                //box.transform.GetChild(0).localRotation = Quaternion.identity;
+                IsBatch = false;
+                build_Prefabs.IsNotBuild = true;
+                box.transform.GetChild(0).GetComponent<Build_Prefabs>().ColorChange(1);
+                Debug.Log("너무 멀음");
             }
         }
     }
 
     private void Drop()
     {
-        if (IsBatch)
+        if (IsBatch && Input.GetMouseButtonDown(0))
         {
-            if (Input.GetMouseButtonDown(0) && CanDrop == true)
-            {
-                IsSelect = false;
-                box.transform.GetChild(0).GetComponent<Rigidbody>().isKinematic = true;
-                box.transform.GetChild(0).GetComponent<Build_Prefabs>().IsNotBuild = true;
-                box.transform.GetChild(0).GetComponent<Build_Prefabs>().ColorChange(0);
-                UI.gameObject.SetActive(true);
-            }
-
-            if (Input.GetMouseButtonDown(1))
-            {
-                Angle += 90f;
-            }
+            IsSelect = false;
+            box.transform.GetChild(0).GetComponent<Rigidbody>().isKinematic = true;
+            box.transform.GetChild(0).GetComponent<Build_Prefabs>().IsNotBuild = true;
+            box.transform.GetChild(0).GetComponent<Build_Prefabs>().ColorChange(0);
+            UI.gameObject.SetActive(true);
+            Debug.Log("설치");
+        }
+        else if (Input.GetMouseButtonDown(1))
+        {
+            Angle += 90f;
         }
     }
 
+    private void ResetState()
+    {
+        IsSelect = true;
+        IsBatch = true;
+    }
 }

@@ -35,7 +35,7 @@ public class Build_Prefabs : MonoBehaviour
         {
 
             ColorChange(1);
-            creftTable.CanDrop = false;
+            creftTable.IsBatch = false;
             Debug.Log("배치 불가능");
 
         }
@@ -43,7 +43,7 @@ public class Build_Prefabs : MonoBehaviour
         {
 
             ColorChange(2);
-            creftTable.CanDrop = true;
+            creftTable.IsBatch = true;
             Debug.Log("배치 가능");
 
 
