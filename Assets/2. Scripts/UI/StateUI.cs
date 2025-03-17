@@ -13,13 +13,6 @@ public class StateUI : MonoBehaviour
     public TextMeshProUGUI WaterText;
     public TextMeshProUGUI InfectionText;
 
-    UICondition uICondition;
-
-    private void Start()
-    {
-        uICondition = CharacterManager.Instance.Player.condition.uICondition;
-    }
-
     private void Update()
     {
         ChangeConditions();
@@ -33,6 +26,7 @@ public class StateUI : MonoBehaviour
 
     void ChangeConditions()
     {
+        UICondition  uICondition = CharacterManager.Instance.Player.condition.uICondition;
         HealthText.text = $"{Mathf.FloorToInt(uICondition.health.curValue)} / {uICondition.health.maxValue}";
         StaminaText.text = $"{Mathf.FloorToInt(uICondition.Stamina.curValue)} / {uICondition.Stamina.maxValue}";
         FoodText.text = $"{Mathf.FloorToInt(uICondition.hunger.curValue)} / {uICondition.hunger.maxValue}";

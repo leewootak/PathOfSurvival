@@ -31,6 +31,13 @@ public class UIManager : MonoBehaviour
         set { _inventoryUI = value; }
     }
 
+    private StoryUI _storyUI;
+    public StoryUI StoryUI
+    {
+        get { return _storyUI; }
+        set { _storyUI = value; }
+    }
+
     private void Awake()
     {
         if(_instance == null)

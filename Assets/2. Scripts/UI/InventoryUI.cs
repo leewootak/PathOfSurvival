@@ -6,7 +6,8 @@ using UnityEngine.UI;
 public enum InventoryUIButton
 {
     State,
-    Craft
+    Craft,
+    Story
 }
 
 public class InventoryUI : MonoBehaviour
@@ -25,6 +26,10 @@ public class InventoryUI : MonoBehaviour
     public GameObject CraftUI;
     public Button CraftButton;
     public GameObject CraftButtonIsOn;
+
+    public GameObject StoryUI;
+    public Button StoryButton;
+    public GameObject StoryButtonIsOn;
 
     public Button ExitButton;
 
@@ -45,6 +50,10 @@ public class InventoryUI : MonoBehaviour
         if (CraftButton != null)
         {
             CraftButton.onClick.AddListener(OnClickCraftButton);
+        }
+        if (StoryButton != null)
+        {
+            StoryButton.onClick.AddListener(OnClickStoryButton);
         }
         if (ExitButton != null)
         {
@@ -67,19 +76,26 @@ public class InventoryUI : MonoBehaviour
 
     void ChangeStateAndUI()
     {
+        StateUI.SetActive(false);
+        StateButtonIsOn.SetActive(false);
+        CraftUI.SetActive(false);
+        CraftButtonIsOn.SetActive(false);
+        StoryUI.SetActive(false);
+        StoryButtonIsOn.SetActive(false);
+
         switch (nowUI)
         {
             case InventoryUIButton.State:
                 StateUI.SetActive(true);
                 StateButtonIsOn.SetActive(true);
-                CraftUI.SetActive(false);
-                CraftButtonIsOn.SetActive(false);
                 break;
             case InventoryUIButton.Craft:
-                StateUI.SetActive(false);
-                StateButtonIsOn.SetActive(false);
                 CraftUI.SetActive(true);
                 CraftButtonIsOn.SetActive(true);
+                break;
+            case InventoryUIButton.Story:
+                StoryUI.SetActive(true);
+                StoryButtonIsOn.SetActive(true);
                 break;
         }
     }
@@ -93,6 +109,11 @@ public class InventoryUI : MonoBehaviour
     void OnClickCraftButton()
     {
         nowUI = InventoryUIButton.Craft;
+        ChangeStateAndUI();
+    }
+    void OnClickStoryButton()
+    {
+        nowUI = InventoryUIButton.Story;
         ChangeStateAndUI();
     }
 
