@@ -8,4 +8,5 @@ public class PostIt : ScriptableObject
     public string NameobStory;
     public string Story;
     public bool isPlayerHave = false;
+    public bool isShow = false;
 }

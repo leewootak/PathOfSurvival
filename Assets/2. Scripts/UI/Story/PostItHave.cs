@@ -8,6 +8,8 @@ public class PostItHave : MonoBehaviour
 
     private void Start()
     {
+        postit.isPlayerHave = false;
+        postit.isShow = false;
         UIManager.Instance.StoryUI.AllPostit.Add(postit);
     }
 

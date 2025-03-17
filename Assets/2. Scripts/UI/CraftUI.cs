@@ -11,7 +11,6 @@ public class CraftUI : MonoBehaviour
     public Transform SpawnCraftPosition;
     public RectTransform SpawnCraftheight;
 
-
     private void OnEnable()
     {
         SpawnCraftheight.sizeDelta = new Vector2(SpawnCraftheight.sizeDelta.x, CraftableItem.Count * 140);
