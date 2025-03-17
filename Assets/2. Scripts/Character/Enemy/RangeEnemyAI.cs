@@ -10,11 +10,13 @@ public class RangeEnemyAI : EnemyAI
     private bool ISRunAway = false;
 
 
-    private void Update()
+    public override void Update()
     {
-        if(AIState.Attack  ==  state && ISRunAway)
+      
+        base.Update();
+        if (AIState.Attack == state && ISRunAway)
         {
-            if(playerDistance >= RunAwayRange) 
+            if (playerDistance >= RunAwayRange)
             {
                 agent.isStopped = true;
 
@@ -71,8 +73,8 @@ public class RangeEnemyAI : EnemyAI
     private void ProjectileShoot()
     {
         Vector3 dir = CharacterManager.Instance.Player.transform.position - transform.position;
-       GameObject Pre =  Instantiate(Prefabs);
-        Pre.GetComponent<Rigidbody>().AddForce(dir, ForceMode.Impulse);
+       GameObject Pre =  Instantiate(Prefabs, transform);
+        Pre.transform.GetChild(0).GetComponent<Rigidbody>().AddForce(dir, ForceMode.Impulse);
     }
     
 }

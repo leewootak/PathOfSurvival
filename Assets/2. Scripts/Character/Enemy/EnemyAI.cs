@@ -43,11 +43,17 @@ public abstract class EnemyAI : MonoBehaviour
     {
         agent.speed = enemyObject.GetEnemyInfo().Speed;
         surface = GetComponentInParent<NavMeshSurface>();
+        if(surface == null)
+        {
+            Debug.Log("Null");
+        }
         state = AIState.Detect;
+        Debug.Log(state);
     }
 
-    private void Update()
+    public virtual void Update()
     {
+
         playerDistance = Vector3.Distance(transform.position, Player.transform.position);
         animator.SetBool("IsMoving", state != AIState.Idle);
         StateAction();
@@ -73,12 +79,14 @@ public abstract class EnemyAI : MonoBehaviour
     {
         if(playerDistance < DetectingDistance) 
         {
+            Debug.Log("Detected");
             SetState(AIState.Attack);
         }
         else
         {
             if(AIState.Detect == state &&agent.gameObject.activeInHierarchy && agent.remainingDistance<0.1f)
             {
+                Debug.Log("");
                 SetState(AIState.Idle);
                 Invoke("StartDetect", 0f);
             }
