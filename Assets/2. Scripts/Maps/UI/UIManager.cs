@@ -24,6 +24,13 @@ public class UIManager : MonoBehaviour
         set { _menuUI = value; }
     }
 
+    private InventoryUI _inventoryUI;
+    public InventoryUI InventoryUI
+    {
+        get { return _inventoryUI; }
+        set { _inventoryUI = value; }
+    }
+
     private void Awake()
     {
         if(_instance == null)
