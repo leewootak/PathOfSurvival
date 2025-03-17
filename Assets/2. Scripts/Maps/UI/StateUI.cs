@@ -28,6 +28,7 @@ public class StateUI : MonoBehaviour
     public void CheckEquipItem()
     {
         //slot에 장착중인 아이템 이미지
+        //GetComponet<Slot>().EquipSlot();
     }
 
     void ChangeConditions()
