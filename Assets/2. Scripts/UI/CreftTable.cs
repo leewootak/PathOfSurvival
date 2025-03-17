@@ -19,6 +19,7 @@ public class CreftTable : MonoBehaviour
 
     private bool IsSelect = false;
     private bool IsBatch = false;
+    public bool CanDrop = true;
 
     private float Angle;
 
@@ -86,8 +87,8 @@ public class CreftTable : MonoBehaviour
             else
             {
                 IsBatch = false;
-                box.transform.position = ray.origin + new Vector3(0.06f, 0, 3f);
-                box.transform.GetChild(0).localRotation = Quaternion.identity;
+                //box.transform.position = ray.origin + new Vector3(0.06f, 0, 3f);
+                //box.transform.GetChild(0).localRotation = Quaternion.identity;
             }
         }
     }
@@ -96,13 +97,13 @@ public class CreftTable : MonoBehaviour
     {
         if (IsBatch)
         {
-
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(0) && CanDrop == true)
             {
                 IsSelect = false;
                 box.transform.GetChild(0).GetComponent<Rigidbody>().isKinematic = true;
                 box.transform.GetChild(0).GetComponent<Bulid_Prefabs>().IsnotBuild = true;
                 box.transform.GetChild(0).GetComponent<Bulid_Prefabs>().ColorChange(0);
+                UI.gameObject.SetActive(true);
             }
 
             if (Input.GetMouseButtonDown(1))
@@ -110,7 +111,6 @@ public class CreftTable : MonoBehaviour
                 Angle += 90f;
             }
         }
-    
     }
 
 }

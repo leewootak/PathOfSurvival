@@ -9,6 +9,7 @@ public class Bulid_Prefabs : MonoBehaviour
     private Material[] materials;
     private MeshRenderer meshRenderer;
     private LayerMask layerMask;
+    [SerializeField] private CreftTable creftTable;
     public Ray ray;
     public bool IsnotBuild = false;
     private void Awake()
@@ -33,11 +34,18 @@ public class Bulid_Prefabs : MonoBehaviour
         {
             
             ColorChange(1);
+            creftTable.CanDrop = false;
+
         }
         else
         {
             if (!IsnotBuild)
+            {
                 ColorChange(2);
+                creftTable.CanDrop = true;
+            }
+                
+
         }
     }
 
