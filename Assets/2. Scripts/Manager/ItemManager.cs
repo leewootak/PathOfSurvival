@@ -11,7 +11,9 @@ public enum ItemID
     [Header("Resources")]
     Arrow,
     Branch,
+    Cotton,
     Stone,
+    RiverWater,
     [Header("Consumes")]
     Can,
     Water,
@@ -23,6 +25,7 @@ public enum ItemID
     Gun,
     [Header("Objects")]
     Bonfire,
+    WoodenWall
 }
 
 
