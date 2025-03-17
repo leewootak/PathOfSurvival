@@ -30,4 +30,9 @@ public class NPC : MonoBehaviour
         interactObject[2].gameObject.SetActive(false);
     }
 
+    public Transform CameraMoving()
+    {
+        return interactObject[3].transform;
+    }
+
 }
