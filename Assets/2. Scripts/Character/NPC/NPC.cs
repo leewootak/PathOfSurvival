@@ -5,15 +5,29 @@ using UnityEngine;
 
 public class NPC : MonoBehaviour
 {
-    private TextMeshProUGUI TalkUI;
-    void Start()
+    private GameObject[] interactObject;
+
+    private void Start()
     {
-        TalkUI = GetComponentInChildren<TextMeshProUGUI>();
+        interactObject = GetComponentsInChildren<GameObject>();
     }
 
 
-    public void TalkUITurnDown()
+    public void TalkToMeTextDown()
     {
-        TalkUI.gameObject.SetActive(false);
+        interactObject[1].gameObject.SetActive(false);
     }
+    public  void DescriptionTextDown()
+    {
+        interactObject[0].gameObject.SetActive(false);
+    }
+    public void DescriptionTextOn()
+    {
+        interactObject[0].gameObject.SetActive(true);
+    }
+    public void FriendsAvataDown()
+    {
+        interactObject[2].gameObject.SetActive(false);
+    }
+
 }
