@@ -38,8 +38,6 @@ public class EnemyAI : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
         enemyObject = GetComponent<EnemyObject>();
-        
-
     }
     private void Start()
     {
@@ -52,9 +50,7 @@ public class EnemyAI : MonoBehaviour
     {
         playerDistance = Vector3.Distance(transform.position, Player.transform.position);
         animator.SetBool("IsMoving", state != AIState.Idle);
-        
         StateAction();
-
     }
 
 
@@ -104,7 +100,6 @@ public class EnemyAI : MonoBehaviour
                     agent.isStopped = false;
                     break;
                 case AIState.Attack:
-
                     agent.isStopped = false;
                     break;
             }
@@ -177,11 +172,8 @@ public class EnemyAI : MonoBehaviour
                     animator.SetBool("IsRun", false);
                     animator.SetBool("IsMoving", true);
                     Debug.Log("AfterAttackIdle");
-
                 }
             }
-
-
         }
         else
         {
@@ -206,9 +198,7 @@ public class EnemyAI : MonoBehaviour
                     SetState(AIState.Detect);
                     animator.SetBool("IsRun", false);
                     animator.SetBool("IsMoving", true);
-
                 }
-
             }
             else
             {
@@ -217,7 +207,6 @@ public class EnemyAI : MonoBehaviour
                 animator.SetBool("IsRun", false);
                 animator.SetBool("IsMoving", true);
             }
-
         }
     }
 
