@@ -5,14 +5,14 @@ using UnityEngine;
 public class EnemyObject : MonoBehaviour
 {
     [SerializeField] private EnemyInfo EnemyInfo;
-    [SerializeField] private List<ItemData> DropItem;
+    [SerializeField] private List<ItemData> DropItem  = new List<ItemData>();
     private Animator animator;
     private float health;
 
     public void Set()
     {
         health = EnemyInfo.Health;
-        DropItemSet(DropItem);
+        //DropItemSet(DropItem);
     }
     private void Start()
     {
@@ -40,7 +40,7 @@ public class EnemyObject : MonoBehaviour
     private IEnumerator Die()
     {
         animator.SetTrigger("DIE");
-        Drop();
+       // Drop();
         yield return new WaitForSeconds(2f);
         gameObject.SetActive(false);
         EnemyPool.Instance.ReQueue(gameObject);

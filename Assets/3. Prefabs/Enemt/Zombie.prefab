@@ -900,6 +900,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EnemyInfo: {fileID: 11400000, guid: 5764a33beef79a04398645d821d3b624, type: 2}
+  DropItem: []
 --- !u!114 &4425354848621440632
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -914,7 +915,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DetectingDistance: 10
   AttackDistance: 16
-  Prefabs: {fileID: 7569426882781910756, guid: cc2f0da2889d7fc42ad282f9e333ca97, type: 3}
+  Prefabs: {fileID: 2806325148058088282, guid: 25c5b02c1ba96ed40bd24bfc7edc9d75, type: 3}
   RunAwayRange: 27
 --- !u!1 &2961033991079865985
 GameObject:
