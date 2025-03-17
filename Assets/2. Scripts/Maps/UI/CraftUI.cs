@@ -9,10 +9,13 @@ public class CraftUI : MonoBehaviour
 
     public GameObject CraftOneLine;
     public Transform SpawnCraftPosition;
+    public RectTransform SpawnCraftheight;
 
     private void OnEnable()
     {
-        foreach(ItemData item in CraftableItem)
+        SpawnCraftheight.sizeDelta = new Vector2(SpawnCraftheight.sizeDelta.x, CraftableItem.Count * 140);
+
+        foreach (ItemData item in CraftableItem)
         {
             GameObject cr = Instantiate(CraftOneLine);
             cr.transform.parent = SpawnCraftPosition;
