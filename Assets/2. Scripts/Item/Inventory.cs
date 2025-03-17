@@ -27,7 +27,6 @@ public class Inventory : MonoBehaviour
     public GameObject unEquipButton;
     public GameObject dropButton;
 
-    public ItemData test;
     public Dictionary<ItemID, ItemSlot> inventory;
 
     private PlayerController controller;
@@ -42,11 +41,19 @@ public class Inventory : MonoBehaviour
     {
         inventory = new Dictionary<ItemID, ItemSlot>();
     }
+
+    public ItemData[] test;
+
     private void Start()
     {
         controller = CharacterManager.Instance.Player.controller;
         condition = CharacterManager.Instance.Player.condition;
         controller.Inventory += Toggle;
+
+        for (int i = 0; i < test.Length; i++)
+        {
+            GetItem(test[i]);
+        }
     }
 
     public void GetItem(ItemData item)

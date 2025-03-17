@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b45cb21f00ed944eaefcd2ac11fce6e, type: 3}
   m_Name: Item_Sword
   m_EditorClassIdentifier: 
-  id: 7
+  id: 9
   displayName: "\uCE7C"
   description: "\uB0A0\uCE74\uB85C\uC6B4 \uCE7C\uC774\uB2E4. \uC870\uC2EC\uD558\uC790."
   type: 1

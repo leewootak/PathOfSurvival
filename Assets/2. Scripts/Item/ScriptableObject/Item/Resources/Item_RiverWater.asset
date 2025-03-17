@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b45cb21f00ed944eaefcd2ac11fce6e, type: 3}
   m_Name: Item_RiverWater
   m_EditorClassIdentifier: 
-  id: 3
+  id: 4
   displayName: "\uAC15\uBB3C"
   description: "\uB9C8\uC2E4 \uC218 \uC5C6\uB294 \uBB3C\uC774\uB2E4"
   type: 0
