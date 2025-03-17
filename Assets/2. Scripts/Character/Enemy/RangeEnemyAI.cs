@@ -29,8 +29,8 @@ public class RangeEnemyAI : EnemyAI
             if (Time.time - lastAttackTime > enemyObject.GetEnemyInfo().AttackCoolTime)
             {
                 lastAttackTime = Time.time;
-                animator.SetTrigger("IsAttack");
-                ProjectileShoot();
+              
+                StartCoroutine(ProjectileShoot());
                 RunAway();
             }
             else
@@ -64,8 +64,10 @@ public class RangeEnemyAI : EnemyAI
         }
     }
 
-    private void ProjectileShoot()
+    private IEnumerator ProjectileShoot()
     {
+        animator.SetTrigger("IsAttack");
+        yield return new WaitForSeconds(1f);
         //공격모션에 따라서 잘하면 코루틴 써야할듯
         Vector3 dir = CharacterManager.Instance.Player.transform.position - transform.position;
         GameObject Pre =  Instantiate(Prefabs,transform);
