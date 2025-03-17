@@ -25,15 +25,6 @@ public class ItemSlot : MonoBehaviour
         outline = GetComponent<Outline>();
     }
 
-    private void OnEnable()
-    {
-        if (outline == null) outline = GetComponent<Outline>();
-        if (outline != null)
-        {
-            outline.enabled = equiped;
-        }
-    }
-
     public void Set()
     {
         icon.gameObject.SetActive(true);

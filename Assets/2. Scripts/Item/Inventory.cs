@@ -48,7 +48,6 @@ public class Inventory : MonoBehaviour
     {
         controller = CharacterManager.Instance.Player.controller;
         condition = CharacterManager.Instance.Player.condition;
-        controller.Inventory += Toggle;
 
         for (int i = 0; i < test.Length; i++)
         {
@@ -242,19 +241,4 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    public void Toggle()
-    {
-        if (IsOpen())
-        {
-            inventoryWindow.SetActive(false);
-        }
-        else
-        {
-            inventoryWindow.SetActive(true);
-        }
-    }
-    public bool IsOpen()
-    {
-        return inventoryWindow.activeInHierarchy;
-    }
 }

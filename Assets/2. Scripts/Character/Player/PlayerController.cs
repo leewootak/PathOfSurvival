@@ -113,22 +113,15 @@ public class PlayerController : MonoBehaviour
             _rigidbody.AddForce(Vector2.up * jumpPower, ForceMode.Impulse);
         }
     }
-    /*
-    public Action Inventory;
+
     public void OnInventory(InputAction.CallbackContext context)
     {
         if (context.phase == InputActionPhase.Started)
         {
-            Inventory?.Invoke();
-            ToggleCursor();
+
         }
     }
-    void ToggleCursor()
-    {
-        bool toggle = Cursor.lockState == CursorLockMode.Locked;
-        Cursor.lockState = toggle ? CursorLockMode.None : CursorLockMode.Locked;
  
-    }*/
     bool IsGrounded()
     {
         Ray[] rays = new Ray[4]
