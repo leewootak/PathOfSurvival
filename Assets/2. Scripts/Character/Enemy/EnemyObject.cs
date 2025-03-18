@@ -34,16 +34,19 @@ public class EnemyObject : MonoBehaviour
     public void SubHealth(float Damage)
     {
         animator.SetTrigger("Scream");
+        AudioManager.Instance.FXOn(Random.Range(0, 3));
         health -= Damage;
     }
 
     private IEnumerator Die()
     {
         animator.SetTrigger("DIE");
-       // Drop();
+        AudioManager.Instance.FXOn(Random.Range(0, 3));
+        // Drop();
         yield return new WaitForSeconds(2f);
         gameObject.SetActive(false);
         EnemyPool.Instance.ReQueue(gameObject);
+
     }
 
     private void DropItemSet(List<ItemData> items)

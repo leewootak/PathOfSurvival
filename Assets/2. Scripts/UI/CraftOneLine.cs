@@ -13,6 +13,9 @@ public class CraftOneLine : MonoBehaviour
     public GameObject SlotIcon;
     public Transform SpawnPositionSlotIcon;
 
+
+    private CraftTable  craftTable;
+
     private void Start()
     {
         CraftButton = GetComponent<Button>();
@@ -21,6 +24,8 @@ public class CraftOneLine : MonoBehaviour
         {
             CraftButton.onClick.AddListener(OnCraftButton);
         }
+        craftTable = GetComponentInChildren<CraftTable>();
+
     }
 
     public void SetItem()
@@ -36,5 +41,14 @@ public class CraftOneLine : MonoBehaviour
         //플레이어 아이템이 존재할 시
         //플레이어 아이템에서 -하고
         //재작템을 플레이어 아이템에 + 한다
+
+        if(ItemData.type == ItemType.Object)
+        {
+            //Equip하고 있다면 추가로 장착을 해제해야함
+            craftTable.Prefabs = ItemData.dropPrefab;
+            craftTable.gameObject.SetActive(true);
+        }
     }
+
+
 }
