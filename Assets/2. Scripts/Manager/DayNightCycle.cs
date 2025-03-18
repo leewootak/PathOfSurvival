@@ -30,6 +30,7 @@ public class DayNightCycle : MonoBehaviour
 
     [Header("---")]
     public GameObject warningTxt;
+    bool isSpawn = false;
 
     private void Start()
     {
@@ -68,10 +69,16 @@ public class DayNightCycle : MonoBehaviour
         if (time > 0.75f && time <= 0.85f)
         {
             warningTxt.SetActive(true);
+            if (!isSpawn)
+            {
+                MapManager.Instance.Resource.resourceSpawn.SpawnResource();
+                isSpawn = true;
+            }
         }
         else
         {
             warningTxt.SetActive(false);
+            isSpawn = false;
         }
     }
 
