@@ -167,10 +167,10 @@ public class PlayerController : MonoBehaviour
         if (Context.phase == InputActionPhase.Started)
         {
             ToggleCursor();
-            inventory?.Invoke();
+            UIManager.Instance.InventoryUI.OnOffInventoryUI();
         }
     }
-    void ToggleCursor()
+    public void ToggleCursor()
     {
         bool toggle = Cursor.lockState == CursorLockMode.Locked;
         Cursor.lockState = toggle ? CursorLockMode.None : CursorLockMode.Locked;

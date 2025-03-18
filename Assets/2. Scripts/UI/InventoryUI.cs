@@ -124,6 +124,7 @@ public class InventoryUI : MonoBehaviour
 
     void OnClickExitButton()
     {
+        CharacterManager.Instance.Player.controller.ToggleCursor();
         OnOffInventoryUI();
     }
 }
