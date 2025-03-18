@@ -36,8 +36,9 @@ public class AudioManager : MonoBehaviour
     private void Start()
     {
         BGMaudio.clip = BGM;
-        BGMaudio.Play();
         BGMaudio.loop = true;
+        BGMaudio.Play();
+      
 
         FXaudio.loop = false;
         FXaudio.playOnAwake = false;

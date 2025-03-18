@@ -71,6 +71,9 @@ public class Projectile : MonoBehaviour
             case ProjectileType.arrow:
                 damage = 0;
                 break;
+            case ProjectileType.enemy:
+                Destroy(gameObject);
+                break;
         }
     }
 }
