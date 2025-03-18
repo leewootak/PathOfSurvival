@@ -27,7 +27,7 @@ public class MapManager : MonoBehaviour
 
     private void Awake()
     {
-        if (_resource == null)
+        if (_instance == null)
         {
             _instance = this;
             DontDestroyOnLoad(gameObject);
