@@ -19,7 +19,6 @@ public class Build_Prefabs : MonoBehaviour
         {
             craftTable = FindAnyObjectByType<CraftTable>();
         }
-
         meshRenderer = GetComponent<MeshRenderer>();
 
         // 현재 메시 렌더러의 머티리얼들을 복사하여 배열에 저장
@@ -39,8 +38,6 @@ public class Build_Prefabs : MonoBehaviour
         // 충돌한 오브젝트가 그라운드 레이어가 아니라면
         if (other.gameObject.layer != LayerMask.NameToLayer("Buildable"))
         {
-            // 배치 불가능 상태 머티리얼
-            if (!IsPlaceComplete)
                 ColorChange(1);
 
 

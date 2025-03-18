@@ -4,7 +4,7 @@ using UnityEngine.UI;
 public class CraftTable : MonoBehaviour
 {
     public GameObject prefabs;
-    private GameObject ui;
+    public Button button;
     private Player player;
     private Camera cam;
     private LayerMask layerMask;
@@ -24,17 +24,14 @@ public class CraftTable : MonoBehaviour
     {
         //ui = transform.parent.gameObject;
         cam = FindAnyObjectByType<Camera>();
-
         player = FindAnyObjectByType<Player>();
-
-
         layerMask = LayerMask.GetMask("Buildable");
 
     }
 
     private void Start()
     {
-        Craft();
+        button.onClick.AddListener(Craft);
     }
 
     private void Update()
@@ -53,8 +50,6 @@ public class CraftTable : MonoBehaviour
     // 배치 모드 시작 및 아이템 프리팹 생성
     private void Craft()
     {
-        ui.gameObject.SetActive(false);
-
         // 아이템 프리팹 생성
         Instantiate(prefabs, prefabs.transform.position, Quaternion.identity);
 
@@ -87,9 +82,6 @@ public class CraftTable : MonoBehaviour
                     Quaternion baseRotation = Quaternion.LookRotation(-hit.normal);
                     Quaternion additionalRotation = Quaternion.Euler(0, 0, Angle);
                     prefabs.transform.rotation = baseRotation * additionalRotation;
-
-
-
                     // 아이템 위치를 감지된 지점으로 이동
                     prefabs.transform.position = hit.point;
                 }
@@ -119,10 +111,6 @@ public class CraftTable : MonoBehaviour
             prefabs.transform.GetChild(0).GetComponent<Build_Prefabs>().ColorChange(0);
             prefabs.layer = 7;
             prefabs.transform.GetChild(0).gameObject.layer = 7;
-            prefabs.transform.GetChild(0).GetComponent<Build_Prefabs>().IsPlaceComplete = true;
-
-            // 배치 UI 다시 활성화
-            ui.gameObject.SetActive(true);
 
             Debug.Log("배치");
         }
