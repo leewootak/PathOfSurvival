@@ -15,7 +15,7 @@ public class CraftTable : MonoBehaviour
     // 배치 모드 활성 여부
     private bool IsSelect = false;
     // 배치 가능 상태 여부
-    public bool CanPlace;
+    public bool CanPlace = false;
 
     [SerializeField] private Build_Prefabs build_Prefabs;
 
@@ -36,12 +36,12 @@ public class CraftTable : MonoBehaviour
 
     private void Update()
     {
-        Drop();
+        Place();
     }
 
     private void FixedUpdate()
     {
-        Place();
+        Moving();
 
         // 화면 중앙에서 레이 생성
         ray = cam.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2));
@@ -50,23 +50,26 @@ public class CraftTable : MonoBehaviour
     // 배치 모드 시작 및 아이템 프리팹 생성
     private void Craft()
     {
-        // 아이템 프리팹 생성
-        Instantiate(prefabs, prefabs.transform.position, Quaternion.identity);
-
+        if (!IsSelect)
+        {
+            // 아이템 프리팹 생성
+            Instantiate(prefabs, prefabs.transform.position, Quaternion.identity);
+        }
+        
         IsSelect = true;
-        CanPlace = true;
+        build_Prefabs.IsPlaced = false;
 
         Debug.Log("부품 선택");
     }
 
-    private void Place()
+    private void Moving()
     {
         if (IsSelect)
         {
             RaycastHit hit;
 
             // 10 이내의 그라운드를 감지하고, 플레이어와의 거리가 10 미만일 때
-            if (Physics.Raycast(ray, out hit, 10f, layerMask) && Vector3.Distance(player.transform.position, hit.point) < 10f)
+            if (Physics.Raycast(ray, out hit, 15f, layerMask) && Vector3.Distance(player.transform.position, hit.point) < 13f)
             {
                 if (hit.collider != null)
                 {
@@ -82,8 +85,10 @@ public class CraftTable : MonoBehaviour
                     Quaternion baseRotation = Quaternion.LookRotation(-hit.normal);
                     Quaternion additionalRotation = Quaternion.Euler(0, 0, Angle);
                     prefabs.transform.rotation = baseRotation * additionalRotation;
+
                     // 아이템 위치를 감지된 지점으로 이동
                     prefabs.transform.position = hit.point;
+                    Debug.Log("배치 가능");
                 }
             }
             // 플레이어와의 거리가 10 이상이면 배치 불가
@@ -100,7 +105,7 @@ public class CraftTable : MonoBehaviour
     }
 
     // 아이템 배치 및 회전 (클릭 계속하면 디버그 로그 계속 찍히는 현상 수정 필요)
-    private void Drop()
+    private void Place()
     {
         if (CanPlace && Input.GetMouseButtonDown(0))
         {
@@ -112,6 +117,7 @@ public class CraftTable : MonoBehaviour
             prefabs.layer = 7;
             prefabs.transform.GetChild(0).gameObject.layer = 7;
 
+            build_Prefabs.IsPlaced = true;
             Debug.Log("배치");
         }
         // 우클릭: 아이템 회전
