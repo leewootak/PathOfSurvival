@@ -16,7 +16,7 @@ MonoBehaviour:
   displayName: "\uBA74"
   description: "\uD2BC\uD2BC\uD55C \uBA74\uC774\uB2E4"
   type: 0
-  dropPrefab: {fileID: 0}
+  dropPrefab: {fileID: 6539650576882728358, guid: 15b318d9e07840b44b85f27c7be01d6a, type: 3}
   icon: {fileID: 0}
   weight: 0
   canStack: 0

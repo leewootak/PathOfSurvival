@@ -3,10 +3,9 @@ using UnityEngine.UI;
 
 public class CraftTable : MonoBehaviour
 {
-    public Button button;
-    public GameObject box;
-    public GameObject UI;
-    public GameObject Player;
+    public GameObject Prefabs;
+    private GameObject UI;
+    private Player Player;
     private Camera cam;
     private LayerMask layerMask;
     private Ray ray;
@@ -23,13 +22,19 @@ public class CraftTable : MonoBehaviour
 
     private void Awake()
     {
+        UI = transform.parent.gameObject;
         cam = FindAnyObjectByType<Camera>();
+
+        Player = FindAnyObjectByType<Player>();
+
+
         layerMask = LayerMask.GetMask("Buildable");
+
     }
 
     private void Start()
     {
-        button.onClick.AddListener(Craft);
+        Craft();
     }
 
     private void Update()
@@ -51,7 +56,7 @@ public class CraftTable : MonoBehaviour
         UI.gameObject.SetActive(false);
 
         // 아이템 프리팹 생성
-        Instantiate(box, box.transform.position, Quaternion.identity);
+        Instantiate(Prefabs, Prefabs.transform.position, Quaternion.identity);
 
         IsSelect = true;
         CanPlace = true;
@@ -73,7 +78,7 @@ public class CraftTable : MonoBehaviour
                     CanPlace = true;
 
                     // 배치 가능 상태 색상으로 변경
-                    box.transform.GetChild(0).GetComponent<Build_Prefabs>().ColorChange(2);
+                    Prefabs.transform.GetChild(0).GetComponent<Build_Prefabs>().ColorChange(2);
 
                     //// 충돌면의 법선과 오른쪽 벡터의 외적으로 전방 방향 계산
                     //Vector3 forward = Vector3.Cross(hit.normal, Vector3.right);
@@ -81,12 +86,12 @@ public class CraftTable : MonoBehaviour
                     // 표면의 법선에 맞춰 회전
                     Quaternion baseRotation = Quaternion.LookRotation(-hit.normal);
                     Quaternion additionalRotation = Quaternion.Euler(0, 0, Angle);
-                    box.transform.rotation = baseRotation * additionalRotation;
+                    Prefabs.transform.rotation = baseRotation * additionalRotation;
 
 
 
                     // 아이템 위치를 감지된 지점으로 이동
-                    box.transform.position = hit.point;
+                    Prefabs.transform.position = hit.point;
                 }
             }
             // 플레이어와의 거리가 10 이상이면 배치 불가
@@ -95,7 +100,7 @@ public class CraftTable : MonoBehaviour
                 CanPlace = false;
 
                 // 배치 불가 상태 색상으로 변경
-                box.transform.GetChild(0).GetComponent<Build_Prefabs>().ColorChange(1);
+                Prefabs.transform.GetChild(0).GetComponent<Build_Prefabs>().ColorChange(1);
 
                 Debug.Log("너무 멀음");
             }
@@ -108,10 +113,13 @@ public class CraftTable : MonoBehaviour
         if (CanPlace && Input.GetMouseButtonDown(0))
         {
             IsSelect = false;
-            box.transform.GetChild(0).GetComponent<Rigidbody>().isKinematic = true;
+            Prefabs.transform.GetChild(0).GetComponent<Rigidbody>().isKinematic = true;
 
             // 배치 완료 상태 색상으로 변경
-            box.transform.GetChild(0).GetComponent<Build_Prefabs>().ColorChange(0);
+            Prefabs.transform.GetChild(0).GetComponent<Build_Prefabs>().ColorChange(0);
+            Prefabs.layer = 7;
+            Prefabs.transform.GetChild(0).gameObject.layer = 7;
+            Prefabs.transform.GetChild(0).GetComponent<Build_Prefabs>().IsBatchComplete = true;
 
             // 배치 UI 다시 활성화
             UI.gameObject.SetActive(true);
