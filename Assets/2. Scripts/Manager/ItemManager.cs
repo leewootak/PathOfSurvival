@@ -88,5 +88,8 @@ public class ItemManager : MonoBehaviour
         return (itemWeight + curWeight < maxWeight) ? true : false;
     }
 
-
+    public void LossWeight(float itemWeight)
+    {
+        curWeight -= itemWeight;
+    }
 }
