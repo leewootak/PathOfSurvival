@@ -3072,7 +3072,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e4d27a2a1b311d4b9b0b68fd308ea38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CraftableItem: []
+  CraftableItem:
+  - {fileID: 11400000, guid: 70eaf7f81366ca941b78df9318c8af27, type: 2}
+  - {fileID: 11400000, guid: 40b1c30c161cd9f4896a640995063cff, type: 2}
+  - {fileID: 11400000, guid: 444dd2ad45505244299e496996faf4a9, type: 2}
+  - {fileID: 11400000, guid: 99756d7446613aa48b68479f42347ad5, type: 2}
   CraftOneLine: {fileID: 8499017140771920530, guid: 0f52dfc8d6959b441b02c87d76ecdcc7, type: 3}
   SpawnCraftPosition: {fileID: 7043320572655150245}
   SpawnCraftheight: {fileID: 7043320572655150245}

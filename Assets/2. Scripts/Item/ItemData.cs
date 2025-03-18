@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public enum ItemType
@@ -52,5 +53,9 @@ public class ItemData : ScriptableObject
 
     [Header("Object")]
     public bool isSetUP;
+
+    [Header("Craftable")]
+    public List<ItemData> CraftResourceData;
+    public List<int> CraftResourceAmount;
 }
 
