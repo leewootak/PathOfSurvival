@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2908117451713389465}
   - component: {fileID: 724414144385939104}
   - component: {fileID: -6724009310423389943}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Item_Drug
   m_TagString: Untagged
   m_Icon: {fileID: 0}

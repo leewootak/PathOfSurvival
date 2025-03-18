@@ -15,7 +15,8 @@ GameObject:
   - component: {fileID: 8267912464717702737}
   - component: {fileID: -1787800924560686572}
   - component: {fileID: -8225844956338876162}
-  m_Layer: 0
+  - component: {fileID: -7998318466880057681}
+  m_Layer: 8
   m_Name: Item_Arrow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -164,3 +165,16 @@ MonoBehaviour:
   damage: 5
   distance: 500
   speed: 0
+--- !u!114 &-7998318466880057681
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7461134767379709357}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bcd7fb5531e09c54591b3e2ccaa35486, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data: {fileID: 11400000, guid: 444dd2ad45505244299e496996faf4a9, type: 2}

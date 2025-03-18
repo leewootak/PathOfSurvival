@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4259008372719349653}
   - component: {fileID: 6020406651116901967}
   - component: {fileID: 4615341678505068062}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Item_WoodenWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}

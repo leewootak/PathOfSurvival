@@ -18,7 +18,7 @@ MonoBehaviour:
   type: 2
   dropPrefab: {fileID: 4872126105537126476, guid: 036badf98839dd04eb63e4cb1ceec3ae, type: 3}
   icon: {fileID: 0}
-  weight: 0
+  weight: 1
   canStack: 1
   maxStackAmount: 99
   getAmount: 0
