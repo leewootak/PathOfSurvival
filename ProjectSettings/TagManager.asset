@@ -6,6 +6,7 @@ TagManager:
   tags:
   - groundLayerMask
   - Ground
+  - EnemyTrigger
   layers:
   - Default
   - TransparentFX
