@@ -11,9 +11,8 @@ public class Inventory : MonoBehaviour
     public Transform dropPosition;
 
     private ItemID curEquipIndex;
-    public PlayerCondition playerCondition;
 
-    public GameObject inventoryWindow;
+   // public GameObject inventoryWindow;
 
     [Header("Select Item")]
     private ItemData selectedItem;
@@ -175,14 +174,18 @@ public class Inventory : MonoBehaviour
                 switch (selectedItem.consumables[i].type)
                 {
                     case ConsumableType.Health:
-                        playerCondition.Heal(selectedItem.consumables[i].value);
+                        condition.Heal(selectedItem.consumables[i].value);
+                        break;
+                    case ConsumableType.Hunger:
+                        condition.Eat(selectedItem.consumables[i].value);
                         break;
                     case ConsumableType.Thirst:
-                        playerCondition.Eat(selectedItem.consumables[i].value);
+                        condition.Water(selectedItem.consumables[i].value);
                         break;
                     case ConsumableType.Disinfection:
-                        playerCondition.vaccine(selectedItem.consumables[i].value);
+                        condition.vaccine(selectedItem.consumables[i].value);
                         break;
+
                 }
             }
             RemoveItem(selectedItemIndex);
