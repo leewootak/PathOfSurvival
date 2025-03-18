@@ -59,5 +59,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 6e4f09f8e2771d84db071cfdfb3d3707, type: 2}
   - {fileID: 11400000, guid: 70eaf7f81366ca941b78df9318c8af27, type: 2}
   - {fileID: 11400000, guid: 281493dc0e76363459e47e4c0f330834, type: 2}
-  maxWeight: 0
+  inventory: {fileID: 0}
+  maxWeight: 1
   curWeight: 0

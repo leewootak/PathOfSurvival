@@ -25,9 +25,7 @@ public class ItemObject : MonoBehaviour, IInteractable
         // 무게 비교가 통과되면 템을 먹고, 그렇지 않으면 템 먹지 않음
         if (ItemManager.Instance.CompareWeight(data.weight))
         {
-            // 아이템을 플레이어에게 추가
-            CharacterManager.Instance.Player.itemData = data;
-            CharacterManager.Instance.Player.addItem?.Invoke();
+            ItemManager.Instance.inventory.GetItem(data);
             Destroy(gameObject);
         }
         else
