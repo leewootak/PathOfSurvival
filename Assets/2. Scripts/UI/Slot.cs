@@ -9,10 +9,10 @@ public class Slot : MonoBehaviour
     public Image Itemicon;
     public TextMeshProUGUI NumObItems;
 
-    public void changeImage(Sprite image)
+    public void changeImage(Sprite image, int quantity)
     {
         Itemicon.sprite = image;
-        //NumObItems.text = image.quantity;
+        NumObItems.text = quantity.ToString();
     }
 
     public void InventorySlot()

@@ -48,8 +48,7 @@ public class Inventory : MonoBehaviour
         condition = CharacterManager.Instance.Player.condition;
         dropPosition = CharacterManager.Instance.Player.dropPosition;
 
-        InventoryUIGameObject = UIManager.Instance.InventoryUI.gameObject;
-        InventoryUIGameObject.SetActive(false);
+        InventoryUIGameObject = UIManager.Instance.InventoryUI.InventoryUIGameObject;
 
         controller.inventory += Toggle;
 
