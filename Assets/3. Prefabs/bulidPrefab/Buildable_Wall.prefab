@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3534555080381708098}
   - component: {fileID: 605665273633776784}
   m_Layer: 0
-  m_Name: BrickHouse_Floor_Mid_A_DM_A
+  m_Name: WoodWall
   m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -124,6 +124,7 @@ MonoBehaviour:
   Red: {fileID: 2100000, guid: 146bf7c9101706d4e84becf35ca230f8, type: 2}
   Green: {fileID: 2100000, guid: 9ef363909e13e6a448c8ae8dcd221c51, type: 2}
   craftTable: {fileID: 0}
+  IsPlaceComplete: 0
 --- !u!54 &605665273633776784
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -161,7 +162,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3300932944788228267}
   m_Layer: 0
-  m_Name: Wall
+  m_Name: Buildable_Wall
   m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

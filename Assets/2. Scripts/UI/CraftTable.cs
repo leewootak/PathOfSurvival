@@ -3,9 +3,9 @@ using UnityEngine.UI;
 
 public class CraftTable : MonoBehaviour
 {
-    public GameObject Prefabs;
-    private GameObject UI;
-    private Player Player;
+    public GameObject prefabs;
+    private GameObject ui;
+    private Player player;
     private Camera cam;
     private LayerMask layerMask;
     private Ray ray;
@@ -22,10 +22,10 @@ public class CraftTable : MonoBehaviour
 
     private void Awake()
     {
-        UI = transform.parent.gameObject;
+        //ui = transform.parent.gameObject;
         cam = FindAnyObjectByType<Camera>();
 
-        Player = FindAnyObjectByType<Player>();
+        player = FindAnyObjectByType<Player>();
 
 
         layerMask = LayerMask.GetMask("Buildable");
@@ -53,10 +53,10 @@ public class CraftTable : MonoBehaviour
     // 배치 모드 시작 및 아이템 프리팹 생성
     private void Craft()
     {
-        UI.gameObject.SetActive(false);
+        ui.gameObject.SetActive(false);
 
         // 아이템 프리팹 생성
-        Instantiate(Prefabs, Prefabs.transform.position, Quaternion.identity);
+        Instantiate(prefabs, prefabs.transform.position, Quaternion.identity);
 
         IsSelect = true;
         CanPlace = true;
@@ -71,14 +71,14 @@ public class CraftTable : MonoBehaviour
             RaycastHit hit;
 
             // 10 이내의 그라운드를 감지하고, 플레이어와의 거리가 10 미만일 때
-            if (Physics.Raycast(ray, out hit, 10f, layerMask) && Vector3.Distance(Player.transform.position, hit.point) < 10f)
+            if (Physics.Raycast(ray, out hit, 10f, layerMask) && Vector3.Distance(player.transform.position, hit.point) < 10f)
             {
                 if (hit.collider != null)
                 {
                     CanPlace = true;
 
                     // 배치 가능 상태 색상으로 변경
-                    Prefabs.transform.GetChild(0).GetComponent<Build_Prefabs>().ColorChange(2);
+                    prefabs.transform.GetChild(0).GetComponent<Build_Prefabs>().ColorChange(2);
 
                     //// 충돌면의 법선과 오른쪽 벡터의 외적으로 전방 방향 계산
                     //Vector3 forward = Vector3.Cross(hit.normal, Vector3.right);
@@ -86,21 +86,21 @@ public class CraftTable : MonoBehaviour
                     // 표면의 법선에 맞춰 회전
                     Quaternion baseRotation = Quaternion.LookRotation(-hit.normal);
                     Quaternion additionalRotation = Quaternion.Euler(0, 0, Angle);
-                    Prefabs.transform.rotation = baseRotation * additionalRotation;
+                    prefabs.transform.rotation = baseRotation * additionalRotation;
 
 
 
                     // 아이템 위치를 감지된 지점으로 이동
-                    Prefabs.transform.position = hit.point;
+                    prefabs.transform.position = hit.point;
                 }
             }
             // 플레이어와의 거리가 10 이상이면 배치 불가
-            else if (Vector3.Distance(Player.transform.position, hit.point) >= 10f)
+            else if (Vector3.Distance(player.transform.position, hit.point) >= 10f)
             {
                 CanPlace = false;
 
                 // 배치 불가 상태 색상으로 변경
-                Prefabs.transform.GetChild(0).GetComponent<Build_Prefabs>().ColorChange(1);
+                prefabs.transform.GetChild(0).GetComponent<Build_Prefabs>().ColorChange(1);
 
                 Debug.Log("너무 멀음");
             }
@@ -113,16 +113,16 @@ public class CraftTable : MonoBehaviour
         if (CanPlace && Input.GetMouseButtonDown(0))
         {
             IsSelect = false;
-            Prefabs.transform.GetChild(0).GetComponent<Rigidbody>().isKinematic = true;
+            prefabs.transform.GetChild(0).GetComponent<Rigidbody>().isKinematic = true;
 
             // 배치 완료 상태 색상으로 변경
-            Prefabs.transform.GetChild(0).GetComponent<Build_Prefabs>().ColorChange(0);
-            Prefabs.layer = 7;
-            Prefabs.transform.GetChild(0).gameObject.layer = 7;
-            Prefabs.transform.GetChild(0).GetComponent<Build_Prefabs>().IsBatchComplete = true;
+            prefabs.transform.GetChild(0).GetComponent<Build_Prefabs>().ColorChange(0);
+            prefabs.layer = 7;
+            prefabs.transform.GetChild(0).gameObject.layer = 7;
+            prefabs.transform.GetChild(0).GetComponent<Build_Prefabs>().IsPlaceComplete = true;
 
             // 배치 UI 다시 활성화
-            UI.gameObject.SetActive(true);
+            ui.gameObject.SetActive(true);
 
             Debug.Log("배치");
         }

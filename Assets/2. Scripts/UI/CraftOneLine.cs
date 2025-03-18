@@ -45,7 +45,7 @@ public class CraftOneLine : MonoBehaviour
         if(ItemData.type == ItemType.Object)
         {
             //Equip하고 있다면 추가로 장착을 해제해야함
-            craftTable.Prefabs = ItemData.dropPrefab;
+            craftTable.prefabs = ItemData.dropPrefab;
             craftTable.gameObject.SetActive(true);
         }
     }
