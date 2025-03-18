@@ -1,6 +1,11 @@
 fileFormatVersion: 2
-guid: 951ded9547ed4054eb5376a804177d3c
-PrefabImporter:
+<<<<<<<< HEAD:Assets/2. Scripts/Character/NPC.meta
+guid: 62d7c6b7173dcdd458b4bb708646cf0a
+folderAsset: yes
+========
+guid: 3294b408d2ae84a4ab6cf9b99f3f1628
+>>>>>>>> Dev:Assets/Externals/LowPolyFoodLite/LowPolyFoodLite_2020.3.0_URP_v1.0.unitypackage.meta
+DefaultImporter:
   externalObjects: {}
   userData: 
   assetBundleName: 
