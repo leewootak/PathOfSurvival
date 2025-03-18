@@ -15,17 +15,18 @@ public enum ItemID
     Cotton,
     Stone,
     RiverWater,
+    Bullet,
     [Header("Consumes")]
-    Can,
+    Can = 10,
     Water,
     Drug,
     [Header("Equip")]
-    Torch,
+    Torch = 20,
     Sword,
     Bow,
     Gun,
     [Header("Objects")]
-    Bonfire,
+    Bonfire = 30,
     WoodenWall
 }
 
