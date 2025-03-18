@@ -38,10 +38,12 @@ public class Interaction : MonoBehaviour
                 if (hit.collider.gameObject != curInteractGameObject)
                 {
                     curInteractGameObject = hit.collider.gameObject;
-                    hit.collider.TryGetComponent<IInteractable>(out curinteractable);
+                    if (hit.collider.TryGetComponent<IInteractable>(out curinteractable))
+                    {
+                        SetPromptText();
+                    }
                     hit.collider.TryGetComponent<ResourcePlayerCanGet>(out resourcePlayerCanGet);
                     hit.collider.TryGetComponent<PostItHave>(out postItHave);
-                    SetPromptText();
                 }
             }
             else
