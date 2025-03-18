@@ -25,6 +25,7 @@ public class Build_Prefabs : MonoBehaviour
         }
 
         layerMask = LayerMask.GetMask("ground", "Wall");
+        craftTable = FindAnyObjectByType<CraftTable>();
     }
 
     private void OnTriggerStay(Collider other)
