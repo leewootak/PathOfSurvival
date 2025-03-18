@@ -89,6 +89,7 @@ public class PlayerController : MonoBehaviour
             dir.y = _rigidbody.velocity.y; // y 방향 속도는 그대로 유지
         }
 
+        
         // Rigidbody의 속도 업데이트
         _rigidbody.velocity = dir;
     }
@@ -111,6 +112,7 @@ public class PlayerController : MonoBehaviour
         if (context.phase == InputActionPhase.Performed) // 키입력이 유지 되는 동안
         {
             curMovementInput = context.ReadValue<Vector2>(); // 값을 받아와서 저장
+        
         }
         else if (context.phase == InputActionPhase.Canceled) // 키입력이 없어졌다면
         {
