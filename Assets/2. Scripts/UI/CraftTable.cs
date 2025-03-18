@@ -86,7 +86,7 @@ public class CraftTable : MonoBehaviour
                     // 표면의 법선에 맞춰 회전
                     Quaternion baseRotation = Quaternion.LookRotation(-hit.normal);
                     Quaternion additionalRotation = Quaternion.Euler(0, 0, Angle);
-                    box.transform.rotation = baseRotation * additionalRotation;
+                    Prefabs.transform.rotation = baseRotation * additionalRotation;
 
 
 
