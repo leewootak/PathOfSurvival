@@ -4,15 +4,19 @@ using TMPro;
 using Unity.VisualScripting;
 using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
+using static UnityEditor.Timeline.Actions.MenuPriority;
 
 public class Inventory : MonoBehaviour
 {
-
+    public GameObject InventoryUIGameObject;
     public Transform dropPosition;
+    public Transform slotPanel;
+    public ItemSlot[] slots;
+
 
     private ItemID curEquipIndex;
 
-   // public GameObject inventoryWindow;
+    //public GameObject inventoryWindow;
 
     [Header("Select Item")]
     private ItemData selectedItem;
@@ -47,11 +51,17 @@ public class Inventory : MonoBehaviour
     {
         controller = CharacterManager.Instance.Player.controller;
         condition = CharacterManager.Instance.Player.condition;
+        dropPosition = CharacterManager.Instance.Player.dropPosition;
+
+        InventoryUIGameObject.SetActive(false);
+
+        controller.inventory += Toggle;
 
         for (int i = 0; i < test.Length; i++)
         {
             GetItem(test[i]);
         }
+        ClearSelectedItemWindow();
     }
 
     public void GetItem(ItemData item)
@@ -67,7 +77,7 @@ public class Inventory : MonoBehaviour
         UpdateUI();
     }
 
-    void CreateItemSlot(ItemData item)  
+    void CreateItemSlot(ItemData item)
     {
         GameObject newSlot = Object.Instantiate(slotPrefab, slotParent);
         ItemSlot itemSlot = newSlot.GetComponent<ItemSlot>();
@@ -84,7 +94,7 @@ public class Inventory : MonoBehaviour
 
     void RemoveItemSlot(ItemID itemId)
     {
-         inventory[itemId].DeleteSlot();
+        inventory[itemId].DeleteSlot();
         inventory.Remove(itemId);
     }
 
@@ -96,7 +106,6 @@ public class Inventory : MonoBehaviour
             if (existItem.quantity >= quantity)
             {
                 existItem.quantity -= quantity;
-                ItemManager.Instance.LossWeight(quantity * existItem.item.weight);
                 if (existItem.quantity <= 0)
                 {
                     inventory.Remove(item);
@@ -243,6 +252,21 @@ public class Inventory : MonoBehaviour
                 itemSlot.Clear();
             }
         }
+    }
+    public void Toggle()
+    {
+        if (IsOpen())
+        {
+            InventoryUIGameObject.SetActive(false);
+        }
+        else
+        {
+            InventoryUIGameObject.SetActive(true);
+        }
+    }
+    public bool IsOpen()
+    {
+        return InventoryUIGameObject.activeInHierarchy;
     }
 
 }
