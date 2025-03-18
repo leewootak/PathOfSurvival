@@ -10,18 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5b45cb21f00ed944eaefcd2ac11fce6e, type: 3}
-  m_Name: Item_Cotton
+  m_Name: Item_Bullet
   m_EditorClassIdentifier: 
-  id: 2
-  displayName: "\uBA74"
-  description: "\uD2BC\uD2BC\uD55C \uBA74\uC774\uB2E4"
+  id: 5
+  displayName: "\uCD1D\uC54C"
+  description: "\uCD1D\uC54C\uC774\uB2E4. \uBD88\uB7C9\uD488\uC740 \uC5C6\uB294 \uB4EF\uD558\uB2E4"
   type: 0
-  dropPrefab: {fileID: 6539650576882728358, guid: 15b318d9e07840b44b85f27c7be01d6a, type: 3}
+  dropPrefab: {fileID: 4609304793929358314, guid: a9430e1bfc7fb2e44b553b9a9c362599, type: 3}
   icon: {fileID: 0}
   weight: 0
   canStack: 0
   maxStackAmount: 99
-  getAmount: 1
+  getAmount: 0
   consumables: []
   equipPrefab: {fileID: 0}
   attackDamage: 0

@@ -96,6 +96,7 @@ public class Inventory : MonoBehaviour
             if (existItem.quantity >= quantity)
             {
                 existItem.quantity -= quantity;
+                ItemManager.Instance.LossWeight(quantity * existItem.item.weight);
                 if (existItem.quantity <= 0)
                 {
                     inventory.Remove(item);
