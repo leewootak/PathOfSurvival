@@ -1,8 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using System;
+
 public class PlayerController : MonoBehaviour
 {
     public PlayerCondition Stamina;
@@ -14,6 +15,9 @@ public class PlayerController : MonoBehaviour
     private Vector2 curMovementInput; // 현재 이동하는 값
     public LayerMask groundLayerMask;
 
+    bool isjump = false;
+    Coroutine CheckjumpCoroutine;
+
     [Header("Look")]
     public Transform cameraContainer;
     public float minXLook; // 최소 시야각
@@ -21,7 +25,9 @@ public class PlayerController : MonoBehaviour
     private float camCurXRot; // 마우스 델타값 저장 공간
     public float lookSensitivity; // 카메라 민감도 dpi
     private Vector2 mouseDelta; // 마우스 변화값
+    public bool canLook = true;
 
+    public Action inventory;
     private Rigidbody _rigidbody;
 
     private void Awake()
@@ -43,7 +49,10 @@ public class PlayerController : MonoBehaviour
 
     private void LateUpdate()
     {
-        CameraLook();
+        if (canLook)
+        {
+            CameraLook();
+        }
     }
 
     void Move()
@@ -70,7 +79,15 @@ public class PlayerController : MonoBehaviour
 
         // 방향에 최종 속도 적용
         dir *= finalSpeed;
-        dir.y = _rigidbody.velocity.y; // y 방향 속도는 그대로 유지
+
+        if(_rigidbody.velocity.y > 0 && !isjump)
+        {
+            dir.y = _rigidbody.velocity.y * 0.01f; // y 방향 속도는 그대로 유지
+        }
+        else
+        {
+            dir.y = _rigidbody.velocity.y; // y 방향 속도는 그대로 유지
+        }
 
         // Rigidbody의 속도 업데이트
         _rigidbody.velocity = dir;
@@ -85,7 +102,7 @@ public class PlayerController : MonoBehaviour
 
         // 마우스 움직임의 변화량(mouseDelta)중 x(좌우)값에 민감도를 곱한다.
         // 좌우 회전은 플레이어(transform)를 회전시켜준다.
-        // Why? 회전시킨 방향을 기준으로 앞뒤좌우 움직여야하니까.
+        // 회전시킨 방향을 기준으로 앞뒤좌우 움직여야하니까.
         transform.eulerAngles += new Vector3(0, mouseDelta.x * lookSensitivity, 0);
     }
 
@@ -108,21 +125,25 @@ public class PlayerController : MonoBehaviour
 
     public void OnJump(InputAction.CallbackContext context)
     {
-        if(context.phase == InputActionPhase.Started && IsGrounded())
+        if(context.phase == InputActionPhase.Started && IsGrounded(0.5f))
         {
+            isjump = true;
             _rigidbody.AddForce(Vector2.up * jumpPower, ForceMode.Impulse);
+            if(CheckjumpCoroutine != null) StopCoroutine(CheckjumpCoroutine);
+            CheckjumpCoroutine = StartCoroutine(AfterJump());
         }
     }
 
-    public void OnInventory(InputAction.CallbackContext context)
+    IEnumerator AfterJump()
     {
-        if (context.phase == InputActionPhase.Started)
+        while (!IsGrounded(0.43f))
         {
-
+            yield return null;
         }
+        isjump = false;
     }
- 
-    bool IsGrounded()
+
+    bool IsGrounded(float hieght)
     {
         Ray[] rays = new Ray[4]
         {
@@ -134,11 +155,25 @@ public class PlayerController : MonoBehaviour
 
         for(int i = 0; i < rays.Length; i++)
         {
-            if (Physics.Raycast(rays[i], 0.5f, groundLayerMask))
+            if (Physics.Raycast(rays[i], hieght, groundLayerMask))
             { // 현재 Ray가 groundLayerMask에 속하는 오브젝트와 충돌하는지 검사 (거리: 0.5)
                 return true;
             }
         }
         return false;
+    }
+    public void OnInventory(InputAction.CallbackContext Context)
+    {
+        if (Context.phase == InputActionPhase.Started)
+        {
+            inventory?.Invoke();
+            ToggleCursor();
+        }
+    }
+    void ToggleCursor()
+    {
+        bool toggle = Cursor.lockState == CursorLockMode.Locked;
+        Cursor.lockState = toggle ? CursorLockMode.None : CursorLockMode.Locked;
+        canLook = !toggle;
     }
 }

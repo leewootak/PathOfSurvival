@@ -14,7 +14,7 @@ public class PlayerCondition : MonoBehaviour, IDamagable
 
     Condition health { get { return uICondition.health; } }
     Condition hunger { get { return uICondition.hunger; } }
-    Condition Stamina { get { return uICondition.Stamina; } }
+    Condition stamina { get { return uICondition.Stamina; } }
     Condition Thirst { get { return uICondition.Thirst; } }
     Condition Infection { get { return uICondition.Infection; } }
 
@@ -27,7 +27,7 @@ public class PlayerCondition : MonoBehaviour, IDamagable
     void Update()
     {
         hunger.Subtract(hunger.passiveValue * Time.deltaTime); // 시간에 따라 줄어듦
-        Stamina.Add(Stamina.passiveValue * Time.deltaTime); // 행동시 줄어듦
+        stamina.Add(stamina.passiveValue * Time.deltaTime); // 행동시 줄어듦
         Thirst.Subtract(Thirst.passiveValue * Time.deltaTime); // 시간에 따라 줄어듦
         Infection.Subtract(Infection.passiveValue * Time.deltaTime); // 시간에 따라 줄어듦
 
@@ -78,4 +78,14 @@ public class PlayerCondition : MonoBehaviour, IDamagable
         health.Subtract(damage);
         onTakeDamage?.Invoke();
     }
+    public bool UseStamina(float amount)
+    {
+        if (stamina.curValue - amount < 0)
+        {
+            return false;
+        }
+        stamina.Subtract(amount);
+        return true;
+    }
 }
+

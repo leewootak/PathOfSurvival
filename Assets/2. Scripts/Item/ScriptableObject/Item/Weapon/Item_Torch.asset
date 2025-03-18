@@ -23,6 +23,6 @@ MonoBehaviour:
   maxStackAmount: 0
   getAmount: 0
   consumables: []
-  equipPrefab: {fileID: 0}
+  equipPrefab: {fileID: 262324312543983727, guid: 83b5509290313c6488ee2d7b1e3d6793, type: 3}
   attackDamage: 0
   isSetUP: 0
