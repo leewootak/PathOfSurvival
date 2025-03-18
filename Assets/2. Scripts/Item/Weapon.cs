@@ -9,7 +9,7 @@ public enum WeaponType
     Range
 }
 
-public class Weapon : MonoBehaviour
+public class Weapon : Equip
 {
     public float attackRate;
     private bool attacked;
@@ -34,7 +34,7 @@ public class Weapon : MonoBehaviour
         //InvokeRepeating("OnAttackInput", 0, attackRate);
     }
 
-    public void OnAttackInput()
+    public override void OnAttackInput()
     {
         if(!attacked)
         {
@@ -44,11 +44,11 @@ public class Weapon : MonoBehaviour
                //animator.SetTrigger("Attack");
                 if(type == WeaponType.Range)
                 {
-                    Inventory proc = ItemManager.Instance.inventory.FindItem(useProjectile);
+                    ItemSlot proc = ItemManager.Instance.inventory.FindItem(useProjectile);
                     if (proc.quantity > 0)
                     {
                         Shoot();
-                        proc.RemoveItem(useProjectile);
+                        ItemManager.Instance.inventory.RemoveItem(useProjectile);
                     }
                 }
                 Invoke("OnCanAttack", attackRate);
@@ -73,9 +73,17 @@ public class Weapon : MonoBehaviour
     {
         attacked = false;
     }
-
+/*
     public void OnHit()
     {
+        Ray ray = camera.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit, attackDistance))
+        {
+            if (hit.collider.TryGetComponent(out EnemyObject enemy))
+            {
+                enemy.SubHealth(damage);
+            }
 
+        }*/
     }
-}

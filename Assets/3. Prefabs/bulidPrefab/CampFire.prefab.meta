@@ -1,7 +1,13 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/2. Scripts/Item/ScriptableObject/Item/Object/Item_WoodenWall.asset.meta
+guid: 4fc32d30ecbcb9942bb8bc01e6d9c8da
+NativeFormatImporter:
+========
 guid: 0214e76ea4d73034482a7f0c511de3e7
 PrefabImporter:
+>>>>>>>> Dev:Assets/3. Prefabs/bulidPrefab/CampFire.prefab.meta
   externalObjects: {}
+  mainObjectFileID: 11400000
   userData: 
   assetBundleName: 
   assetBundleVariant: 
