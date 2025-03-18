@@ -13,7 +13,7 @@ public class Weapon : Equip
 {
     public float attackRate;
     private bool attacked;
-    
+    public Camera camera;
     public float useStamina;
     [SerializeField] private WeaponType type;
 
@@ -32,6 +32,7 @@ public class Weapon : Equip
     {
         //animator = GetComponent<Animator>();    
         //InvokeRepeating("OnAttackInput", 0, attackRate);
+        camera = Camera.main;
     }
 
     public override void OnAttackInput()
@@ -41,8 +42,8 @@ public class Weapon : Equip
  //           if (CharacterManager.Instance.Player.condition.UseStamina(useStamina))
             {
                 attacked = true;
-               //animator.SetTrigger("Attack");
-                if(type == WeaponType.Range)
+                //animator.SetTrigger("Attack");
+                if (type == WeaponType.Range)
                 {
                     ItemSlot proc = ItemManager.Instance.inventory.FindItem(useProjectile);
                     if (proc.quantity > 0)
@@ -51,14 +52,16 @@ public class Weapon : Equip
                         ItemManager.Instance.inventory.RemoveItem(useProjectile);
                     }
                 }
-                Invoke("OnCanAttack", attackRate);
+                else OnHit();
+                    Invoke("OnCanAttack", attackRate);
             }
         }
     }
 
     void Shoot()
     {
-        Vector3 spawnPosition = transform.position + transform.forward * 1.3f;
+        Vector3 playerPos = CharacterManager.Instance.Player.transform.position;
+        Vector3 spawnPosition = playerPos + CharacterManager.Instance.Player.transform.forward * 1.3f;
         Quaternion spawnRotation = transform.rotation;
         GameObject procjec = Instantiate(projectiles, spawnPosition, spawnRotation);
         Rigidbody rb = procjec.GetComponent<Rigidbody>();
@@ -73,7 +76,7 @@ public class Weapon : Equip
     {
         attacked = false;
     }
-/*
+
     public void OnHit()
     {
         Ray ray = camera.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
@@ -82,8 +85,10 @@ public class Weapon : Equip
         {
             if (hit.collider.TryGetComponent(out EnemyObject enemy))
             {
-                enemy.SubHealth(damage);
+                Destroy(enemy.gameObject);
             }
 
-        }*/
+        }
     }
+    
+}

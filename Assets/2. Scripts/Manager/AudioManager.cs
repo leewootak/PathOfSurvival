@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.UI;
 
 public class AudioManager : MonoBehaviour
@@ -16,6 +17,8 @@ public class AudioManager : MonoBehaviour
 
     AudioSource BGMaudio;
     AudioSource FXaudio;
+
+    public AudioMixerGroup MasterAudio;
 
 
     private void Awake()
@@ -36,8 +39,10 @@ public class AudioManager : MonoBehaviour
     private void Start()
     {
         BGMaudio.clip = BGM;
-        BGMaudio.Play();
         BGMaudio.loop = true;
+        BGMaudio.outputAudioMixerGroup = MasterAudio;
+        BGMaudio.Play();
+      
 
         FXaudio.loop = false;
         FXaudio.playOnAwake = false;

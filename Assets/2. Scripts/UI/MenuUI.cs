@@ -59,7 +59,7 @@ public class MenuUI : MonoBehaviour
         RadioMove = StartCoroutine(MoveRadio());
 
         float CurrentValue;
-        MasterAudioMixer.GetFloat("MasterAudioMixer", out CurrentValue);
+        MasterAudioMixer.GetFloat("MasterVolume", out CurrentValue);
         VolumeSlider.value = Mathf.InverseLerp(-80f, 0f, CurrentValue);
     }
 
