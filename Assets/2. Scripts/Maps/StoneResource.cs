@@ -24,7 +24,7 @@ public class StoneResource : ResourcePlayerCanGet
         Particle.SetActive(true);
     }
 
-    public void GetResource()
+    public override void GetResource()
     {
         GameObject go = Instantiate(MapManager.Instance.Resource.resourceSpawn.Stone);
         go.transform.position = new Vector3(transform.position.x + Random.Range(-1f, 1f), transform.position.y + 2f, transform.position.z + Random.Range(-1f, 1f));

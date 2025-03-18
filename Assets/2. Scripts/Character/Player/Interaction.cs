@@ -13,6 +13,8 @@ public class Interaction : MonoBehaviour
 
     public GameObject curInteractGameObject;
     private IInteractable curinteractable;
+    private ResourcePlayerCanGet resourcePlayerCanGet;
+    private PostItHave postItHave;
 
     public TextMeshProUGUI promptText;
     private Camera camera;
@@ -36,7 +38,9 @@ public class Interaction : MonoBehaviour
                 if (hit.collider.gameObject != curInteractGameObject)
                 {
                     curInteractGameObject = hit.collider.gameObject;
-                    curinteractable = hit.collider.GetComponent<IInteractable>();
+                    hit.collider.TryGetComponent<IInteractable>(out curinteractable);
+                    hit.collider.TryGetComponent<ResourcePlayerCanGet>(out resourcePlayerCanGet);
+                    hit.collider.TryGetComponent<PostItHave>(out postItHave);
                     SetPromptText();
                 }
             }
@@ -57,12 +61,24 @@ public class Interaction : MonoBehaviour
 
     public void OnInteractInput(InputAction.CallbackContext context)
     {
-        if(context.phase == InputActionPhase.Started && curinteractable != null)
+        if (context.phase == InputActionPhase.Started && curinteractable != null)
         {
             curinteractable.OnInteract();
             curInteractGameObject = null;
             curinteractable = null;
             promptText.gameObject.SetActive(false);
+        }
+        else if (context.phase == InputActionPhase.Started && resourcePlayerCanGet != null)
+        {
+            resourcePlayerCanGet.GetResource();
+            curInteractGameObject = null;
+            curinteractable = null;
+        }
+        else if (context.phase == InputActionPhase.Started && postItHave != null)
+        {
+            postItHave.OnInteraction();
+            curInteractGameObject = null;
+            curinteractable = null;
         }
     }
 }
