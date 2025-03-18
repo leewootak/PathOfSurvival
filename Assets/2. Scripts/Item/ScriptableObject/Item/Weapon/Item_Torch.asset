@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b45cb21f00ed944eaefcd2ac11fce6e, type: 3}
   m_Name: Item_Torch
   m_EditorClassIdentifier: 
-  id: 8
+  id: 20
   displayName: "\uD683\uBD88"
   description: "\uC8FC\uBCC0\uC774 \uC870\uAE08 \uBC1D\uC544\uC9C4\uB2E4"
-  type: 0
-  dropPrefab: {fileID: 7863944550608283333, guid: 60d3603858042df44818ffa6a7eac8dc, type: 3}
+  type: 1
+  dropPrefab: {fileID: 3779767209805076754, guid: 54bb0fc6602af68438e3e1ad6d2cc59e, type: 3}
   icon: {fileID: 0}
   weight: 0
   canStack: 0

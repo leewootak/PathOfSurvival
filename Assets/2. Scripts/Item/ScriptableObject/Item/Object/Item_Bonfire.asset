@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b45cb21f00ed944eaefcd2ac11fce6e, type: 3}
   m_Name: Item_Bonfire
   m_EditorClassIdentifier: 
-  id: 12
+  id: 30
   displayName: "\uBAA8\uB2E5\uBD88"
   description: "\uB530\uB73B\uD558\uB2E4."
   type: 3
@@ -20,7 +20,7 @@ MonoBehaviour:
   icon: {fileID: 0}
   weight: 0
   canStack: 0
-  maxStackAmount: 0
+  maxStackAmount: 10
   getAmount: 0
   consumables: []
   equipPrefab: {fileID: 0}
