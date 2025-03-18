@@ -10,6 +10,7 @@ public class Build_Prefabs : MonoBehaviour
     private LayerMask layerMask;
     private Material[] materials;
     private MeshRenderer meshRenderer;
+    public bool IsBatchComplete = false;
 
 
     private void Awake()
@@ -32,7 +33,10 @@ public class Build_Prefabs : MonoBehaviour
         if (other.gameObject.layer != LayerMask.NameToLayer("ground") && other.gameObject.layer != LayerMask.NameToLayer("Wall"))
         {
             // 배치 불가능 상태 머티리얼
-            ColorChange(1);
+            if (!IsBatchComplete)
+                ColorChange(1);
+
+
             // CreftTable의 배치 가능 여부를 false로 설정
             craftTable.CanPlace = false;
             Debug.Log("배치 불가능");
