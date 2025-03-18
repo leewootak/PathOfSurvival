@@ -61,7 +61,7 @@ public class InventoryUI : MonoBehaviour
         }
     }
 
-    private void OnEnable()
+    public void OnEnable()
     {
         //가지고 있는 만큼 소환
         //6개 단위로 Contents의 높이를 조정 + Slot소환

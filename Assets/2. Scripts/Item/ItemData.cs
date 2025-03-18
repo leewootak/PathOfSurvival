@@ -11,7 +11,7 @@ public enum ItemType
 public enum ConsumableType
 {
     Health,
-    Hungry,
+    Hunger,
     Thirst,
     Disinfection
 }

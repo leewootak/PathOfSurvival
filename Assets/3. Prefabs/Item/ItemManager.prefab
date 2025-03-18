@@ -56,6 +56,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c14d64007708b244a84f8730e75432cf, type: 2}
   - {fileID: 11400000, guid: 97d115fb7ad2e0d4c99b5c0eeb0828a7, type: 2}
   - {fileID: 11400000, guid: f8edce907266acc4689b87e2db351c3a, type: 2}
-  inventory: []
+  - {fileID: 11400000, guid: 6e4f09f8e2771d84db071cfdfb3d3707, type: 2}
+  - {fileID: 11400000, guid: 70eaf7f81366ca941b78df9318c8af27, type: 2}
+  - {fileID: 11400000, guid: 281493dc0e76363459e47e4c0f330834, type: 2}
   maxWeight: 0
   curWeight: 0
