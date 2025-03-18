@@ -55,9 +55,7 @@ public class AudioManager : MonoBehaviour
 
     public void FXOn(int index)
     {
-        FXaudio.clip = audioSources[index];
-
-        FXaudio.Play();
+        FXaudio.PlayOneShot(audioSources[index]);
     }
 
 
