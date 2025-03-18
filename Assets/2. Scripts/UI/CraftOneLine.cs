@@ -8,6 +8,7 @@ public class CraftOneLine : MonoBehaviour
     Button CraftButton;
     public Slot slot;
 
+    public CraftTable craftTable;
     public ItemData ItemData;
 
     public GameObject SlotIcon;
@@ -36,5 +37,13 @@ public class CraftOneLine : MonoBehaviour
         //플레이어 아이템이 존재할 시
         //플레이어 아이템에서 -하고
         //재작템을 플레이어 아이템에 + 한다
+
+
+        if(ItemData.type == ItemType.Object)
+        {
+            //Equip하고 있다면 추가로 장착을 해제해야함
+            craftTable.box = ItemData.dropPrefab;
+            craftTable.gameObject.SetActive(true);
+        }
     }
 }

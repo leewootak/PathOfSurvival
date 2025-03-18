@@ -6,7 +6,7 @@ public class Build_Prefabs : MonoBehaviour
 
     [SerializeField] private Material Red;
     [SerializeField] private Material Green;
-    [SerializeField] private CraftTable craftTable;
+    public CraftTable craftTable;
     private LayerMask layerMask;
     private Material[] materials;
     private MeshRenderer meshRenderer;
@@ -14,6 +14,11 @@ public class Build_Prefabs : MonoBehaviour
 
     private void Awake()
     {
+        if (craftTable == null)
+        {
+            craftTable = FindAnyObjectByType<CraftTable>();
+        }
+
         meshRenderer = GetComponent<MeshRenderer>();
 
         // 현재 메시 렌더러의 머티리얼들을 복사하여 배열에 저장
@@ -23,7 +28,8 @@ public class Build_Prefabs : MonoBehaviour
             materials[i] = meshRenderer.materials[i];
         }
 
-        layerMask = LayerMask.GetMask("Ground", "Wall");
+        layerMask = LayerMask.GetMask("Buildable");
+
     }
 
     private void OnTriggerStay(Collider other)
@@ -32,7 +38,9 @@ public class Build_Prefabs : MonoBehaviour
         if (other.gameObject.layer != LayerMask.NameToLayer("Ground") && other.gameObject.layer != LayerMask.NameToLayer("Wall"))
         {
             // 배치 불가능 상태 머티리얼
+
             ColorChange(1);
+
             // CreftTable의 배치 가능 여부를 false로 설정
             craftTable.CanPlace = false;
             Debug.Log("배치 불가능");
