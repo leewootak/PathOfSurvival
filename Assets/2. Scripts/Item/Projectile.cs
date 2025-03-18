@@ -50,7 +50,7 @@ public class Projectile : MonoBehaviour
             EnemyObject enemy = collision.gameObject.GetComponent<EnemyObject>();
             if (enemy != null)
             {
-                enemy.SubHealth(damage);
+                Destroy(enemy.gameObject);
             }
             DisActive();
         }
