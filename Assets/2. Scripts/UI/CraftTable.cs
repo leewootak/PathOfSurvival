@@ -13,11 +13,12 @@ public class CraftTable : MonoBehaviour
     private float Angle;
 
     // 배치 모드 활성 여부
-    private bool IsSelect = false;
+    private bool IsBuildMode = false;
     // 배치 가능 상태 여부
     public bool CanPlace = false;
 
-    [SerializeField] private Build_Prefabs build_Prefabs;
+    [SerializeField] private BuildColorSetting buildColorSetting;
+    private GameObject currentPrefab; // 현재 배치 중인 프리팹
 
 
     private void Awake()
@@ -50,56 +51,49 @@ public class CraftTable : MonoBehaviour
     // 배치 모드 시작 및 아이템 프리팹 생성
     private void Craft()
     {
-        if (!IsSelect)
+        if (!IsBuildMode)
         {
+            IsBuildMode = true;
             // 아이템 프리팹 생성
-            Instantiate(prefabs, prefabs.transform.position, Quaternion.identity);
-        }
-        
-        IsSelect = true;
-        build_Prefabs.IsPlaced = false;
+            currentPrefab = Instantiate(prefabs, prefabs.transform.position, Quaternion.identity);
+            Debug.Log("부품 선택");
 
-        Debug.Log("부품 선택");
+            // 새로 생성된 프리팹의 색상을 기본값으로 초기화 (배치 가능 상태)
+            currentPrefab.transform.GetChild(0).GetComponent<BuildColorSetting>().ColorChange(2);
+            currentPrefab.transform.GetChild(0).GetComponent<BuildColorSetting>().IsPlaced = false; // 배치되지 않은 상태로 초기화
+        }
+
+        buildColorSetting.IsPlaced = false;
     }
 
     private void Moving()
     {
-        if (IsSelect)
+        if (IsBuildMode)
         {
             RaycastHit hit;
 
-            // 10 이내의 그라운드를 감지하고, 플레이어와의 거리가 10 미만일 때
             if (Physics.Raycast(ray, out hit, 15f, layerMask) && Vector3.Distance(player.transform.position, hit.point) < 13f)
             {
                 if (hit.collider != null)
                 {
                     CanPlace = true;
-
-                    // 배치 가능 상태 색상으로 변경
-                    prefabs.transform.GetChild(0).GetComponent<Build_Prefabs>().ColorChange(2);
-
-                    //// 충돌면의 법선과 오른쪽 벡터의 외적으로 전방 방향 계산
-                    //Vector3 forward = Vector3.Cross(hit.normal, Vector3.right);
+                    currentPrefab.transform.GetChild(0).GetComponent<BuildColorSetting>().ColorChange(2);
+                    Debug.Log("배치 가능 상태: " + CanPlace);
 
                     // 표면의 법선에 맞춰 회전
                     Quaternion baseRotation = Quaternion.LookRotation(-hit.normal);
                     Quaternion additionalRotation = Quaternion.Euler(0, 0, Angle);
-                    prefabs.transform.rotation = baseRotation * additionalRotation;
+                    currentPrefab.transform.rotation = baseRotation * additionalRotation;
 
                     // 아이템 위치를 감지된 지점으로 이동
-                    prefabs.transform.position = hit.point;
-                    Debug.Log("배치 가능");
+                    currentPrefab.transform.position = hit.point;
                 }
             }
-            // 플레이어와의 거리가 10 이상이면 배치 불가
-            else if (Vector3.Distance(player.transform.position, hit.point) >= 10f)
+            else
             {
                 CanPlace = false;
-
-                // 배치 불가 상태 색상으로 변경
-                prefabs.transform.GetChild(0).GetComponent<Build_Prefabs>().ColorChange(1);
-
-                Debug.Log("너무 멀음");
+                currentPrefab.transform.GetChild(0).GetComponent<BuildColorSetting>().ColorChange(1);
+                Debug.Log("배치 불가 상태: " + CanPlace);
             }
         }
     }
@@ -109,15 +103,15 @@ public class CraftTable : MonoBehaviour
     {
         if (CanPlace && Input.GetMouseButtonDown(0))
         {
-            IsSelect = false;
+            IsBuildMode = false;
             prefabs.transform.GetChild(0).GetComponent<Rigidbody>().isKinematic = true;
 
             // 배치 완료 상태 색상으로 변경
-            prefabs.transform.GetChild(0).GetComponent<Build_Prefabs>().ColorChange(0);
-            prefabs.layer = 7;
-            prefabs.transform.GetChild(0).gameObject.layer = 7;
+            currentPrefab.transform.GetChild(0).GetComponent<BuildColorSetting>().ColorChange(0);
+            currentPrefab.layer = 7;
+            currentPrefab.transform.GetChild(0).gameObject.layer = 7;
 
-            build_Prefabs.IsPlaced = true;
+            buildColorSetting.IsPlaced = true;
             Debug.Log("배치");
         }
         // 우클릭: 아이템 회전
@@ -127,3 +121,5 @@ public class CraftTable : MonoBehaviour
         }
     }
 }
+// 버튼과 설치가 동시에 되는 현상 수정 필요 ex) 클릭 설치 => 다른 키
+// 빌드 모드 취소 로직 및 잘못 설치한 프리팹 되돌리기 기능 필요
