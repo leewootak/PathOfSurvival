@@ -17,7 +17,7 @@ MonoBehaviour:
   description: "\uAE68\uB057\uD55C \uBB3C\uC774\uB2E4."
   type: 2
   dropPrefab: {fileID: 4872126105537126476, guid: 036badf98839dd04eb63e4cb1ceec3ae, type: 3}
-  icon: {fileID: 0}
+  icon: {fileID: -764399494, guid: fc8eaa2549593684c9593bf8166ff85f, type: 3}
   weight: 1
   canStack: 1
   maxStackAmount: 99
@@ -28,3 +28,5 @@ MonoBehaviour:
   equipPrefab: {fileID: 0}
   attackDamage: 0
   isSetUP: 0
+  CraftResourceData: []
+  CraftResourceAmount: 

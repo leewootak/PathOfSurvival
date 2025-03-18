@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,7 +13,6 @@ public class CraftOneLine : MonoBehaviour
 
     public GameObject SlotIcon;
     public Transform SpawnPositionSlotIcon;
-
 
     private CraftTable  craftTable;
 
@@ -30,9 +30,14 @@ public class CraftOneLine : MonoBehaviour
 
     public void SetItem()
     {
-        //slot.changeImage(ItemData.Image);
-        //ItemData가 가지고 있는 재료 수 만큼
-        //foreach
+        slot.changeImage(ItemData.icon, 1);
+
+        for (int i = 0; i < ItemData.CraftResourceData.Count; i++)
+        {
+            GameObject go = Instantiate(SlotIcon);
+            go.transform.parent = SpawnPositionSlotIcon;
+            go.GetComponent<Slot>().changeImage(ItemData.CraftResourceData[i].icon, ItemData.CraftResourceAmount[i]);
+        }
     }
 
     void OnCraftButton()
