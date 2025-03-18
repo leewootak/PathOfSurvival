@@ -24,7 +24,6 @@ public class CraftTable : MonoBehaviour
     {
         UI = transform.parent.gameObject;
         cam = FindAnyObjectByType<Camera>();
-
         Player = FindAnyObjectByType<Player>();
 
 
