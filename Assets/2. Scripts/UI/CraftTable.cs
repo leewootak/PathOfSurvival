@@ -24,8 +24,12 @@ public class CraftTable : MonoBehaviour
     {
         UI = transform.parent.gameObject;
         cam = FindAnyObjectByType<Camera>();
+
         Player = FindAnyObjectByType<Player>();
-        layerMask = LayerMask.GetMask("ground", "Wall");
+
+
+        layerMask = LayerMask.GetMask("Buildable");
+
     }
 
     private void Start()
@@ -81,8 +85,8 @@ public class CraftTable : MonoBehaviour
 
                     // 표면의 법선에 맞춰 회전
                     Quaternion baseRotation = Quaternion.LookRotation(-hit.normal);
-                    Quaternion additionalRotation = Quaternion.Euler(0, Angle, 0);
-                    Prefabs.transform.rotation = baseRotation * additionalRotation;
+                    Quaternion additionalRotation = Quaternion.Euler(0, 0, Angle);
+                    box.transform.rotation = baseRotation * additionalRotation;
 
 
 
