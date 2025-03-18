@@ -42,7 +42,8 @@ public class Projectile : MonoBehaviour
             {
                 if(collision.gameObject.CompareTag("Player"))
                 {
-                    CharacterManager.Instance.Player.condition.TakePhysicalDamage((int)transform.parent.GetComponent<EnemyObject>().GetEnemyInfo().Attack);
+                    CharacterManager.Instance.Player.condition.
+                        TakePhysicalDamage((int)transform.parent.GetComponent<EnemyObject>().GetEnemyInfo().Attack);
                 }
             }
             rb.constraints = RigidbodyConstraints.None;
