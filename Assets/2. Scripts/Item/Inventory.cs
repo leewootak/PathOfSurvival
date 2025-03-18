@@ -217,7 +217,7 @@ public class Inventory : MonoBehaviour
         }
         inventory[selectedItemIndex].equiped = true;
         curEquipIndex = selectedItemIndex;
-        //CharacterManager.Instance.Player.equip.EquipNew(selectedItem);
+        CharacterManager.Instance.Player.equip.EquipNew(selectedItem);
         UpdateUI();
         SelectItem(selectedItemIndex);
     }
@@ -225,7 +225,7 @@ public class Inventory : MonoBehaviour
     void UnEquip(ItemID index)
     {
         inventory[index].equiped = false;
-        //CharacterManager.Instance.Player.equip.UnEquip();
+        CharacterManager.Instance.Player.equip.UnEquip();
         UpdateUI();
 
         if (selectedItemIndex == index)
