@@ -10,6 +10,7 @@ public class Build_Prefabs : MonoBehaviour
     private LayerMask layerMask;
     private Material[] materials;
     private MeshRenderer meshRenderer;
+    public bool IsBatchComplete = false;
 
 
     private void Awake()
@@ -23,7 +24,10 @@ public class Build_Prefabs : MonoBehaviour
             materials[i] = meshRenderer.materials[i];
         }
 
+
+        craftTable = FindAnyObjectByType<CraftTable>();
         layerMask = LayerMask.GetMask("Buildable");
+
     }
 
     private void OnTriggerStay(Collider other)
@@ -32,7 +36,10 @@ public class Build_Prefabs : MonoBehaviour
         if (other.gameObject.layer != LayerMask.NameToLayer("Buildable"))
         {
             // 배치 불가능 상태 머티리얼
-            ColorChange(1);
+            if (!IsBatchComplete)
+                ColorChange(1);
+
+
             // CreftTable의 배치 가능 여부를 false로 설정
             craftTable.CanPlace = false;
             Debug.Log("배치 불가능");
