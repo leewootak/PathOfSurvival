@@ -123,7 +123,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Red: {fileID: 2100000, guid: 146bf7c9101706d4e84becf35ca230f8, type: 2}
   Green: {fileID: 2100000, guid: 9ef363909e13e6a448c8ae8dcd221c51, type: 2}
-  IsnotBuild: 0
+  craftTable: {fileID: 0}
 --- !u!54 &1578775612672672982
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -162,7 +162,7 @@ GameObject:
   - component: {fileID: 7829753940994212679}
   m_Layer: 0
   m_Name: Build_Sil_Hum_Che
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
