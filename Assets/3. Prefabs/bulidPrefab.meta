@@ -1,6 +1,10 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/3. Prefabs/bulidPrefab.meta
 guid: 0701a3da8c3c3a44ebb8e25e996bb15f
 folderAsset: yes
+========
+guid: 08f95f1203ab3cc4889faf2436cc2293
+>>>>>>>> Dev:Assets/1. Scenes/LWTScene.unity.meta
 DefaultImporter:
   externalObjects: {}
   userData: 

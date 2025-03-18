@@ -1,6 +1,10 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/4. Animations/NPC.meta
 guid: 95b21ff851748e84bab6debb89ce1f89
 folderAsset: yes
+========
+guid: e8d1d59b4af53fb4685894e0972082fc
+>>>>>>>> Dev:Assets/Externals/LowPolyFoodLite/LowPolyFoodLite_2020.3.0_HDRP_v1.0.unitypackage.meta
 DefaultImporter:
   externalObjects: {}
   userData: 
