@@ -12,16 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b45cb21f00ed944eaefcd2ac11fce6e, type: 3}
   m_Name: Item_WoodenWall
   m_EditorClassIdentifier: 
-  id: 31
+  id: -1
   displayName: "\uB098\uBB34 \uBCBD"
   description: "\uAF64\uB098 \uD2BC\uD2BC\uD558\uB2E4"
-  type: 3
-  dropPrefab: {fileID: 3111129501358846248, guid: 62d7c6b7173dcdd458b4bb708646cf0a, type: 3}
+  type: 0
+  dropPrefab: {fileID: 0}
   icon: {fileID: 0}
   weight: 0
   canStack: 0
-  maxStackAmount: 99
-  getAmount: 0
+  maxStackAmount: 0
+  getAmount: 1
   consumables: []
   equipPrefab: {fileID: 0}
   attackDamage: 0

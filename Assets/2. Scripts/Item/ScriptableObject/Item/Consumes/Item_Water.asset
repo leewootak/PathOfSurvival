@@ -12,16 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b45cb21f00ed944eaefcd2ac11fce6e, type: 3}
   m_Name: Item_Water
   m_EditorClassIdentifier: 
-  id: 11
+  id: -1
   displayName: "\uBB3C"
   description: "\uAE68\uB057\uD55C \uBB3C\uC774\uB2E4."
-  type: 2
+  type: 0
   dropPrefab: {fileID: 4872126105537126476, guid: 036badf98839dd04eb63e4cb1ceec3ae, type: 3}
   icon: {fileID: 0}
   weight: 0
   canStack: 1
   maxStackAmount: 99
-  getAmount: 0
+  getAmount: 1
   consumables:
   - type: 2
     value: 10

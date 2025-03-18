@@ -80,7 +80,7 @@ public class InventoryUI : MonoBehaviour
         StateButtonIsOn.SetActive(false);
         CraftUI.SetActive(false);
         CraftButtonIsOn.SetActive(false);
-        StoryUI.SetActive(false);
+        //StoryUI.SetActive(false);
         StoryButtonIsOn.SetActive(false);
 
         switch (nowUI)

@@ -15,18 +15,17 @@ public enum ItemID
     Cotton,
     Stone,
     RiverWater,
-    Bullet,
     [Header("Consumes")]
-    Can = 10,
+    Can,
     Water,
     Drug,
     [Header("Equip")]
-    Torch = 20,
+    Torch,
     Sword,
     Bow,
     Gun,
     [Header("Objects")]
-    Bonfire = 30,
+    Bonfire,
     WoodenWall
 }
 
@@ -89,8 +88,5 @@ public class ItemManager : MonoBehaviour
         return (itemWeight + curWeight < maxWeight) ? true : false;
     }
 
-    public void LossWeight(float itemWeight)
-    {
-        curWeight -= itemWeight;
-    }
+
 }

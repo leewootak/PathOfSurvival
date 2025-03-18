@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 7464485699783806879}
   - component: {fileID: 2725039773952896674}
   - component: {fileID: 6052177668556287569}
-  - component: {fileID: 4567202844923335129}
   - component: {fileID: 6072882590579799450}
   - component: {fileID: 1620152138929760633}
+  - component: {fileID: 4567202844923335129}
   m_Layer: 0
   m_Name: BrickHouse_Floor_Mid_B
   m_TagString: Untagged
@@ -88,27 +88,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &4567202844923335129
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5984734821694392251}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 4.0000143, y: 0.30025342, z: 7.1931095}
-  m_Center: {x: -1.9999996, y: -0.050040305, z: -1.9965475}
 --- !u!114 &6072882590579799450
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -123,7 +102,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Red: {fileID: 2100000, guid: 146bf7c9101706d4e84becf35ca230f8, type: 2}
   Green: {fileID: 2100000, guid: 9ef363909e13e6a448c8ae8dcd221c51, type: 2}
-  craftTable: {fileID: 0}
+  IsnotBuild: 0
 --- !u!54 &1620152138929760633
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -151,6 +130,27 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!65 &4567202844923335129
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5984734821694392251}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 4.0000143, y: 0.30025342, z: 7.1931095}
+  m_Center: {x: -1.9999996, y: -0.050040305, z: -1.9965475}
 --- !u!1 &7570283255316969465
 GameObject:
   m_ObjectHideFlags: 0

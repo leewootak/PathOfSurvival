@@ -33,7 +33,7 @@ public class EnemyPool : MonoBehaviour
 
         for (int j = 0; j < PoolCount; j++)
         {
-            GameObject Enemy = Instantiate(EnemyList[Random.Range(0,2)], transform);
+            GameObject Enemy = Instantiate(EnemyList[0], transform);
             Enemy.GetComponent<EnemyObject>().Set();
             Enemy.SetActive(false);
             Pool.Enqueue(Enemy);

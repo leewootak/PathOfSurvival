@@ -15,7 +15,9 @@ public class PostItHave : MonoBehaviour
 
     public void OnInteraction()
     {
+        UIManager.Instance.StoryUI.AllPostit.Remove(postit);
         postit.isPlayerHave = true;
+        UIManager.Instance.StoryUI.AllPostit.Add(postit);
         Destroy(gameObject);
     }
 }

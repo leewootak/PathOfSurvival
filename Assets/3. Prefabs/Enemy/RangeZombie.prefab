@@ -2369,7 +2369,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cbf6f253a1b33240b73cf4c18ad5a1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EnemyInfo: {fileID: 11400000, guid: a01ca710db6a23f4391449b8d13a9b1e, type: 2}
+  EnemyInfo: {fileID: 11400000, guid: 5764a33beef79a04398645d821d3b624, type: 2}
   DropItem: []
 --- !u!114 &5049351449655789466
 MonoBehaviour:

@@ -6,7 +6,6 @@ public enum ProjectileType
 {
     bullet,
     arrow,
-    enemy,
 }
 
 
@@ -38,14 +37,6 @@ public class Projectile : MonoBehaviour
     {
         if (rb != null)
         {
-            if(type == ProjectileType.enemy)
-            {
-                if(collision.gameObject.CompareTag("Player"))
-                {
-                    CharacterManager.Instance.Player.condition.
-                        TakePhysicalDamage((int)transform.parent.GetComponent<EnemyObject>().GetEnemyInfo().Attack);
-                }
-            }
             rb.constraints = RigidbodyConstraints.None;
             EnemyObject enemy = collision.gameObject.GetComponent<EnemyObject>();
             if (enemy != null)

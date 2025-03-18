@@ -12,16 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b45cb21f00ed944eaefcd2ac11fce6e, type: 3}
   m_Name: Item_Bow
   m_EditorClassIdentifier: 
-  id: 22
+  id: 10
   displayName: "\uD65C"
   description: "\uD2BC\uD2BC\uD55C \uD65C\uC774\uB2E4."
-  type: 1
+  type: 0
   dropPrefab: {fileID: 993288255304207990, guid: 368f9d2ad3205504faaf2ae3f6102354, type: 3}
   icon: {fileID: 0}
   weight: 0
   canStack: 0
   maxStackAmount: 0
-  getAmount: 0
+  getAmount: 1
   consumables: []
   equipPrefab: {fileID: 993288255304207990, guid: 368f9d2ad3205504faaf2ae3f6102354, type: 3}
   attackDamage: 0

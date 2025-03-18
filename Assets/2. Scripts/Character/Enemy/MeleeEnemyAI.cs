@@ -16,7 +16,6 @@ public class MeleeEnemyAI : EnemyAI
             {
                 lastAttackTime = Time.time;
                 animator.SetTrigger("IsAttack");
-                AudioManager.Instance.FXOn(Random.Range(0, 3));
                 IsAttack = true;
                 Debug.Log("AttackComplete");
             }

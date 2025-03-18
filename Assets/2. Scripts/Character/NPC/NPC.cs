@@ -5,15 +5,34 @@ using UnityEngine;
 
 public class NPC : MonoBehaviour
 {
-    public GameObject Clear;
+    private GameObject[] interactObject;
 
-    private void OnCollisionEnter(Collision collision)
+    private void Start()
     {
-        if(collision.gameObject.CompareTag("Player"))
-        {
-            Clear.SetActive(true);
-        }
+        interactObject = GetComponentsInChildren<GameObject>();
     }
 
+
+    public void TalkToMeTextDown()
+    {
+        interactObject[1].gameObject.SetActive(false);
+    }
+    public  void DescriptionTextDown()
+    {
+        interactObject[0].gameObject.SetActive(false);
+    }
+    public void DescriptionTextOn()
+    {
+        interactObject[0].gameObject.SetActive(true);
+    }
+    public void FriendsAvataDown()
+    {
+        interactObject[2].gameObject.SetActive(false);
+    }
+
+    public Transform CameraMoving()
+    {
+        return interactObject[3].transform;
+    }
 
 }

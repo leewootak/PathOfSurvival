@@ -769,7 +769,7 @@ GameObject:
   - component: {fileID: 1269883566511482920}
   - component: {fileID: 2237386298237022717}
   - component: {fileID: 8714075928915294874}
-  - component: {fileID: -1396240497314714615}
+  - component: {fileID: 4425354848621440632}
   m_Layer: 0
   m_Name: MeleeZombie
   m_TagString: Untagged
@@ -806,7 +806,7 @@ Animator:
   m_GameObject: {fileID: 2930548414025018374}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: d3ceef38d5a43734da8f35193518b21c, type: 3}
-  m_Controller: {fileID: 9100000, guid: 368d8824026d6bd468d03fae1c7d26e1, type: 2}
+  m_Controller: {fileID: 9100000, guid: 65c983452e8d98f4e9fc1a20999f6b64, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
@@ -901,7 +901,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EnemyInfo: {fileID: 11400000, guid: 5764a33beef79a04398645d821d3b624, type: 2}
   DropItem: []
---- !u!114 &-1396240497314714615
+--- !u!114 &4425354848621440632
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -910,11 +910,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 2930548414025018374}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a8c9e3e4b6491040b7abae6b4037d1b, type: 3}
+  m_Script: {fileID: 11500000, guid: 89ebaed5303beef42b585e50e649bda3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DetectingDistance: 17.3
-  AttackDistance: 3
+  DetectingDistance: 10
+  AttackDistance: 16
+  Prefabs: {fileID: 2806325148058088282, guid: 25c5b02c1ba96ed40bd24bfc7edc9d75, type: 3}
+  RunAwayRange: 27
 --- !u!1 &2961033991079865985
 GameObject:
   m_ObjectHideFlags: 0

@@ -18,7 +18,7 @@ public class EnemySpot : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("EnemyTrigger"))
+        if (other.gameObject.CompareTag("Player"))
         {
             for (int i = 0; i < EnemyCount; i++)
             {
@@ -47,7 +47,7 @@ public class EnemySpot : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.CompareTag("EnemyTrigger"))
+        if (other.gameObject.CompareTag("Player"))
         {
             for (int i = 0; i < EnemyCount; i++)
             {
