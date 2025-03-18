@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,10 +9,13 @@ public class AudioManager : MonoBehaviour
     private static  AudioManager instance;
     public static AudioManager Instance {  get { return instance; } set { instance = value; } }
 
-    [SerializeField] private List<AudioSource> audioSources = new List<AudioSource>();
-    [SerializeField] private AudioSource BGM;
+    [SerializeField] private List<AudioClip> audioSources = new List<AudioClip>();
+    [SerializeField] private AudioClip BGM;
     [SerializeField] Scrollbar BGMscrollbar;
     [SerializeField] Scrollbar FXscrollbar;
+
+    AudioSource BGMaudio;
+    AudioSource FXaudio;
 
 
     private void Awake()
@@ -22,38 +26,38 @@ public class AudioManager : MonoBehaviour
         }
         else
             Destroy(gameObject);
+        gameObject.AddComponent<AudioSource>();
+        BGMaudio = GetComponent<AudioSource>();
+
+        gameObject.AddComponent<AudioSource>();
+        FXaudio = GetComponent<AudioSource>();
     }
+
     private void Start()
     {
-        foreach(AudioSource source in audioSources) 
-        {
-            source.enabled= false;
-            source.loop=false;
-            source.playOnAwake = false;
-        }
+        //BGMaudio.clip = BGM;
+        //BGMaudio.Play();
+        //BGMaudio.loop = true;
+
+        FXaudio.loop = false;
+        FXaudio.playOnAwake = false;
     }
-
-
-    private void Update()
-    {
-        BGM.Play();
-    }
-
 
     public void BGMVolumeSet()
     {
-        BGM.volume = BGMscrollbar.value;
+        BGMaudio.volume = BGMscrollbar.value;
     }
     public void FXVolumeSet() 
     {
-        FXscrollbar.value = FXscrollbar.value;
+        FXaudio.volume = FXscrollbar.value;
     }
 
 
     public void FXOn(int index)
     {
-        audioSources[index].enabled = true;
-        audioSources[index].Play();
+        FXaudio.clip = audioSources[index];
+        
+        FXaudio.Play();
     }
 
 

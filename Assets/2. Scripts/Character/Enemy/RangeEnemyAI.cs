@@ -67,6 +67,7 @@ public class RangeEnemyAI : EnemyAI
     private IEnumerator ProjectileShoot()
     {
         animator.SetTrigger("IsAttack");
+        AudioManager.Instance.FXOn(Random.Range(0, 3));
         yield return new WaitForSeconds(1f);
         //공격모션에 따라서 잘하면 코루틴 써야할듯
         Vector3 dir = CharacterManager.Instance.Player.transform.position - transform.position;
