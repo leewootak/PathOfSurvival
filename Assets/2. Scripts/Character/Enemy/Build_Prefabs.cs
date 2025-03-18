@@ -23,13 +23,13 @@ public class Build_Prefabs : MonoBehaviour
             materials[i] = meshRenderer.materials[i];
         }
 
-        layerMask = LayerMask.GetMask("ground", "Wall");
+        layerMask = LayerMask.GetMask("Buildable");
     }
 
     private void OnTriggerStay(Collider other)
     {
         // 충돌한 오브젝트가 그라운드 레이어가 아니라면
-        if (other.gameObject.layer != LayerMask.NameToLayer("ground") && other.gameObject.layer != LayerMask.NameToLayer("Wall"))
+        if (other.gameObject.layer != LayerMask.NameToLayer("Buildable"))
         {
             // 배치 불가능 상태 머티리얼
             ColorChange(1);
