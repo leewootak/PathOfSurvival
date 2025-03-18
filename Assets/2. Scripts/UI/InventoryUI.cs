@@ -76,12 +76,12 @@ public class InventoryUI : MonoBehaviour
 
     void ChangeStateAndUI()
     {
-        //StateUI.SetActive(false);
-        //StateButtonIsOn.SetActive(false);
-        //CraftUI.SetActive(false);
-        //CraftButtonIsOn.SetActive(false);
-        ////StoryUI.SetActive(false);
-        //StoryButtonIsOn.SetActive(false);
+        StateUI.SetActive(false);
+        StateButtonIsOn.SetActive(false);
+        CraftUI.SetActive(false);
+        CraftButtonIsOn.SetActive(false);
+        //StoryUI.SetActive(false);
+        StoryButtonIsOn.SetActive(false);
 
         switch (nowUI)
         {

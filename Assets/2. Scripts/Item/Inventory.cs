@@ -164,15 +164,15 @@ public class Inventory : MonoBehaviour
 
     void ClearSelectedItemWindow()
     {
-        //selectedItemName.text = string.Empty;
-        //selectedItemDescription.text = string.Empty;
-        //selectedStatName.text = string.Empty;
-        //selectedStatValue.text = string.Empty;
+        selectedItemName.text = string.Empty;
+        selectedItemDescription.text = string.Empty;
+        selectedStatName.text = string.Empty;
+        selectedStatValue.text = string.Empty;
 
-        //useButton.SetActive(false);
-        //equipButton.SetActive(false);
-        //unEquipButton.SetActive(false);
-        //dropButton.SetActive(false);
+        useButton.SetActive(false);
+        equipButton.SetActive(false);
+        unEquipButton.SetActive(false);
+        dropButton.SetActive(false);
     }
 
     public void OnUseButton()
