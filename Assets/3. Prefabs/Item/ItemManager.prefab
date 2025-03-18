@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5111918902295626024}
   - component: {fileID: 56501853322305423}
+  - component: {fileID: 6347329521164285187}
+  - component: {fileID: 4014864698361010132}
   m_Layer: 0
   m_Name: ItemManager
   m_TagString: Untagged
@@ -59,6 +61,46 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 6e4f09f8e2771d84db071cfdfb3d3707, type: 2}
   - {fileID: 11400000, guid: 70eaf7f81366ca941b78df9318c8af27, type: 2}
   - {fileID: 11400000, guid: 281493dc0e76363459e47e4c0f330834, type: 2}
-  inventory: {fileID: 0}
-  maxWeight: 1
+  inventory: {fileID: 4014864698361010132}
+  maxWeight: 100
   curWeight: 0
+--- !u!114 &6347329521164285187
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1795075555154011778}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b19ed505279526438b996f36d26ca43, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InventoryUIGameObject: {fileID: 0}
+  dropPosition: {fileID: 0}
+  useButton: {fileID: 0}
+  equipButton: {fileID: 0}
+  unEquipButton: {fileID: 0}
+  dropButton: {fileID: 0}
+  slotParent: {fileID: 0}
+  slotPrefab: {fileID: 1457250765269633535, guid: c856e2603f714fb49ae8ef6842714087, type: 3}
+--- !u!114 &4014864698361010132
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1795075555154011778}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b19ed505279526438b996f36d26ca43, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InventoryUIGameObject: {fileID: 0}
+  dropPosition: {fileID: 0}
+  useButton: {fileID: 0}
+  equipButton: {fileID: 0}
+  unEquipButton: {fileID: 0}
+  dropButton: {fileID: 0}
+  slotParent: {fileID: 0}
+  slotPrefab: {fileID: 1457250765269633535, guid: c856e2603f714fb49ae8ef6842714087, type: 3}

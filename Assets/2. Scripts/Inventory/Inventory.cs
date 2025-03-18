@@ -10,9 +10,6 @@ public class Inventory : MonoBehaviour
 {
     public GameObject InventoryUIGameObject;
     public Transform dropPosition;
-    public Transform slotPanel;
-    public ItemSlot[] slots;
-
 
     private ItemID curEquipIndex;
 
@@ -45,22 +42,17 @@ public class Inventory : MonoBehaviour
         inventory = new Dictionary<ItemID, ItemSlot>();
     }
 
-    public ItemData[] test;
-
     private void Start()
     {
         controller = CharacterManager.Instance.Player.controller;
         condition = CharacterManager.Instance.Player.condition;
         dropPosition = CharacterManager.Instance.Player.dropPosition;
 
+        InventoryUIGameObject = UIManager.Instance.InventoryUI.gameObject;
         InventoryUIGameObject.SetActive(false);
 
         controller.inventory += Toggle;
 
-        for (int i = 0; i < test.Length; i++)
-        {
-            GetItem(test[i]);
-        }
         ClearSelectedItemWindow();
     }
 
