@@ -7,6 +7,7 @@ public class Player : MonoBehaviour
 {
     public PlayerController controller;
     public PlayerCondition condition;
+    public Equipment equip;
 
     public ItemData itemData;
     public Action addItem;
@@ -18,5 +19,6 @@ public class Player : MonoBehaviour
         CharacterManager.Instance.Player = this; //CharacterManager에 있는 Player 에 Player 를 넣는다
         controller = GetComponent<PlayerController>();
         condition = GetComponent<PlayerCondition>();
+        equip = GetComponent<Equipment>();
     }
 }

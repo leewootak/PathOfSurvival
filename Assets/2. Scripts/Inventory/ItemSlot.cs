@@ -16,6 +16,7 @@ public class ItemSlot : MonoBehaviour
     private Outline outline;
 
     public Inventory inventory;
+    public InventoryUI inventoryUI;
 
     public ItemID index;
    

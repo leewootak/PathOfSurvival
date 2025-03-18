@@ -12,16 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b45cb21f00ed944eaefcd2ac11fce6e, type: 3}
   m_Name: Item_Gun
   m_EditorClassIdentifier: 
-  id: 11
+  id: -1
   displayName: "\uCD1D"
   description: "\uC5B4\uB514\uC120\uAC00 \uC8FC\uC6B4 \uCD1D\uC774\uB2E4."
-  type: 1
+  type: 0
   dropPrefab: {fileID: 1921186004474396032, guid: d4226e12e89885d429a17b9a3d7ff1e6, type: 3}
   icon: {fileID: 0}
   weight: 0
   canStack: 0
   maxStackAmount: 0
-  getAmount: 0
+  getAmount: 1
   consumables: []
   equipPrefab: {fileID: 2750419410303345624, guid: f1e5f1dc02d60a4428bafe592a06e2c8, type: 3}
   attackDamage: 0
