@@ -16,13 +16,13 @@ MonoBehaviour:
   displayName: "\uCD1D"
   description: "\uC5B4\uB514\uC120\uAC00 \uC8FC\uC6B4 \uCD1D\uC774\uB2E4."
   type: 1
-  dropPrefab: {fileID: 1921186004474396032, guid: d4226e12e89885d429a17b9a3d7ff1e6, type: 3}
+  dropPrefab: {fileID: 2065718189668892784, guid: c4edb8e70c32862448c9f1bb264fe671, type: 3}
   icon: {fileID: 0}
-  weight: 0
+  weight: 2
   canStack: 0
   maxStackAmount: 0
   getAmount: 0
   consumables: []
-  equipPrefab: {fileID: 2750419410303345624, guid: f1e5f1dc02d60a4428bafe592a06e2c8, type: 3}
+  equipPrefab: {fileID: 5604288342603391047, guid: 5d9757346e2c89e49922cfc96eddfc4a, type: 3}
   attackDamage: 0
   isSetUP: 0
