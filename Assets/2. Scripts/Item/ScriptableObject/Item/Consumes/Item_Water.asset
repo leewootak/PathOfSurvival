@@ -28,5 +28,8 @@ MonoBehaviour:
   equipPrefab: {fileID: 0}
   attackDamage: 0
   isSetUP: 0
-  CraftResourceData: []
-  CraftResourceAmount: 
+  CraftResourceData:
+  - {fileID: 11400000, guid: e6699ac008c11394782925bf328edc24, type: 2}
+  - {fileID: 11400000, guid: d310ba68d37c7304fa6aebeb8c572b8d, type: 2}
+  - {fileID: 11400000, guid: 70eaf7f81366ca941b78df9318c8af27, type: 2}
+  CraftResourceAmount: 040000000400000001000000
