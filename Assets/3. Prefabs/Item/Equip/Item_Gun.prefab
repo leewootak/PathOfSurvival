@@ -9,10 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5918869589027371803}
-  - component: {fileID: 6199820621569064496}
-  - component: {fileID: 2986424817606427098}
   - component: {fileID: 457717728165003100}
-  m_Layer: 0
+  - component: {fileID: -2797329744528363383}
+  - component: {fileID: -1955181467557284999}
+  m_Layer: 8
   m_Name: Item_Gun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40,7 +40,20 @@ Transform:
   - {fileID: 2112028004293596750}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!54 &6199820621569064496
+--- !u!114 &457717728165003100
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2065718189668892784}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bcd7fb5531e09c54591b3e2ccaa35486, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data: {fileID: 11400000, guid: c14d64007708b244a84f8730e75432cf, type: 2}
+--- !u!54 &-2797329744528363383
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -67,7 +80,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &2986424817606427098
+--- !u!65 &-1955181467557284999
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -88,19 +101,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &457717728165003100
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2065718189668892784}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bcd7fb5531e09c54591b3e2ccaa35486, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  data: {fileID: 11400000, guid: c14d64007708b244a84f8730e75432cf, type: 2}
 --- !u!1 &2452882344028871752
 GameObject:
   m_ObjectHideFlags: 0
@@ -112,7 +112,7 @@ GameObject:
   - component: {fileID: 2112028004293596750}
   - component: {fileID: 6230800800996548491}
   - component: {fileID: 2253255195533157545}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cylinder.006
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -195,7 +195,7 @@ GameObject:
   - component: {fileID: 2498375045265370019}
   - component: {fileID: 4097003091845150402}
   - component: {fileID: 3450666983238008378}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -278,7 +278,7 @@ GameObject:
   - component: {fileID: 7336004701948547452}
   - component: {fileID: 8900823291645386728}
   - component: {fileID: 1990065575733917414}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube.004
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -361,7 +361,7 @@ GameObject:
   - component: {fileID: 5443438797658561437}
   - component: {fileID: 3073660847435980820}
   - component: {fileID: 7472029020272348630}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -446,7 +446,7 @@ GameObject:
   - component: {fileID: 6730967615905789659}
   - component: {fileID: 6599159425083859901}
   - component: {fileID: 1201795299963080853}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -529,7 +529,7 @@ GameObject:
   - component: {fileID: 1063099142801668882}
   - component: {fileID: 8485523093994506413}
   - component: {fileID: 4592525731933859484}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube.000
   m_TagString: Untagged
   m_Icon: {fileID: 0}

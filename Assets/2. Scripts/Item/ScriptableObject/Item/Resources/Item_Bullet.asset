@@ -16,9 +16,9 @@ MonoBehaviour:
   displayName: "\uCD1D\uC54C"
   description: "\uCD1D\uC54C\uC774\uB2E4. \uBD88\uB7C9\uD488\uC740 \uC5C6\uB294 \uB4EF\uD558\uB2E4"
   type: 0
-  dropPrefab: {fileID: 4609304793929358314, guid: a9430e1bfc7fb2e44b553b9a9c362599, type: 3}
-  icon: {fileID: 0}
-  weight: 0
+  dropPrefab: {fileID: 3891803713595545882, guid: 11b8f521de43ef743a051f03e30eb72a, type: 3}
+  icon: {fileID: 181367751, guid: 232311d0626175c4bb75bbf5894114ff, type: 3}
+  weight: 0.1
   canStack: 0
   maxStackAmount: 99
   getAmount: 0
@@ -26,3 +26,5 @@ MonoBehaviour:
   equipPrefab: {fileID: 0}
   attackDamage: 0
   isSetUP: 0
+  CraftResourceData: []
+  CraftResourceAmount: 

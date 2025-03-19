@@ -16,9 +16,9 @@ MonoBehaviour:
   displayName: "\uB098\uBB34 \uBCBD"
   description: "\uAF64\uB098 \uD2BC\uD2BC\uD558\uB2E4"
   type: 3
-  dropPrefab: {fileID: 3111129501358846248, guid: 62d7c6b7173dcdd458b4bb708646cf0a, type: 3}
-  icon: {fileID: 0}
-  weight: 0
+  dropPrefab: {fileID: 3114171554722015818, guid: 68efdabbf3dcb2142bf4e73651371075, type: 3}
+  icon: {fileID: -1129076576, guid: 8d530fcacac2e7044ad552a0680ede97, type: 3}
+  weight: 8
   canStack: 0
   maxStackAmount: 99
   getAmount: 0
@@ -26,3 +26,6 @@ MonoBehaviour:
   equipPrefab: {fileID: 0}
   attackDamage: 0
   isSetUP: 0
+  CraftResourceData:
+  - {fileID: 11400000, guid: e6699ac008c11394782925bf328edc24, type: 2}
+  CraftResourceAmount: 04000000

@@ -17,7 +17,8 @@ public class RangeEnemyAI : EnemyAI
         {
             if (playerDistance >= RunAwayRange)
             {
-                agent.isStopped = true;
+                RunAway();
+                SetState(AIState.Detect);
             }
         }
     }
@@ -29,7 +30,6 @@ public class RangeEnemyAI : EnemyAI
             if (Time.time - lastAttackTime > enemyObject.GetEnemyInfo().AttackCoolTime)
             {
                 lastAttackTime = Time.time;
-              
                 StartCoroutine(ProjectileShoot());
                 RunAway();
             }
@@ -60,6 +60,7 @@ public class RangeEnemyAI : EnemyAI
         }
         else
         {
+            ISRunAway = false;
             agent.isStopped = true;
         }
     }
@@ -68,11 +69,12 @@ public class RangeEnemyAI : EnemyAI
     {
         animator.SetTrigger("IsAttack");
         AudioManager.Instance.FXOn(Random.Range(0, 3));
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2f);
         //공격모션에 따라서 잘하면 코루틴 써야할듯
-        Vector3 dir = CharacterManager.Instance.Player.transform.position - transform.position;
-        GameObject Pre =  Instantiate(Prefabs,transform);
-        Pre.transform.GetChild(0).GetComponent<Rigidbody>().AddForce(dir * 3f, ForceMode.Impulse);
+        Vector3 dir = (CharacterManager.Instance.Player.transform.position - transform.position).normalized;
+        GameObject Pre =  Instantiate(Prefabs, transform.position, Quaternion.identity);
+        Debug.Log(dir);
+        Pre.transform.GetChild(0).GetComponent<Rigidbody>().AddForce(dir * 30f,ForceMode.Impulse);
     }
     
 }

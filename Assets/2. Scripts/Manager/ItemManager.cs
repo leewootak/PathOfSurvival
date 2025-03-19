@@ -35,7 +35,7 @@ public class ItemManager : MonoBehaviour
 {
     public List<ItemData> list = new List<ItemData>();
     private static ItemManager _instance;
-    public Inventory inventory = new Inventory();
+    public Inventory inventory;
     public float maxWeight;
     public float curWeight;
 
@@ -56,7 +56,6 @@ public class ItemManager : MonoBehaviour
         if (_instance == null)
         {
             _instance = this;
-            DontDestroyOnLoad(gameObject);
         }
         else
         {

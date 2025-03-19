@@ -4,27 +4,28 @@ using TMPro;
 using Unity.VisualScripting;
 using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
+using static UnityEditor.Timeline.Actions.MenuPriority;
 
 public class Inventory : MonoBehaviour
 {
-
+    public GameObject InventoryUIGameObject;
     public Transform dropPosition;
 
-    private ItemID curEquipIndex;
+    private ItemID curEquipIndex = ItemID.None;
 
-    // public GameObject inventoryWindow;
+    //public GameObject inventoryWindow;
 
     [Header("Select Item")]
     private ItemData selectedItem;
     private ItemID selectedItemIndex;
-    private TextMeshProUGUI selectedItemName;
+ /*   private TextMeshProUGUI selectedItemName;
     private TextMeshProUGUI selectedItemDescription;
     private TextMeshProUGUI selectedStatName;
     private TextMeshProUGUI selectedStatValue;
     public GameObject useButton;
     public GameObject equipButton;
     public GameObject unEquipButton;
-    public GameObject dropButton;
+    public GameObject dropButton;*/
 
     public Dictionary<ItemID, ItemSlot> inventory;
 
@@ -34,24 +35,24 @@ public class Inventory : MonoBehaviour
     [Header("UI Management")]
     public Transform slotParent; // Vertical Layout Group이 붙어있는 부모
     public GameObject slotPrefab; // 슬롯 프리팹
-
+    public Slot equipSlot;
 
     private void Awake()
     {
         inventory = new Dictionary<ItemID, ItemSlot>();
     }
 
-    public ItemData[] test;
-
     private void Start()
     {
         controller = CharacterManager.Instance.Player.controller;
         condition = CharacterManager.Instance.Player.condition;
+        dropPosition = CharacterManager.Instance.Player.dropPosition;
 
-        for (int i = 0; i < test.Length; i++)
-        {
-            GetItem(test[i]);
-        }
+        InventoryUIGameObject = UIManager.Instance.InventoryUI.InventoryUIGameObject;
+
+        controller.inventory += Toggle;
+
+ //       ClearSelectedItemWindow();
     }
 
     public void GetItem(ItemData item)
@@ -96,14 +97,12 @@ public class Inventory : MonoBehaviour
             if (existItem.quantity >= quantity)
             {
                 existItem.quantity -= quantity;
-                ItemManager.Instance.LossWeight(quantity * existItem.item.weight);
                 if (existItem.quantity <= 0)
                 {
-                    inventory.Remove(item);
                     RemoveItemSlot(item);
                     selectedItemIndex = ItemID.None;
                     selectedItem = null;
-                    ClearSelectedItemWindow();
+               //     ClearSelectedItemWindow();
                     UpdateUI();
                 }
             }
@@ -134,7 +133,7 @@ public class Inventory : MonoBehaviour
         if (inventory[index].item == null) return;
         selectedItem = inventory[index].item;
         selectedItemIndex = index;
-
+        /*
         selectedItemName.text = selectedItem.displayName;
         selectedItemDescription.text = selectedItem.description;
 
@@ -150,10 +149,10 @@ public class Inventory : MonoBehaviour
         equipButton.SetActive(selectedItem.type == ItemType.Equipable && !inventory[index].equiped);
         unEquipButton.SetActive(selectedItem.type == ItemType.Equipable && inventory[index].equiped);
         dropButton.SetActive(true);
-    }
+  */  }
 
 
-    void ClearSelectedItemWindow()
+ /*   void ClearSelectedItemWindow()
     {
         selectedItemName.text = string.Empty;
         selectedItemDescription.text = string.Empty;
@@ -165,7 +164,7 @@ public class Inventory : MonoBehaviour
         unEquipButton.SetActive(false);
         dropButton.SetActive(false);
     }
-
+ */
     public void OnUseButton()
     {
         if (selectedItem.type == ItemType.Consumable)
@@ -202,13 +201,14 @@ public class Inventory : MonoBehaviour
 
     public void OnEquipButton()
     {
-        if (inventory[curEquipIndex].equiped)
+        if (curEquipIndex != ItemID.None && inventory[curEquipIndex].equiped)
         {
             UnEquip(curEquipIndex);
         }
         inventory[selectedItemIndex].equiped = true;
         curEquipIndex = selectedItemIndex;
         CharacterManager.Instance.Player.equip.EquipNew(selectedItem);
+        equipSlot.changeImage(selectedItem.icon, 1);
         UpdateUI();
         SelectItem(selectedItemIndex);
     }
@@ -243,6 +243,21 @@ public class Inventory : MonoBehaviour
                 itemSlot.Clear();
             }
         }
+    }
+    public void Toggle()
+    {
+        if (IsOpen())
+        {
+            InventoryUIGameObject.SetActive(false);
+        }
+        else
+        {
+            InventoryUIGameObject.SetActive(true);
+        }
+    }
+    public bool IsOpen()
+    {
+        return InventoryUIGameObject.activeInHierarchy;
     }
 
 }

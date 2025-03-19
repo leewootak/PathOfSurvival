@@ -18,11 +18,12 @@ public class ItemSlot : MonoBehaviour
     public Inventory inventory;
   
     public ItemID index;
-
+    bool isClick;
 
     private void Awake()
     {
         outline = GetComponent<Outline>();
+        button = GetComponent<Button>();
     }
 
     public void Set()
@@ -53,7 +54,25 @@ public class ItemSlot : MonoBehaviour
 
     public void OnClickButton()
     {
+        Debug.Log("check");
         inventory.SelectItem(index);
+        if (isClick)
+        {
+            switch (item.type) 
+            {
+                case ItemType.Consumable:
+                    inventory.OnUseButton();
+                    break;
+                case ItemType.Equipable:
+                    inventory.OnEquipButton();
+                    break;
+                case ItemType.Object:
+                    break;
+            }
+
+        }
+        else isClick = true;
+
     }
 
     public float GetQuantity()

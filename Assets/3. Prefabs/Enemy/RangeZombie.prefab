@@ -2371,6 +2371,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EnemyInfo: {fileID: 11400000, guid: a01ca710db6a23f4391449b8d13a9b1e, type: 2}
   DropItem: []
+  DropTable:
+  - {fileID: 11400000, guid: 890ae223f6ae5e64dbeb80166301d2b5, type: 2}
+  - {fileID: 11400000, guid: 2eb84346a570cd54b82fd70db276f960, type: 2}
+  - {fileID: 11400000, guid: e6699ac008c11394782925bf328edc24, type: 2}
+  - {fileID: 11400000, guid: d310ba68d37c7304fa6aebeb8c572b8d, type: 2}
 --- !u!114 &5049351449655789466
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2383,10 +2388,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89ebaed5303beef42b585e50e649bda3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DetectingDistance: 10
+  DetectingDistance: 20
   AttackDistance: 10
   Prefabs: {fileID: 2806325148058088282, guid: 25c5b02c1ba96ed40bd24bfc7edc9d75, type: 3}
-  RunAwayRange: 10
+  RunAwayRange: 3
 --- !u!195 &-2888562301674386427
 NavMeshAgent:
   m_ObjectHideFlags: 0

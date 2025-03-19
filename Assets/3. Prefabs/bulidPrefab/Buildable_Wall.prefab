@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 2651028059957985168}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0, z: -4.8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -124,7 +124,7 @@ MonoBehaviour:
   Red: {fileID: 2100000, guid: 146bf7c9101706d4e84becf35ca230f8, type: 2}
   Green: {fileID: 2100000, guid: 9ef363909e13e6a448c8ae8dcd221c51, type: 2}
   craftTable: {fileID: 0}
-  IsPlaceComplete: 0
+  IsPlaced: 0
 --- !u!54 &605665273633776784
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -133,7 +133,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2651028059957985168}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 1000
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -178,7 +178,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.2781903, y: 0.057245493, z: -1.4153832}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.7, y: 1, z: 0.3}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6688967562840968814}
