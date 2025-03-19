@@ -12,6 +12,8 @@ public class NPC : MonoBehaviour
         if(collision.gameObject.CompareTag("Player"))
         {
             Clear.SetActive(true);
+
+            GameManager.Instance.ChangeScene(NowSceneEnum.End);
         }
     }
 

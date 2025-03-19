@@ -9,8 +9,7 @@ public class EnemyAttack : MonoBehaviour
 
         if (other.gameObject.CompareTag("Player"))
         {
-            CharacterManager.Instance.Player.condition.
-                TakePhysicalDamage(30);
+            CharacterManager.Instance.Player.condition.TakePhysicalDamage(30);
         }
     }
 }
