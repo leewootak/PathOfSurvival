@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static UnityEditor.Timeline.TimelinePlaybackControls;
 
 public class PlayerController : MonoBehaviour
 {
@@ -115,6 +116,17 @@ public class PlayerController : MonoBehaviour
         else if (context.phase == InputActionPhase.Canceled) // 키입력이 없어졌다면
         {
             curMovementInput = Vector2.zero; // 멈추도록
+        }
+    }
+
+
+    public void OnMenu(InputAction.CallbackContext context)
+    {
+        
+        if (context.phase == InputActionPhase.Started)
+        {
+            UIManager.Instance.MenuUI.OnOffMenu();
+            ToggleCursor();
         }
     }
 
