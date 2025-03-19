@@ -10,6 +10,8 @@ public class CraftTable : MonoBehaviour
     private Camera cam;
     private LayerMask layerMask;
     private Ray ray;
+    private GameObject currentPrefab; // 현재 배치 중인 프리팹
+    [SerializeField] private InventoryUI inventoryUI;
 
     private float Angle;
 
@@ -19,7 +21,6 @@ public class CraftTable : MonoBehaviour
     public bool CanPlace = false;
 
     [SerializeField] private BuildColorSetting buildColorSetting;
-    private GameObject currentPrefab; // 현재 배치 중인 프리팹
 
 
     private void Awake()
@@ -28,7 +29,7 @@ public class CraftTable : MonoBehaviour
         cam = FindAnyObjectByType<Camera>();
         player = FindAnyObjectByType<Player>();
         layerMask = LayerMask.GetMask("Buildable");
-        
+        inventoryUI = FindObjectOfType<InventoryUI>();
 
     }
 
@@ -64,7 +65,7 @@ public class CraftTable : MonoBehaviour
             currentPrefab.transform.GetChild(0).GetComponent<BuildColorSetting>().ColorChange(2);
             currentPrefab.transform.GetChild(0).GetComponent<BuildColorSetting>().IsPlaced = false; // 배치되지 않은 상태로 초기화
         }
-
+        inventoryUI.OnClickExitButton();
         buildColorSetting.IsPlaced = false;
     }
 

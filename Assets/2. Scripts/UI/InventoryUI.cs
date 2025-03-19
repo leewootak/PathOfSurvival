@@ -122,7 +122,7 @@ public class InventoryUI : MonoBehaviour
         InventoryUIGameObject.SetActive(!InventoryUIGameObject.activeSelf);
     }
 
-    void OnClickExitButton()
+    public void OnClickExitButton()
     {
         CharacterManager.Instance.Player.controller.ToggleCursor();
         OnOffInventoryUI();
