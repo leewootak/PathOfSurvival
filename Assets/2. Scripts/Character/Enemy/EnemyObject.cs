@@ -6,13 +6,14 @@ public class EnemyObject : MonoBehaviour
 {
     [SerializeField] private EnemyInfo EnemyInfo;
     [SerializeField] private List<ItemData> DropItem  = new List<ItemData>();
+    [SerializeField] private List<ItemData> DropTable = new List<ItemData>();
     private Animator animator;
     private float health;
 
     public void Set()
     {
         health = EnemyInfo.Health;
-        //DropItemSet(DropItem);
+        DropItemSet(DropItem);
     }
     private void Start()
     {
@@ -42,7 +43,7 @@ public class EnemyObject : MonoBehaviour
     {
         animator.SetTrigger("DIE");
         AudioManager.Instance.FXOn(Random.Range(0, 3));
-        // Drop();
+        Drop();
         yield return new WaitForSeconds(2f);
         gameObject.SetActive(false);
         EnemyPool.Instance.ReQueue(gameObject);
@@ -55,19 +56,19 @@ public class EnemyObject : MonoBehaviour
 
         if(Persentage <5)
         {
-            items.Add(ItemManager.Instance.list[0]);
+            items.Add(DropTable[0]);
         }
         if(Persentage < 40)
         {
-            items.Add(ItemManager.Instance.list[1]);
+            items.Add(DropTable[1]);
         }
         if (Persentage < 60)
         {
-            items.Add(ItemManager.Instance.list[2]);
+            items.Add(DropTable[2]);
         }
         if (Persentage % 2 == 1)
         {
-            items.Add(ItemManager.Instance.list[3]);
+            items.Add(DropTable[3]);
         }
 
     }

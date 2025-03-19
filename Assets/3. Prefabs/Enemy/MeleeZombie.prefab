@@ -901,6 +901,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EnemyInfo: {fileID: 11400000, guid: 5764a33beef79a04398645d821d3b624, type: 2}
   DropItem: []
+  DropTable:
+  - {fileID: 11400000, guid: 890ae223f6ae5e64dbeb80166301d2b5, type: 2}
+  - {fileID: 11400000, guid: 2eb84346a570cd54b82fd70db276f960, type: 2}
+  - {fileID: 11400000, guid: e6699ac008c11394782925bf328edc24, type: 2}
+  - {fileID: 11400000, guid: d310ba68d37c7304fa6aebeb8c572b8d, type: 2}
 --- !u!114 &-1396240497314714615
 MonoBehaviour:
   m_ObjectHideFlags: 0
