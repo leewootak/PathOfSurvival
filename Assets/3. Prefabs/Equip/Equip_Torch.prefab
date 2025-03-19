@@ -123,8 +123,8 @@ MonoBehaviour:
   camera: {fileID: 0}
   useStamina: 0
   type: 0
-  damage: 5
-  attackDistance: 3
+  damage: 100
+  attackDistance: 5
   shootSpeed: 0
   projectiles: {fileID: 0}
   useProjectile: 0
