@@ -24,7 +24,7 @@ public class CraftOneLine : MonoBehaviour
         {
             CraftButton.onClick.AddListener(OnCraftButton);
         }
-        craftTable = GetComponentInChildren<CraftTable>();
+        craftTable = FindAnyObjectByType<CraftTable>();
 
     }
 
@@ -51,7 +51,7 @@ public class CraftOneLine : MonoBehaviour
         {
             //Equip하고 있다면 추가로 장착을 해제해야함
             craftTable.prefabs = ItemData.dropPrefab;
-            craftTable.gameObject.SetActive(true);
+            craftTable.enabled = true;
         }
     }
 

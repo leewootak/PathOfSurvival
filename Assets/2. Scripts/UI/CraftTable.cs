@@ -35,6 +35,7 @@ public class CraftTable : MonoBehaviour
 
     private void Start()
     {
+        //Craft();
         button.onClick.AddListener(Craft);
     }
 
@@ -61,6 +62,7 @@ public class CraftTable : MonoBehaviour
             currentPrefab = Instantiate(prefabs, prefabs.transform.position, Quaternion.identity);
             Debug.Log("부품 선택");
 
+            
             // 새로 생성된 프리팹의 색상을 기본값으로 초기화 (배치 가능 상태)
             currentPrefab.transform.GetChild(0).GetComponent<BuildColorSetting>().ColorChange(2);
             currentPrefab.transform.GetChild(0).GetComponent<BuildColorSetting>().IsPlaced = false; // 배치되지 않은 상태로 초기화

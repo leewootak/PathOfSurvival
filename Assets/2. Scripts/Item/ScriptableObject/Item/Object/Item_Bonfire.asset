@@ -16,7 +16,7 @@ MonoBehaviour:
   displayName: "\uBAA8\uB2E5\uBD88"
   description: "\uB530\uB73B\uD558\uB2E4."
   type: 3
-  dropPrefab: {fileID: 6180663838326387332, guid: b9b7773d74755fc4f83b4aba1f68b908, type: 3}
+  dropPrefab: {fileID: 4417476640262759032, guid: 8b850c8c66465d44fb8e4d32c975f432, type: 3}
   icon: {fileID: -1101746453, guid: d9f015dee1caab3418ba9792205327ca, type: 3}
   weight: 6
   canStack: 0

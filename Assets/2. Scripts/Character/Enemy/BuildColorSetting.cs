@@ -24,6 +24,7 @@ public class BuildColorSetting : MonoBehaviour
         }
 
         layerMask = LayerMask.GetMask("Buildable");
+        craftTable = FindAnyObjectByType<CraftTable>();
     }
 
     private void OnTriggerEnter(Collider other)
