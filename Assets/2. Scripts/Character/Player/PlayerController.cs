@@ -38,7 +38,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Cursor.lockState = CursorLockMode.Locked; // 마우스 제어
+        //Cursor.lockState = CursorLockMode.Locked; // 마우스 제어
     }
 
     // Update is called once per frame
@@ -167,10 +167,10 @@ public class PlayerController : MonoBehaviour
         if (Context.phase == InputActionPhase.Started)
         {
             ToggleCursor();
-            inventory?.Invoke();
+            UIManager.Instance.InventoryUI.OnOffInventoryUI();
         }
     }
-    void ToggleCursor()
+    public void ToggleCursor()
     {
         bool toggle = Cursor.lockState == CursorLockMode.Locked;
         Cursor.lockState = toggle ? CursorLockMode.None : CursorLockMode.Locked;

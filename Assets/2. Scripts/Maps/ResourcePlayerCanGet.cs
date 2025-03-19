@@ -12,4 +12,9 @@ public class ResourcePlayerCanGet : MonoBehaviour
         Particle.transform.SetParent(transform, true);
         Particle.transform.localPosition = Vector3.zero;
     }
+
+    public virtual void GetResource()
+    {
+
+    }
 }

@@ -24,7 +24,7 @@ public class WoodResource : ResourcePlayerCanGet
         Particle.SetActive(true);
     }
 
-    public void GetResource()
+    public override void GetResource()
     {
         for(int i = 0; i < Random.Range(1, 4); i++)
         {

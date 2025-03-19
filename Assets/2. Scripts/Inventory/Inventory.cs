@@ -11,7 +11,7 @@ public class Inventory : MonoBehaviour
     public GameObject InventoryUIGameObject;
     public Transform dropPosition;
 
-    private ItemID curEquipIndex;
+    private ItemID curEquipIndex = ItemID.None;
 
     //public GameObject inventoryWindow;
 
@@ -48,8 +48,7 @@ public class Inventory : MonoBehaviour
         condition = CharacterManager.Instance.Player.condition;
         dropPosition = CharacterManager.Instance.Player.dropPosition;
 
-        InventoryUIGameObject = UIManager.Instance.InventoryUI.gameObject;
-        InventoryUIGameObject.SetActive(false);
+        InventoryUIGameObject = UIManager.Instance.InventoryUI.InventoryUIGameObject;
 
         controller.inventory += Toggle;
 
@@ -100,7 +99,6 @@ public class Inventory : MonoBehaviour
                 existItem.quantity -= quantity;
                 if (existItem.quantity <= 0)
                 {
-                    inventory.Remove(item);
                     RemoveItemSlot(item);
                     selectedItemIndex = ItemID.None;
                     selectedItem = null;
@@ -135,7 +133,7 @@ public class Inventory : MonoBehaviour
         if (inventory[index].item == null) return;
         selectedItem = inventory[index].item;
         selectedItemIndex = index;
-
+        /*
         selectedItemName.text = selectedItem.displayName;
         selectedItemDescription.text = selectedItem.description;
 
@@ -151,7 +149,7 @@ public class Inventory : MonoBehaviour
         equipButton.SetActive(selectedItem.type == ItemType.Equipable && !inventory[index].equiped);
         unEquipButton.SetActive(selectedItem.type == ItemType.Equipable && inventory[index].equiped);
         dropButton.SetActive(true);
-    }
+  */  }
 
 
     void ClearSelectedItemWindow()
@@ -203,7 +201,7 @@ public class Inventory : MonoBehaviour
 
     public void OnEquipButton()
     {
-        if (inventory[curEquipIndex].equiped)
+        if (curEquipIndex != ItemID.None && inventory[curEquipIndex].equiped)
         {
             UnEquip(curEquipIndex);
         }

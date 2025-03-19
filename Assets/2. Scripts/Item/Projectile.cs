@@ -50,7 +50,7 @@ public class Projectile : MonoBehaviour
             EnemyObject enemy = collision.gameObject.GetComponent<EnemyObject>();
             if (enemy != null)
             {
-                enemy.SubHealth(damage);
+                Destroy(enemy.gameObject);
             }
             DisActive();
         }
@@ -70,6 +70,9 @@ public class Projectile : MonoBehaviour
                 break;
             case ProjectileType.arrow:
                 damage = 0;
+                break;
+            case ProjectileType.enemy:
+                Destroy(gameObject);
                 break;
         }
     }
