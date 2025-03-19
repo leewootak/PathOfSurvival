@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Health: 50
   Speed: 2
-  Attack: 50
+  Attack: 30
   Sight: 180
   AttackCoolTime: 3
   type: 0
