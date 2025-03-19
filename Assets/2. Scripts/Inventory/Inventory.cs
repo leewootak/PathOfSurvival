@@ -18,14 +18,14 @@ public class Inventory : MonoBehaviour
     [Header("Select Item")]
     private ItemData selectedItem;
     private ItemID selectedItemIndex;
-    private TextMeshProUGUI selectedItemName;
+ /*   private TextMeshProUGUI selectedItemName;
     private TextMeshProUGUI selectedItemDescription;
     private TextMeshProUGUI selectedStatName;
     private TextMeshProUGUI selectedStatValue;
     public GameObject useButton;
     public GameObject equipButton;
     public GameObject unEquipButton;
-    public GameObject dropButton;
+    public GameObject dropButton;*/
 
     public Dictionary<ItemID, ItemSlot> inventory;
 
@@ -35,7 +35,7 @@ public class Inventory : MonoBehaviour
     [Header("UI Management")]
     public Transform slotParent; // Vertical Layout Group이 붙어있는 부모
     public GameObject slotPrefab; // 슬롯 프리팹
-
+    public Slot equipSlot;
 
     private void Awake()
     {
@@ -52,7 +52,7 @@ public class Inventory : MonoBehaviour
 
         controller.inventory += Toggle;
 
-        ClearSelectedItemWindow();
+ //       ClearSelectedItemWindow();
     }
 
     public void GetItem(ItemData item)
@@ -102,7 +102,7 @@ public class Inventory : MonoBehaviour
                     RemoveItemSlot(item);
                     selectedItemIndex = ItemID.None;
                     selectedItem = null;
-                    ClearSelectedItemWindow();
+               //     ClearSelectedItemWindow();
                     UpdateUI();
                 }
             }
@@ -152,7 +152,7 @@ public class Inventory : MonoBehaviour
   */  }
 
 
-    void ClearSelectedItemWindow()
+ /*   void ClearSelectedItemWindow()
     {
         selectedItemName.text = string.Empty;
         selectedItemDescription.text = string.Empty;
@@ -164,7 +164,7 @@ public class Inventory : MonoBehaviour
         unEquipButton.SetActive(false);
         dropButton.SetActive(false);
     }
-
+ */
     public void OnUseButton()
     {
         if (selectedItem.type == ItemType.Consumable)
@@ -208,6 +208,7 @@ public class Inventory : MonoBehaviour
         inventory[selectedItemIndex].equiped = true;
         curEquipIndex = selectedItemIndex;
         CharacterManager.Instance.Player.equip.EquipNew(selectedItem);
+        equipSlot.changeImage(selectedItem.icon, 1);
         UpdateUI();
         SelectItem(selectedItemIndex);
     }
