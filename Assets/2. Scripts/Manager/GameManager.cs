@@ -57,6 +57,11 @@ public class GameManager : MonoBehaviour
     void GameOver()
     {
         // uiManager의 게임 종료 메서드
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+        Application.Quit(); // 어플리케이션 종료
+#endif
     }
 
     public void ChangeScene(NowSceneEnum ToChange)
@@ -73,6 +78,7 @@ public class GameManager : MonoBehaviour
                 SceneManager.LoadScene("TestScene");
                 break;
             case NowSceneEnum.End:
+                GameOver();
                 break;
         }
     }
