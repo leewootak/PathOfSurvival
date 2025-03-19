@@ -162,7 +162,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
-  damage: 5
+  damage: 100
   distance: 500
   speed: 0
 --- !u!114 &-7998318466880057681

@@ -21,7 +21,7 @@ public abstract class EnemyAI : MonoBehaviour
     protected NavMeshAgent agent;
     protected Animator animator;
     protected NavMeshSurface surface;
-    protected EnemyObject enemyObject;
+    public EnemyObject enemyObject;
     protected float lastAttackTime;
 
 
@@ -79,7 +79,6 @@ public abstract class EnemyAI : MonoBehaviour
     {
         if(playerDistance < DetectingDistance) 
         {
-            Debug.Log("Detected");
             SetState(AIState.Attack);
         }
         else
