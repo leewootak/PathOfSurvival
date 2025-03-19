@@ -125,7 +125,7 @@ public class PlayerController : MonoBehaviour
 
     public void OnJump(InputAction.CallbackContext context)
     {
-        if(context.phase == InputActionPhase.Started && IsGrounded(0.5f))
+        if(context.phase == InputActionPhase.Started && IsGrounded(0.5f) && CharacterManager.Instance.Player.condition.UseStamina(5))
         {
             isjump = true;
             _rigidbody.AddForce(Vector2.up * jumpPower, ForceMode.Impulse);
