@@ -70,7 +70,7 @@ public class PlayerCondition : MonoBehaviour, IDamagable
     }
     public void Die()
     {
-        Debug.Log("죽음");
+        GameManager.Instance.ChangeScene(NowSceneEnum.End);
     }
 
     public void TakePhysicalDamage(int damage)
