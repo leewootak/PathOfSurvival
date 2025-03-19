@@ -46,6 +46,7 @@ public class AudioManager : MonoBehaviour
 
         FXaudio.loop = false;
         FXaudio.playOnAwake = false;
+        FXaudio.outputAudioMixerGroup = MasterAudio;
     }
 
     public void BGMVolumeSet()
