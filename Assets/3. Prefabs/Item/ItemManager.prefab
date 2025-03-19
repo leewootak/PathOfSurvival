@@ -82,4 +82,4 @@ MonoBehaviour:
   unEquipButton: {fileID: 0}
   dropButton: {fileID: 0}
   slotParent: {fileID: 0}
-  slotPrefab: {fileID: 1457250765269633535, guid: c856e2603f714fb49ae8ef6842714087, type: 3}
+  slotPrefab: {fileID: 1457250765269633535, guid: 040103db96137bb4798b214569863ce3, type: 3}
