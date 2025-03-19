@@ -5,6 +5,7 @@ public class CraftTable : MonoBehaviour
 {
     public GameObject prefabs;
     public Button button;
+    private Collider col;
     private Player player;
     private Camera cam;
     private LayerMask layerMask;
@@ -27,6 +28,7 @@ public class CraftTable : MonoBehaviour
         cam = FindAnyObjectByType<Camera>();
         player = FindAnyObjectByType<Player>();
         layerMask = LayerMask.GetMask("Buildable");
+        
 
     }
 
@@ -104,12 +106,15 @@ public class CraftTable : MonoBehaviour
         if (CanPlace && Input.GetMouseButtonDown(0))
         {
             IsBuildMode = false;
-            prefabs.transform.GetChild(0).GetComponent<Rigidbody>().isKinematic = true;
+            currentPrefab.transform.GetChild(0).GetComponent<Rigidbody>().isKinematic = true;
+            col = currentPrefab.GetComponentInChildren<Collider>();
+            col.isTrigger = false;
+
 
             // 배치 완료 상태 색상으로 변경
             currentPrefab.transform.GetChild(0).GetComponent<BuildColorSetting>().ColorChange(0);
-            currentPrefab.layer = 7;
-            currentPrefab.transform.GetChild(0).gameObject.layer = 7;
+            currentPrefab.layer = 10;
+            currentPrefab.transform.GetChild(0).gameObject.layer = 10;
 
             buildColorSetting.IsPlaced = true;
             Debug.Log("배치");
